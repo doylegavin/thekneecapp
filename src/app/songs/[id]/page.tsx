@@ -2,10 +2,26 @@
 
 import { useState, use, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Music, Play, Volume2, ChevronDown, ChevronUp, Pause, SkipForward, SkipBack, Settings } from 'lucide-react';
+import { ArrowLeft, Music, Play, ChevronDown, ChevronUp, Pause, Settings } from 'lucide-react';
 
 // Complete KNEECAP discography organized by release
-const songData: Record<string, any> = {
+const songData: Record<string, {
+  id: string;
+  title: string;
+  titleEnglish: string;
+  album: string;
+  year: number;
+  duration: string;
+  primaryLanguage: string;
+  lines: Array<{
+    irish?: string;
+    english?: string;
+    language?: 'irish' | 'english';
+    type?: 'section' | 'lyric';
+    section?: string;
+    artist?: string;
+  }>;
+}> = {
   // ===== FINE ART (2024) =====
   '3cag-feat-radie-peat': {
     id: '3cag-feat-radie-peat',
@@ -30,7 +46,7 @@ const songData: Record<string, any> = {
     lines: [
       { irish: 'Is mise an duine a rinne é seo', english: 'I am the one who made this', language: 'irish' },
       { irish: 'This is my world, this is my art', english: 'Seo mo shaol, seo mo ealaín', language: 'english' },
-      { irish: 'Ní stopfaidh mé go dtí go bhfuil sé críochnaithe', english: 'I won\'t stop until it\'s finished', language: 'irish' },
+      { irish: 'Ní stopfaidh mé go dtí go bhfuil sé críochnaithe', english: 'I won&apos;t stop until it&apos;s finished', language: 'irish' },
       { irish: 'Every line tells a story of our struggle', english: 'Insíonn gach líne scéal ár streachailt', language: 'english' }
     ]
   },
@@ -205,74 +221,74 @@ const songData: Record<string, any> = {
     primaryLanguage: 'irish',
     lines: [
       { type: 'section', section: 'Verse 1', artist: 'Móglaí Bap' },
-      { irish: 'Foc mí, ní fhaca mé na bastairdí', english: 'Fuck me, I didn\'t see the bastards', language: 'irish' },
+      { irish: 'Foc mí, ní fhaca mé na bastairdí', english: 'Fuck me, I didn&apos;t see the bastards', language: 'irish' },
       { irish: 'Carr dubh ina bhfolach ar ár mullach is iad taobh istigh', english: 'A black car hidden on our roof with them inside', language: 'irish' },
-      { irish: 'Seans ar bith, go bhfaighidh siad mo mhála MD', english: 'No chance at all they\'ll get my bag of MD', language: 'irish' },
-      { irish: 'Mar tá cóisir ann anocht \'s níl fáilte roimh an RUC', english: 'Because there\'s a party tonight and the RUC aren\'t welcome', language: 'irish' },
-      { irish: 'Is gan dabht, tá mise ar bís', english: 'And without a doubt, I\'m buzzing', language: 'irish' },
+      { irish: 'Seans ar bith, go bhfaighidh siad mo mhála MD', english: 'No chance at all they&apos;ll get my bag of MD', language: 'irish' },
+      { irish: 'Mar tá cóisir ann anocht \'s níl fáilte roimh an RUC', english: 'Because there&apos;s a party tonight and the RUC aren&apos;t welcome', language: 'irish' },
+      { irish: 'Is gan dabht, tá mise ar bís', english: 'And without a doubt, I&apos;m buzzing', language: 'irish' },
       { irish: 'Le dul síos ar an snaois arís \'s arís', english: 'To go down on the snuff again and again', language: 'irish' },
-      { irish: 'Is ní stopfaidh mé go maidin mar ní socraím síos', english: 'And I won\'t stop until morning because I don\'t settle down', language: 'irish' },
+      { irish: 'Is ní stopfaidh mé go maidin mar ní socraím síos', english: 'And I won&apos;t stop until morning because I don&apos;t settle down', language: 'irish' },
       { irish: 'Agus fuair mé mála mór ket in ionad mo chíos', english: 'And I got a big bag of ket instead of my rent', language: 'irish' },
       
       { type: 'section', section: 'Verse 2', artist: 'Mo Chara' },
-      { irish: 'Níl tú ag focan éisteacht liom níl seo ina focan jóc', english: 'You\'re not fucking listening to me, this isn\'t a fucking joke', language: 'irish' },
-      { irish: 'Tá mé ag iarraidh a bheidh ag an chóisir leat ag ithe cúpla yokes', english: 'I\'m trying to be at the party with you eating a few yokes', language: 'irish' },
+      { irish: 'Níl tú ag focan éisteacht liom níl seo ina focan jóc', english: 'You&apos;re not fucking listening to me, this isn&apos;t a fucking joke', language: 'irish' },
+      { irish: 'Tá mé ag iarraidh a bheidh ag an chóisir leat ag ithe cúpla yokes', english: 'I&apos;m trying to be at the party with you eating a few yokes', language: 'irish' },
       { irish: 'Ag déanamh cúpla líne bhán don phúdar mín cóc', english: 'Doing a couple of white lines of the fine powdered coke', language: 'irish' },
-      { irish: 'Is tiocfaidh deireadh na hoíche \'s béimid ar fad ag gol den smoke', english: 'And the end of the night will come and we\'ll all be going for a smoke', language: 'irish' },
+      { irish: 'Is tiocfaidh deireadh na hoíche \'s béimid ar fad ag gol den smoke', english: 'And the end of the night will come and we&apos;ll all be going for a smoke', language: 'irish' },
       { irish: 'Ach má rugtar orainn inniú', english: 'But if we get caught today', language: 'irish' },
-      { irish: 'Is muidinne a bheas thíos leis i bhfaiteadh na súl', english: 'It\'s us who\'ll be down with it in the blink of an eye', language: 'irish' },
+      { irish: 'Is muidinne a bheas thíos leis i bhfaiteadh na súl', english: 'It&apos;s us who&apos;ll be down with it in the blink of an eye', language: 'irish' },
       { irish: 'Mar tá na muca móra mire sa tóir ar ár meon', english: 'Because the big mad pigs are after our minds', language: 'irish' },
       { irish: 'Is beidh lucht Maghaberry sa tóir ar mo thóin', english: 'And the Maghaberry lot will be after my arse', language: 'irish' },
       
       { type: 'section', section: 'Chorus' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' },
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' },
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' },
       
       { type: 'section', section: 'Verse 3', artist: 'Mo Chara' },
       { irish: 'Dúirt mé leat cheana, seo an chúis le Balaclava', english: 'I told you before, this is the reason for a balaclava', language: 'irish' },
-      { irish: 'Is féidir siúil ar shiúil, \'s ní aithneoidh siad tada', english: 'You can walk on walking, and they won\'t recognize anything', language: 'irish' },
-      { irish: 'Tá \'gear\' is fearr in iarthar Bhéal Feirste againn le fada', english: 'We\'ve had the best \'gear\' in west Belfast for ages', language: 'irish' },
+      { irish: 'Is féidir siúil ar shiúil, \'s ní aithneoidh siad tada', english: 'You can walk on walking, and they won&apos;t recognize anything', language: 'irish' },
+      { irish: 'Tá \'gear\' is fearr in iarthar Bhéal Feirste againn le fada', english: 'We&apos;ve had the best \'gear\' in west Belfast for ages', language: 'irish' },
       { irish: 'Cóc, speed, e\'s agus moll marijuana', english: 'Coke, speed, e\'s and soft marijuana', language: 'irish' },
       { irish: 'Ag teacht isteach go ciúin fríd shléibhte Chonamara', english: 'Coming in quietly through the mountains of Connemara', language: 'irish' },
       { irish: 'Ag cóisireacht le Tinky Winky agus Seamus Barra', english: 'Partying with Tinky Winky and Seamus Barra', language: 'irish' },
-      { irish: 'Ní stopaim ón gheimhreadh fríd go dtí an earrach', english: 'I don\'t stop from winter through until spring', language: 'irish' },
-      { irish: 'Díolaim snaois le do Mhamó, do mhac \'is do chara', english: 'I sell snuff to your granny, your son and your friend', language: 'irish' },
+      { irish: 'Ní stopaim ón gheimhreadh fríd go dtí an earrach', english: 'I don&apos;t stop from winter through until spring', language: 'irish' },
+      { irish: 'Díolaim snaois le do Mhamó, do mhac &apos;is do chara', english: 'I sell snuff to your granny, your son and your friend', language: 'irish' },
       { irish: 'A n-íocann as má laethanta saoire ar an bhFál Carrach', english: 'Who pay for my holidays on the Falls Road', language: 'irish' },
       
       { type: 'section', section: 'Verse 4', artist: 'Móglaí Bap' },
-      { irish: 'Níl aon chathair nach bhfuil muid ann faoi lathair', english: 'There\'s no city we\'re not in at present', language: 'irish' },
+      { irish: 'Níl aon chathair nach bhfuil muid ann faoi lathair', english: 'There&apos;s no city we&apos;re not in at present', language: 'irish' },
       { irish: 'Doire, Corcaigh agus fiú amháin D4', english: 'Derry, Cork and even D4', language: 'irish' },
       { irish: 'Ag scriosadh na háite ar mhaithe le bheith saibhir', english: 'Destroying the place for the sake of being rich', language: 'irish' },
       { irish: 'Ansin ag déanamh snaois bhán le réaltaí TG4', english: 'Then doing white snuff with TG4 stars', language: 'irish' },
-      { irish: 'So goitse anois, agus déanfaimid deifir', english: 'So come on now, and we\'ll hurry', language: 'irish' },
-      { irish: 'Mar tá mise ró-stuama anois faoi láthair', english: 'Because I\'m too sober now at present', language: 'irish' },
-      { irish: 'Agus beidh muid ag dul go maidin le Rónán Mac An Rí', english: 'And we\'ll be going until morning with Rónán Mac An Rí', language: 'irish' },
+      { irish: 'So goitse anois, agus déanfaimid deifir', english: 'So come on now, and we&apos;ll hurry', language: 'irish' },
+      { irish: 'Mar tá mise ró-stuama anois faoi láthair', english: 'Because I&apos;m too sober now at present', language: 'irish' },
+      { irish: 'Agus beidh muid ag dul go maidin le Rónán Mac An Rí', english: 'And we&apos;ll be going until morning with Rónán Mac An Rí', language: 'irish' },
       { irish: '\'cause\' foc na riallacha atá ag RTÉ', english: 'Because fuck the rules that RTÉ has', language: 'irish' },
       
       { type: 'section', section: 'Chorus' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' },
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' },
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' },
       
       { type: 'section', section: 'Verse 5', artist: 'Móglaí Bap' },
       { irish: 'Tógadh Mo Chara agus muid ar an bhealach', english: 'Mo Chara was taken and we were on the way', language: 'irish' },
       { irish: 'Cé gur thug mé smack ceart don gharda salach', english: 'Even though I gave a proper smack to the dirty guard', language: 'irish' },
       { irish: 'Bhí orm rith na bhaile agus dul ina bhfolach', english: 'I had to run home and go into hiding', language: 'irish' },
       { irish: 'Mar bhí 10 kilo cóc taped ar mo bhrollach', english: 'Because I had 10 kilos of coke taped to my chest', language: 'irish' },
-      { irish: 'Anois ní sin le rá go raibh mé scanraithe', english: 'Now that\'s not to say I was scared', language: 'irish' },
-      { irish: 'Sure ní íocaim as an "toll" ar an M50', english: 'Sure I don\'t pay the "toll" on the M50', language: 'irish' },
-      { irish: 'Agus rachaidh muid ar aghaidh go dtí go bhfuil gach deor críochnaithe', english: 'And we\'ll continue until every drop is finished', language: 'irish' },
+      { irish: 'Anois ní sin le rá go raibh mé scanraithe', english: 'Now that&apos;s not to say I was scared', language: 'irish' },
+      { irish: 'Sure ní íocaim as an "toll" ar an M50', english: 'Sure I don&apos;t pay the "toll" on the M50', language: 'irish' },
+      { irish: 'Agus rachaidh muid ar aghaidh go dtí go bhfuil gach deor críochnaithe', english: 'And we&apos;ll continue until every drop is finished', language: 'irish' },
       { irish: 'Raithneach dleathach in focan Éire aontaithe', english: 'Legal cannabis in fucking united Ireland', language: 'irish' },
       
       { type: 'section', section: 'Bridge', artist: 'Garda/Police' },
@@ -280,24 +296,24 @@ const songData: Record<string, any> = {
       { irish: 'Agus tá tú ag teacht go dtí an stáisiún ionas gur féidir linn labhairt i gceart', english: 'And you are coming to the station so we can talk properly', language: 'english' },
       
       { type: 'section', section: 'Verse 6', artist: 'Mo Chara' },
-      { irish: 'Tá tú ag labhairt le Kneecap is cuma linn sa tsioc', english: 'You\'re talking to Kneecap, we don\'t give a shit', language: 'irish' },
-      { irish: 'Bím ar Facebook do mháthair ag wankáil like foc', english: 'I\'m on your mother\'s Facebook wanking like fuck', language: 'irish' },
+      { irish: 'Tá tú ag labhairt le Kneecap is cuma linn sa tsioc', english: 'You&apos;re talking to Kneecap, we don&apos;t give a shit', language: 'irish' },
+      { irish: 'Bím ar Facebook do mháthair ag wankáil like foc', english: 'I&apos;m on your mother&apos;s Facebook wanking like fuck', language: 'irish' },
       { irish: 'Ag streachailt do m\'anáil mar tá do dheirfiúr fliuch', english: 'Struggling for my breath because your sister is wet', language: 'irish' },
-      { irish: 'Ag tabhairt greadadh do d\'athair agus mé lom nocht', english: 'Giving a beating to your father while I\'m stark naked', language: 'irish' },
-      { irish: 'Mar le tamall anois tá mé as mo mheabhair', english: 'Because for a while now I\'ve been out of my mind', language: 'irish' },
-      { irish: 'Déanfaidh mise a bheag duit agus tú os comhair', english: 'I\'ll do you a small one while you\'re in front', language: 'irish' },
+      { irish: 'Ag tabhairt greadadh do d\'athair agus mé lom nocht', english: 'Giving a beating to your father while I&apos;m stark naked', language: 'irish' },
+      { irish: 'Mar le tamall anois tá mé as mo mheabhair', english: 'Because for a while now I&apos;ve been out of my mind', language: 'irish' },
+      { irish: 'Déanfaidh mise a bheag duit agus tú os comhair', english: 'I&apos;ll do you a small one while you&apos;re in front', language: 'irish' },
       { irish: 'Cébí, duine a bhí, mar chuid de do shaol', english: 'Whoever, anyone who was, as part of your life', language: 'irish' },
       { irish: 'Brisim achan riail, seachas focan caol le caol', english: 'I break every rule, except fucking slender with slender', language: 'irish' },
       
       { type: 'section', section: 'Final Chorus' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' },
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' },
       { irish: 'C.E.A.R.T.A', english: 'R.I.G.H.T.S', language: 'irish' },
-      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don\'t give a fuck about any garda', language: 'irish' },
-      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I\'m too quick', language: 'irish' },
-      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won\'t see me standing around too long', language: 'irish' }
+      { irish: 'Is cuma liom sa foc faoi aon gharda', english: 'I don&apos;t give a fuck about any garda', language: 'irish' },
+      { irish: 'Dúidín lasta, tá mise ró-ghasta', english: 'A lit joint, I&apos;m too quick', language: 'irish' },
+      { irish: 'Ní fheicfidh tú mise i mo sheasamh ró-fhada', english: 'You won&apos;t see me standing around too long', language: 'irish' }
     ]
   },
   'incognito': {
@@ -616,10 +632,9 @@ interface LyricsLineProps {
     section?: string;
     artist?: string;
   };
-  index: number;
 }
 
-function LyricsLine({ line, index }: LyricsLineProps) {
+function LyricsLine({ line }: LyricsLineProps) {
   const [showTranslation, setShowTranslation] = useState(false);
   
   // Handle section headers
@@ -1024,8 +1039,8 @@ export default function SongPage({ params }: SongPageProps) {
             className="p-6 max-h-screen overflow-y-auto"
             style={{ scrollBehavior: 'smooth' }}
           >
-            {song.lines.map((line: any, index: number) => (
-              <LyricsLine key={index} line={line} index={index} />
+            {song.lines.map((line, index: number) => (
+              <LyricsLine key={index} line={line} />
             ))}
           </div>
         </div>
@@ -1033,7 +1048,7 @@ export default function SongPage({ params }: SongPageProps) {
         {/* Song Information */}
         <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
           <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">
-            About "{song.title}"
+            About &quot;{song.title}&quot;
           </h3>
           <div className="grid md:grid-cols-2 gap-4 text-blue-700 dark:text-blue-300">
             <div>
@@ -1049,10 +1064,10 @@ export default function SongPage({ params }: SongPageProps) {
               <h4 className="font-semibold mb-2">Album Context:</h4>
               <p className="text-sm">
                 {song.album === 'Fine Art' 
-                  ? 'From KNEECAP\'s critically acclaimed 2024 album "Fine Art", produced by Toddla T. The album seamlessly merges Irish with English lyrics.'
+                  ? 'From KNEECAP&apos;s critically acclaimed 2024 album &quot;Fine Art&quot;, produced by Toddla T. The album seamlessly merges Irish with English lyrics.'
                   : song.album === '3CAG'
-                  ? 'From KNEECAP\'s debut 2018 mixtape "3CAG" (3 Consonants and a Vowel), which introduced their unique bilingual rap style to the world.'
-                  : 'A standalone single release showcasing KNEECAP\'s evolving sound and lyrical prowess.'
+                  ? 'From KNEECAP&apos;s debut 2018 mixtape &quot;3CAG&quot; (3 Consonants and a Vowel), which introduced their unique bilingual rap style to the world.'
+                  : 'A standalone single release showcasing KNEECAP&apos;s evolving sound and lyrical prowess.'
                 }
               </p>
             </div>
@@ -1070,12 +1085,12 @@ export default function SongPage({ params }: SongPageProps) {
                 {song.id === 'cearta' && (
                   <>
                     <p>
-                      <strong>C.E.A.R.T.A</strong> is one of KNEECAP's most famous songs, documenting a near miss with police 
+                      <strong>C.E.A.R.T.A</strong> is one of KNEECAP&apos;s most famous songs, documenting a near miss with police 
                       while carrying illegal substances. The song helped introduce Irish slang for modern drug culture.
                     </p>
                     <p>
                       <strong>Language Note:</strong> KNEECAP invented many Irish words for drugs since traditional Irish 
-                      didn't have urban terminology. "Snaois" (snuff) is used for cocaine, "yokes" for ecstasy pills.
+                      didn&apos;t have urban terminology. &quot;Snaois&quot; (snuff) is used for cocaine, &quot;yokes&quot; for ecstasy pills.
                     </p>
                     <p>
                       <strong>RUC:</strong> Royal Ulster Constabulary - the former police force in Northern Ireland, 
@@ -1091,14 +1106,14 @@ export default function SongPage({ params }: SongPageProps) {
                     </p>
                     <p>
                       <strong>Collaboration:</strong> This track represents the connection between Irish and English 
-                      alternative music scenes, bridging Dublin and Belfast's music communities.
+                      alternative music scenes, bridging Dublin and Belfast&apos;s music communities.
                     </p>
                   </>
                 )}
                 {song.id === 'fine-art' && (
                   <p>
-                    <strong>Fine Art</strong> is the title track that encapsulates KNEECAP's artistic philosophy, 
-                    blending street art, graffiti culture, and musical expression as forms of resistance and identity.
+                                          <strong>Fine Art</strong> is the title track that encapsulates KNEECAP&apos;s artistic philosophy, 
+                      blending street art, graffiti culture, and musical expression as forms of resistance and identity.
                   </p>
                 )}
               </div>
@@ -1115,24 +1130,24 @@ export default function SongPage({ params }: SongPageProps) {
                   <ul className="space-y-1 text-sm">
                     {song.id === 'cearta' && (
                       <>
-                        <li><strong>C.E.A.R.T.A:</strong> "kay-ee-ah-ar-tay-ah"</li>
-                        <li><strong>Ní fhaca mé:</strong> "nee ah-ka may"</li>
-                        <li><strong>Tá mé:</strong> "taw may"</li>
-                        <li><strong>Garda:</strong> "gar-da"</li>
+                        <li><strong>C.E.A.R.T.A:</strong> &quot;kay-ee-ah-ar-tay-ah&quot;</li>
+                        <li><strong>Ní fhaca mé:</strong> &quot;nee ah-ka may&quot;</li>
+                        <li><strong>Tá mé:</strong> &quot;taw may&quot;</li>
+                        <li><strong>Garda:</strong> &quot;gar-da&quot;</li>
                       </>
                     )}
                     {song.id === 'better-way-to-live' && (
                       <>
-                        <li><strong>Táim ag ól:</strong> "taw-im ag ole"</li>
-                        <li><strong>Mo phian:</strong> "mo fee-an"</li>
-                        <li><strong>A cheilt:</strong> "ah heh-lt"</li>
+                        <li><strong>Táim ag ól:</strong> &quot;taw-im ag ole&quot;</li>
+                        <li><strong>Mo phian:</strong> &quot;mo fee-an&quot;</li>
+                        <li><strong>A cheilt:</strong> &quot;ah heh-lt&quot;</li>
                       </>
                     )}
                     {song.id === 'fine-art' && (
                       <>
-                        <li><strong>Is mise:</strong> "iss mish-eh"</li>
-                        <li><strong>Mo shaol:</strong> "mo howl"</li>
-                        <li><strong>Mo ealaín:</strong> "mo al-aw-een"</li>
+                        <li><strong>Is mise:</strong> &quot;iss mish-eh&quot;</li>
+                        <li><strong>Mo shaol:</strong> &quot;mo howl&quot;</li>
+                        <li><strong>Mo ealaín:</strong> &quot;mo al-aw-een&quot;</li>
                       </>
                     )}
                   </ul>
@@ -1141,8 +1156,8 @@ export default function SongPage({ params }: SongPageProps) {
                   <h4 className="font-semibold mb-2">Grammar Notes:</h4>
                   <ul className="space-y-1 text-sm">
                     <li>Irish word order is often Verb-Subject-Object</li>
-                    <li>"Tá" = "is/am/are" (present tense of "to be")</li>
-                    <li>"Ní" = "not" (negation particle)</li>
+                    <li>&quot;Tá&quot; = &quot;is/am/are&quot; (present tense of &quot;to be&quot;)</li>
+                    <li>&quot;Ní&quot; = &quot;not&quot; (negation particle)</li>
                     <li>Aspiration (h) after consonants changes pronunciation</li>
                   </ul>
                 </div>

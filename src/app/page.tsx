@@ -103,7 +103,7 @@ export default function Home() {
                 Community
               </h4>
               <p className="text-gray-600 dark:text-gray-400">
-                Connect with others learning Irish through KNEECAP's music
+                Connect with others learning Irish through KNEECAP&apos;s music
               </p>
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function Home() {
           </h3>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
             KNEECAP is a groundbreaking Irish rap group that performs in both Irish (Gaeilge) and English. 
-            They've revolutionized the Irish music scene by bringing the Irish language into contemporary hip-hop, 
+            They&apos;ve revolutionized the Irish music scene by bringing the Irish language into contemporary hip-hop, 
             making it accessible and relevant to new generations.
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
@@ -127,7 +127,7 @@ export default function Home() {
           </p>
           <div className="bg-green-100 dark:bg-green-900/30 p-6 rounded-lg">
             <p className="text-green-800 dark:text-green-200 font-semibold">
-              "Music is a powerful tool for language learning and cultural connection."
+              &quot;Music is a powerful tool for language learning and cultural connection.&quot;
             </p>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function Home() {
             <span className="text-xl font-bold">KNEECAP Educational Platform</span>
           </div>
           <p className="text-gray-400 mb-4">
-            Educational platform for learning Irish through KNEECAP's bilingual rap music
+            Educational platform for learning Irish through KNEECAP&apos;s bilingual rap music
           </p>
           <p className="text-sm text-gray-500">
             This is an educational resource. All rights to the music and lyrics belong to KNEECAP.

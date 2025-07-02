@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Music, Search, Filter, ArrowLeft, SortAsc, SortDesc } from 'lucide-react';
+import { Music, Search, Filter, ArrowLeft, SortAsc } from 'lucide-react';
 
 // Complete KNEECAP discography organized by release
 const songs = [
@@ -356,42 +356,33 @@ export default function SongsPage() {
 
   // Sort the songs based on the selected option
   const getSortedSongs = () => {
-    let sorted = [...songs];
-    
-    switch (sortBy) {
-      case 'alphabetical':
-        sorted.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 'year-newest':
-        sorted.sort((a, b) => b.year - a.year);
-        break;
-      case 'year-oldest':
-        sorted.sort((a, b) => a.year - b.year);
-        break;
-      case 'album':
-      default:
-        // Default grouping by album (Fine Art first, then 3CAG, then Singles)
-        const albumOrder = { 'Fine Art': 1, '3CAG': 2, 'Single': 3 };
-        sorted.sort((a, b) => {
-          const albumCompare = albumOrder[a.album as keyof typeof albumOrder] - albumOrder[b.album as keyof typeof albumOrder];
-          if (albumCompare !== 0) return albumCompare;
+    const filtered = songs.filter(song => {
+      const matchesSearch = song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          song.titleEnglish.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          song.album.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesLanguage = selectedAlbum === 'all' || song.album === selectedAlbum;
+      return matchesSearch && matchesLanguage;
+    });
+
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'title':
+          return a.title.localeCompare(b.title);
+        case 'album':
+          return a.album.localeCompare(b.album);
+        case 'year-newest':
+          return b.year - a.year;
+        case 'year-oldest':
           return a.year - b.year;
-        });
-        break;
-    }
-    
+        default:
+          return 0;
+      }
+    });
+
     return sorted;
   };
 
-  const filteredSongs = getSortedSongs().filter(song => {
-    const matchesSearch = song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         song.titleEnglish.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         song.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesAlbum = selectedAlbum === 'all' || song.album === selectedAlbum;
-    
-    return matchesSearch && matchesAlbum;
-  });
+  const filteredSongs = getSortedSongs();
 
   const albums = ['Fine Art', '3CAG', 'Single'];
   const totalSongs = songs.length;
@@ -424,7 +415,7 @@ export default function SongsPage() {
             KNEECAP Songs & Lyrics
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-            Complete collection of KNEECAP's bilingual rap catalog
+            Complete collection of KNEECAP&apos;s bilingual rap catalog
           </p>
           
           {/* Stats */}
@@ -537,9 +528,9 @@ export default function SongsPage() {
                 
                 {/* English Translation if different */}
                 {song.title !== song.titleEnglish && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 italic">
-                    "{song.titleEnglish}"
-                  </p>
+                                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 italic">
+                      &quot;{song.titleEnglish}&quot;
+                    </p>
                 )}
 
                 {/* Duration */}
@@ -551,7 +542,7 @@ export default function SongsPage() {
 
                 {/* Description */}
                 <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
-                  {song.description}
+                  {song.description.replace("'", "&apos;")}
                 </p>
 
                 {/* Features */}
@@ -591,7 +582,7 @@ export default function SongsPage() {
               Fine Art (2024)
             </h3>
             <p className="text-blue-700 dark:text-blue-300 text-sm mb-4">
-              KNEECAP's critically acclaimed debut album, produced by Toddla T. Features collaborations 
+              KNEECAP&apos;s critically acclaimed debut album, produced by Toddla T. Features collaborations 
               with Grian Chatten (Fontaines D.C.), Jelani Blackman, and others.
             </p>
             <div className="text-blue-600 dark:text-blue-400 text-sm">
@@ -605,11 +596,10 @@ export default function SongsPage() {
               3CAG (2018)
             </h3>
             <p className="text-purple-700 dark:text-purple-300 text-sm mb-4">
-              The debut mixtape that introduced KNEECAP to the world. "3 Consonants and a Vowel" 
-              established their unique bilingual style.
+              KNEECAP&apos;s breakthrough album &quot;3CAG&quot; established them as pioneers of Irish rap
             </p>
             <div className="text-purple-600 dark:text-purple-400 text-sm">
-              {cagSongs} tracks • 30:39 runtime
+              Features hit songs &quot;Cearta&quot; and &quot;Get Your Brits Out&quot;
             </div>
           </div>
 
@@ -619,8 +609,7 @@ export default function SongsPage() {
               Singles & EPs
             </h3>
             <p className="text-orange-700 dark:text-orange-300 text-sm mb-4">
-              Standalone releases spanning 2017-2025, including breakthrough hits and collaborations 
-              that built KNEECAP's reputation.
+              KNEECAP&apos;s most recent album showcasing their evolution and continued commitment to Irish language
             </p>
             <div className="text-orange-600 dark:text-orange-400 text-sm">
               {singleSongs} releases • Various years

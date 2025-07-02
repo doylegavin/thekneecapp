@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowLeft, BookOpen, Headphones, Users, Star, Music, Languages, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, Headphones, Users, Music, Languages, Target } from 'lucide-react';
 
 export default function LearnPage() {
   return (
@@ -27,7 +27,7 @@ export default function LearnPage() {
             Learn Irish Through Music
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Discover the beauty of the Irish language (Gaeilge) through KNEECAP's powerful lyrics. 
+            Discover the beauty of the Irish language (Gaeilge) through KNEECAP&apos;s powerful lyrics. 
             Music is one of the most effective ways to learn a new language.
           </p>
         </div>
@@ -148,7 +148,7 @@ export default function LearnPage() {
               <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                 <li>• Duolingo Irish Course</li>
                 <li>• Bitesize Irish Gaelic</li>
-                <li>• TG4's "Now You're Talking"</li>
+                <li>• TG4&apos;s &quot;Now You&apos;re Talking&quot;</li>
                 <li>• Memrise Irish</li>
               </ul>
             </div>
@@ -180,7 +180,7 @@ export default function LearnPage() {
               <ul className="space-y-2 text-green-600 dark:text-green-400">
                 <li>• Read the English translation first</li>
                 <li>• Look up unfamiliar words</li>
-                <li>• Understand the song's context</li>
+                <li>• Understand the song&apos;s context</li>
               </ul>
             </div>
             
@@ -189,7 +189,7 @@ export default function LearnPage() {
               <ul className="space-y-2 text-green-600 dark:text-green-400">
                 <li>• Follow along with Irish lyrics</li>
                 <li>• Pay attention to rhythm and pronunciation</li>
-                <li>• Don't worry about understanding everything</li>
+                <li>• Don&apos;t worry about understanding everything</li>
               </ul>
             </div>
             
