@@ -52,8 +52,8 @@ export default function AboutPage() {
             </p>
             
             <p className="mb-6">
-              The group&apos;s name itself is a statement – referencing both the notorious punishment used during 
-              the Troubles and their intention to &quot;kneecap&quot; the forces that seek to suppress Irish culture 
+              The group's name itself is a statement – referencing both the notorious punishment used during 
+              the Troubles and their intention to "kneecap" the forces that seek to suppress Irish culture 
               and language. Their music is both a celebration of Irish identity and a form of cultural resistance.
             </p>
           </div>
@@ -103,15 +103,15 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Fine Art (2024)</h3>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
                 Their latest album showcasing mature songwriting and continued commitment to bilingual rap. 
-                Features powerful tracks like &quot;Cearta&quot; and &quot;H-Ifreann&quot;.
+                Features powerful tracks like "Cearta" and "H-Ifreann".
               </p>
             </div>
             
             <div className="border-l-4 border-orange-500 pl-6">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">3CAG (2018)</h3>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
-                Their breakthrough album that put them on the map. Contains iconic tracks like &quot;Fenian Cunts&quot;, 
-                &quot;Your Man&quot;, and &quot;Get Your Brits Out&quot; that established their distinctive sound.
+                Their breakthrough album that put them on the map. Contains iconic tracks like "Fenian Cunts", 
+                "Your Man", and "Get Your Brits Out" that established their distinctive sound.
               </p>
             </div>
             
@@ -136,7 +136,7 @@ export default function AboutPage() {
                 Our Mission
               </h3>
               <p className="text-green-600 dark:text-green-400 mb-4">
-                This educational platform celebrates KNEECAP&apos;s contribution to Irish culture while providing 
+                This educational platform celebrates KNEECAP's contribution to Irish culture while providing 
                 tools for language learning. We believe music is one of the most powerful ways to connect 
                 with a language and culture.
               </p>
@@ -178,7 +178,7 @@ export default function AboutPage() {
             Start Your Irish Language Journey
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-            Explore KNEECAP&apos;s powerful lyrics and discover the beauty of the Irish language
+            Explore KNEECAP's powerful lyrics and discover the beauty of the Irish language
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

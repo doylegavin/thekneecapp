@@ -1,0 +1,20 @@
+{
+  "id": "mam",
+  "title": "Mam",
+  "titleEnglish": "Mam",
+  "album": "Single",
+  "year": "2025",
+  "duration": "3:18",
+  "primaryLanguage": "bilingual",
+  "lines": [
+    {
+      "type": "section",
+      "section": "Lyrics Coming Soon"
+    },
+    {
+      "irish": "Lyrics will be added here...",
+      "english": "Lyrics will be added here...",
+      "language": "bilingual"
+    }
+  ]
+}

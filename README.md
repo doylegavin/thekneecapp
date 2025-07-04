@@ -57,8 +57,8 @@ kneecap-platform/
    ```
 
 3. **Run the development server**:
-   ```bash
-   npm run dev
+```bash
+npm run dev
    ```
 
 4. **Open your browser** and visit [http://localhost:3000](http://localhost:3000)
