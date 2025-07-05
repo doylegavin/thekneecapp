@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowLeft, BookOpen, Headphones, Users, Star, Music, Languages, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, Headphones, Users, Music, Languages, Target } from 'lucide-react';
 
 export default function LearnPage() {
   return (
