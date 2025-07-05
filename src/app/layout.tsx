@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KNEECAP - Educational Platform",
+  title: "TheKneecApp - Educational Platform",
   description: "Educational platform for KNEECAP's bilingual Irish rap lyrics - Learn Irish through music",
-  keywords: "KNEECAP, Irish rap, Gaeilge, lyrics, translation, education, Irish language",
+  keywords: "KNEECAP, Irish rap, Gaeilge, lyrics, translation, education, Irish language, TheKneecApp",
 };
 
 export default function RootLayout({

@@ -14,7 +14,11 @@ export default function AboutPage() {
             </Link>
             <div className="flex items-center space-x-2">
               <Music className="h-8 w-8 text-green-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">KNEECAP</span>
+              <span className="text-2xl font-bold">
+                <span className="text-green-600">The</span>
+                <span className="text-gray-900 dark:text-white">Kneec</span>
+                <span className="text-orange-500">App</span>
+              </span>
             </div>
           </div>
         </div>

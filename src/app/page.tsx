@@ -10,7 +10,11 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Music className="h-8 w-8 text-green-600" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">KNEECAP</span>
+              <span className="text-2xl font-bold">
+                <span className="text-green-600">The</span>
+                <span className="text-gray-900 dark:text-white">Kneec</span>
+                <span className="text-orange-500">App</span>
+              </span>
               <span className="text-sm text-gray-600 dark:text-gray-400">Educational Platform</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -34,10 +38,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
-            <span className="bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent">
-              KNEECAP
-            </span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-green-600">The</span>
+            <span className="text-gray-900 dark:text-white">Kneec</span>
+            <span className="text-orange-500">App</span>
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
             Irish Rap • Educational Platform
@@ -138,7 +142,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Music className="h-6 w-6 text-green-400" />
-            <span className="text-xl font-bold">KNEECAP Educational Platform</span>
+            <span className="text-xl font-bold">
+              <span className="text-green-400">The</span>
+              <span className="text-white">Kneec</span>
+              <span className="text-orange-400">App</span>
+              <span className="text-white"> Educational Platform</span>
+            </span>
           </div>
           <p className="text-gray-400 mb-4">
             Educational platform for learning Irish through KNEECAP's bilingual rap music

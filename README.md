@@ -1,4 +1,4 @@
-# KNEECAP Educational Platform
+# TheKneecApp - Educational Platform
 
 A React/Next.js educational platform dedicated to the Irish rap group **KNEECAP**, designed to help users learn Irish (Gaeilge) through their bilingual lyrics.
 
