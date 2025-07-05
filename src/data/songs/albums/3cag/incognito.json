@@ -1,284 +1,235 @@
 {
+
   "id": "incognito",
   "title": "Incognito",
   "titleEnglish": "Incognito",
   "album": "3CAG",
-  "year": "2018",
-  "duration": "3:29",
+  "year": "2019",
+  "duration": "4:08",
   "primaryLanguage": "bilingual",
   "lines": [
     {
       "type": "section",
-      "section": "Lyrics Coming Soon"
+      "section": "Verse 1"
     },
     {
-      "english": "Lyrics will be added here...",
-      "irish": "Lyrics will be added here...",
-      "language": "english"
+      "english": "'Gul síos ar an snaois, you're sniffing the coke",
+      "irish": "'Gul síos ar an snaois, tá tú ag tabhairt boladh don chóicín"
+    },
+    {
+      "english": "Tá tú ag iarraidh cúpla smailc, you're looking a wee smoke",
+      "irish": "Tá tú ag iarraidh cúpla smailc, tá tú ag iarraidh toitín beag"
+    },
+    {
+      "english": "Trí chonsan agus guta, that's Molly or MD",
+      "irish": "Trí chonsan agus guta, sin Molly nó MDMA"
+    },
+    {
+      "english": "\"An bhfuil cead agam eochair?\", if you fancy a key",
+      "irish": "\"An bhfuil cead agam eochair?\" más mian leat bump beag"
+    },
+    {
+      "english": "And if you can't grasp that, say Micí Dainín",
+      "irish": "Agus mura dtuigeann tú sin, abair Micí Dainín"
+    },
+    {
+      "english": "Or if he's mad for the coke, then he's a 'snaoisín'",
+      "irish": "Má tá fonn an chóicín air, is snaoisín é"
+    },
+    {
+      "english": "If you don't have a 'dom, then you have no coiscín",
+      "irish": "Mura bhfuil dom agat, níl coiscín agat"
+    },
+    {
+      "english": "Kneecap, gan stop, anois a bhuachaillí",
+      "irish": "Kneecap, gan stopadh, anois a bhuachaillí"
+    },
+
+    {
+      "english": "You say \"Foc me!\" when you see na Gardaí",
+      "irish": "Deir tú 'Foc me!' nuair a fheiceann tú na Gardaí"
+    },
+    {
+      "english": "'Nother one for the cops is \"Fuck the RUC!\"",
+      "irish": "Eile le haghaidh na póilíní ná 'Fuck the RUC!'"
+    },
+    {
+      "english": "As well as that we have na fir buí",
+      "irish": "Agus leis sin tá na fir buí againn"
+    },
+    {
+      "english": "Just connigh súil amach do na bastardí",
+      "irish": "Coinnigh súil amach do na bastaird sin"
+    },
+    {
+      "english": "So más maith leat an phit, you like a bit of gee",
+      "irish": "Má thaitníonn an pit leat, is maith leat mná"
+    },
+    {
+      "english": "Nó más fearr leat an bod, you like getting the D",
+      "irish": "Nó más fearr leat an bod, is maith leat an D"
+    },
+    {
+      "english": "Más maith leat green dul síos go teach Aoidh",
+      "irish": "Más maith leat green (cannabas), téigh go teach Aoidh"
+    },
+    {
+      "english": "Seo an 3CAG crew le focain ceacht inniu",
+      "irish": "Seo foireann 3CAG le ceacht fucking inniu"
+    },
+
+    {
+      "type": "section",
+      "section": "Chorus"
+    },
+    {
+      "english": "Céim a haon to being incognito: Las an dúid agus just foghlaim an lingo",
+      "irish": "Step one to being incognito: Light up a joint and learn the lingo"
+    },
+    {
+      "english": "Céim a dó for avoidin' the law: Caith do focain bally gach aon lá",
+      "irish": "Step two to avoid the law: Wear your fucking balaclava every day"
+    },
+    {
+      "english": "Is céim a trí, seo an ceann is tábhachtaí: Just ná focain éist le RTÉ",
+      "irish": "And step three, the most important one: Just don’t fucking listen to RTÉ"
+    },
+    {
+      "english": "Ná focain éist le RTÉ",
+      "irish": "Don’t fucking listen to RTÉ"
+    },
+
+    {
+      "type": "section",
+      "section": "Verse 2"
+    },
+    {
+      "english": "Tá na leaids ar fad clocháilte, we're stoned to the bone",
+      "irish": "All the lads are stoned, clocháilte amach is amach"
+    },
+    {
+      "english": "Tá tú ag iarraidh a bheith focáilte, cur snaois i do shrón",
+      "irish": "You want to get fucked up, shove coke up your nose"
+    },
+    {
+      "english": "'Fear glic' is a housebreaker up in Malone",
+      "irish": "'Fear glic' is a burglar living in Malone"
+    },
+    {
+      "english": "Ag goideadh airgid ó rich cunts and taking it home",
+      "irish": "Stealing cash from rich cunts and taking it home"
+    },
+    {
+      "english": "'Gan airgead' is skint, mar a bhíonn de ghnáth",
+      "irish": "‘Gan airgead’ means broke, like usual"
+    },
+    {
+      "english": "You can't pay for drugs so you get tic gach lá",
+      "irish": "Can’t pay for drugs so you get tic (credit) every day"
+    },
+    {
+      "english": "'Píonós pointí' is penalty points",
+      "irish": "'Píonós pointí' means penalty points"
+    },
+    {
+      "english": "The Stinging Roger is the drioblaín at the end of your joints",
+      "irish": "The Stinging Roger is the butt of your joint"
+    },
+    {
+      "english": "An phit is a gee, minge, fanny or a flirt",
+      "irish": "'An phit' is slang for vagina"
+    },
+    {
+      "english": "If you're fucked from last night, tá tinneas póit ort",
+      "irish": "If you're wrecked from last night, you’ve got a hangover"
+    },
+    {
+      "english": "What you need is a wee bit of faoiseamh béil",
+      "irish": "What you need is a bit of oral relief"
+    },
+    {
+      "english": "But steal her cac and cuir é suas i Shankill Buy and Sell",
+      "irish": "Steal her crap and put it up on Shankill Buy and Sell"
+    },
+
+    {
+      "type": "section",
+      "section": "Verse 3"
+    },
+    {
+      "english": "Incognito, just follow na rialacha",
+      "irish": "Incognito, just follow the rules"
+    },
+    {
+      "english": "Cur do dope i bhfolach 'is hide your paraphernalia",
+      "irish": "Hide your dope and your paraphernalia"
+    },
+    {
+      "english": "A brathadóir is a Tout, but sure they're always afraid of ya",
+      "irish": "A brathadóir is a tout/snitch, but they’re always scared of you"
+    },
+    {
+      "english": "And if you're fucking grannied then look at the fucking state of ya",
+      "irish": "And if you're out of it (grannied), look at the state of ya"
+
+    },
+
+    {
+      "type": "section",
+      "section": "Verse 4 / Outro"
+    },
+    {
+      "english": "When you see your mate, you say '’Dé an fucking craic?'",
+      "irish": "When you see your mate, you say 'What's the fucking craic?'"
+    },
+    {
+      "english": "Nó 'Cad é mar atá' if you wanna be polite",
+      "irish": "Or 'Cad é mar atá tú?' if you want to be polite"
+    },
+    {
+      "english": "You say 'Maith go leor!' if you think he's alright",
+      "irish": "Say 'Maith go leor!' if he’s grand"
+    },
+    {
+      "english": "Or if he's lán de cac that means he's full of shite",
+      "irish": "If he's 'lán de cac' that means he's full of shite"
+    },
+    {
+      "english": "A dúid mór ramhar is a busty joint",
+      "irish": "A big fat joint is 'dúid mór ramhar'"
+    },
+    {
+      "english": "And you always speak the lingo at a Garda checkpoint",
+      "irish": "And always use the lingo when stopped by the Gardaí"
+    },
+    {
+      "english": "Ach rud amhain eile sula ndéanaimid dearmad:",
+      "irish": "But one more thing before we forget:"
+    },
+    {
+      "english": "You say 'Na Sé Chontae' for the North of Ireland",
+      "irish": "Say 'Na Sé Chontae' instead of Northern Ireland"
+    },
+
+    {
+      "type": "section",
+      "section": "Outro Chorus"
+    },
+    {
+      "english": "Céim a haon to being incognito:\nLas an dúid agus just foghlaim an lingo",
+      "irish": "Step one to being incognito:\nLight a joint and learn the slang"
+    },
+    {
+      "english": "Céim a dó for avoidin' the law:\nCaith do focain bally gach aon lá",
+      "irish": "Step two to avoid the law:\nWear your fucking balaclava every day"
+    },
+    {
+      "english": "Is céim a trí, seo an ceann is tábhachtaí\nJust ná focain éist le RTÉ",
+      "irish": "And step three, most important:\nJust don’t fucking listen to RTÉ"
+    },
+    {
+      "english": "Right!\nAn bhfuil sibh ag focain éisteacht?",
+      "irish": "Right!\nAre ye fucking listening?"
     }
   ]
 }
-
-
-Music IQ
-Featured
-Charts
-Videos
-Promote Your Music
-Sign Up
-Search lyrics & more
-
-1
-Cover art for Incognito by Kneecap
-Incognito
-Kneecap
-Producer
-DJ PRÓVAÍ
-Track 5 on
-3CAG 
-Jun. 25, 2018
-1 viewer
-36.9K views
-
-
-
-
-26 Contributors
-Incognito Lyrics
-(Gaeilge labhartha Bhéal Feirste. Modúl a haon: "Incognito")
-
-'Gul síos ar an snaois, you're sniffing the coke
-Tá tú ag iarraidh cúpla smailc, you're looking a wee smoke
-Trí chonsan agus guta, that's Molly or MD
-"An bhfuil cead agam eochair?", if you fancy a key
-And if you can't grasp that, say Micí Dainín
-Or if he's mad for the coke, then he's a 'snaoisín'
-If you don't have a 'dom, then you have no coiscín
-Kneecap,, gan stop, anois a bhuachaillí
-
-You say "Foc me!" when you see na Gardaí
-'Nother one for the cops is "Fuck the RUC!"
-As well as that we have na fir buí
-Just connigh súil amach do na bastardí
-So más maith leat an phit, you like a bit of gee
-Nó más fearr leat an bod, you like getting the D
-Más maith leat green dul síos go teach Aoidh
-Seo an 3CAG crew le focain ceacht inniu
-
-[Curfá/Chorus]
-Céim a haon to being incognito:
-Las an dúid agus just foghlaim an lingo
-Céim a dó for avoidin' the law:
-Caith do focain bally gach aon lá
-Is céim a trí, seo an ceann is tábhachtaí
-Just ná focain éist le RTÉ
-Ná focain éist le RTÉ
-Just ná focain éist le RTÉ
-See Kneecap Live
-Get tickets as low as $81
-
-You might also like
-Fenian Cunts
-Kneecap
-C.E.A.R.T.A
-Kneecap
-Your Sniffer Dogs Are Shite
-Kneecap
-Tá na leaids ar fad clocháilte, we're stoned to the bone
-Tá tú ag iarraidh a bheith focáilte, cur snaois i do shrón
-'Fear glic' is a housebreaker up in Malone
-Ag goideadh airgid ó rich cunts and taking it home
-'Gan airgead' is skint, mar a bhíonn de ghnáth
-You can't pay for drugs so you get tic gach lá
-'Píonós pointí' is penalty points
-The Stinging Roger is the drioblaín at the end of your joints
-An phit is a gee, minge, fanny or a flirt
-If you're fucked from last night, tá tinneas póit ort
-What you need is a wee bit of faoiseamh béil
-But steal her cac and cuir é suas i Shankill Buy and Sell
-
-Incognito, just follow na rialacha
-Cur do dope i bhfolach 'is hide your paraphernalia
-A brathadóir is a Tout, but sure they're always afraid of ya
-And if you're fucking grannied then look at the fucking state of ya
-
-[Curfá/Chorus]
-Céim a haon to being incognito:
-Las an dúid agus just foghlaim an lingo
-Céim a dó for avoidin' the law:
-Caith do focain bally gach aon lá
-Is céim a trí, seo an ceann is tábhachtaí
-Just ná focain éist le RTÉ
-Ná focain éist le RTÉ
-Just ná focain éist le RTÉ
-When you see your mate, you say "’Dé an fucking craic?"
-Nó "Cad é mar atá" if you wanna be polite
-You say "Maith go leor!" if you think he's alright
-Or if he's lán de cac that means he's full of shite
-A dúid mór ramhar is a busty joint
-And you always speak the lingo at a Garda checkpoint
-Ach rud amhain eile sula ndéanaimid dearmad;
-You say "Na Sé Chontae" for the North of Ireland
-[UPPA RA]
-
-Kneecap, trí chonsan agus guta crew
-Ag múineadh achan duine óg atá i gCúige Uladh
-Tá muid beagnach críochnaithe don lá inniú
-Ach incognito will be continued
-But one more time roimh deireadh an rang
-Abair ós ard don fuckin' 3CAG gang
-If you want to be incognito like me
-Tóg’ bhur bpeann is páipéar agus scríobhaigí
-
-[Curfá/Chorus]
-Céim a haon to being incognito:
-Las an dúid agus just foghlaim an lingo
-Céim a dó for avoidin' the law:
-Caith do focain bally gach aon lá
-Is céim a trí, seo an ceann is tábhachtaí
-Just ná focain éist le RTÉ
-Ná focain éist le RTÉ
-Just ná focain éist le RTÉ
-Right!
-An bhfuil sibh ag focain éisteacht?)
-
-Céim a haon to being incognito:
-Las an dúid agus just foghlaim an lingo
-Céim a dó for avoidin' the law:
-Caith do focain bally gach aon lá
-Is céim a trí, seo an ceann is tábhachtaí
-Just ná focain éist le RTÉ
-Ná focain éist le RTÉ
-Just ná focain éist le RTÉ
-
-
-
-1
-Embed
-About
-Have the inside scoop on this song?
-Sign up and drop some knowledge
-Start the song bio
-Q&A
-Find answers to frequently asked questions about the song and explore its deeper meaning
-
-Ask a question
-Who produced “Incognito” by Kneecap?
-
-When did Kneecap release “Incognito”?
-
-Who wrote “Incognito” by Kneecap?
-
-3CAG (2018)
-Kneecap
-1.
-Your All Legitimate Targets
-2.
-Amach Anocht
-3.
-Tá na Baggies ar an Talamh
-4.
-C.E.A.R.T.A
-5.
-Incognito
-6.
-Ceacht Mo Chara
-7.
-Your Sniffer Dogs Are Shite
-8.
-Bouncers
-Credits
-Producer
-DJ PRÓVAÍ
-Writers
-Mo Chara & Móglaí Bap
-Released on
-June 25, 2018
-Tags
-Rap
-UK
-Irish Rebel Music
-Gaeilge
-Northern Ireland
-Comments
-Add a comment
-Get the conversation started
-Be the first to comment
-Sign Up And Drop Knowledge 🤓
-Genius is the ultimate source of music knowledge, created by scholars like you who share facts and insight about the songs and artists they love.
-Sign Up
-11 Blunders to Avoid to Help You Retire ComfortablyFROM THE WEB
-11 Blunders to Avoid to Help You Retire Comfortably
-For individuals with a €500k+ portfolio, get our guide and ongoing insights to help plan the retirement you deserve.
-(Fisher Investments Ireland)
-Who Has the Cheapest Car Insurance in Leinster (Check Eircode)FROM THE WEB
-Who Has the Cheapest Car Insurance in Leinster (Check Eircode)
-(Car Insurance 2025)
-You will never turn off your computer again if you have a mouseFROM THE WEB
-You will never turn off your computer again if you have a mouse
-Play for free. No Installation.
-(Combat Siege)
-I couldn’t admit it to myself' – Brian May reveals guilt over having feelings for Anita DobsonFROM THE WEB
-I couldn’t admit it to myself' – Brian May reveals guilt over having feelings for Anita Dobson
-(Ohmymag)
-Man falls to his death in work accident - it was confirmed to be a Gogglebox starFROM THE WEB
-Man falls to his death in work accident - it was confirmed to be a Gogglebox star
-(NEWS/OhMyMag.co.uk)
-JBLAZN – Feeling Like Dancin'
-JBLAZN – Feeling Like Dancin'
-Feeling Like Dancin' Lyrics: I Feel like I wanna dance / So I gotta dance / I feel I got to dance / Don't you wanna dance? Damn / I gotta make them dance / Make em wanna dance / Making my stance / Dance to
-https://genius.com/
-
-Genius is the world’s biggest collection of song lyrics and musical knowledge
-About Genius
-Contributor Guidelines
-Press
-Shop
-Advertise
-Privacy Policy
-Privacy Preferences
-Licensing
-Jobs
-Developers
-Copyright Policy
-Contact Us
-Sign In
-Do Not Sell My Personal Information
-© 2025 ML Genius Holdings, LLC
-Terms of Use
-Verified Artists
-All Artists:
-a
-b
-c
-d
-e
-f
-g
-h
-i
-j
-k
-l
-m
-n
-o
-p
-q
-r
-s
-t
-u
-v
-w
-x
-y
-z
-#
-Hot Songs:
-HUNTR/X - Golden (Romanized)
-Free
-Animals (Pt. I)
-What It Sounds Like
-How It’s Done
-View All
