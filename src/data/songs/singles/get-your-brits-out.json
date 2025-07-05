@@ -1,349 +1,245 @@
 {
     "id": "get-your-brits-out",
     "title": "Get Your Brits Out",
-    "titleEnglish": "Get Your Brits Out",
-    "album": "Single",
-    "year": 2019,
-    "duration": "3:20",
-    "primaryLanguage": "english",
+    "titleEnglish": "Faigh Amach do Bhriotanaigh",
+    "album": "Fine Art",
+    "year": 2024,
+    "duration": "3:36",
+    "primaryLanguage": "bilingual",
     "lines": [
-      {
-        "type": "section",
-        "section": "Verse 1 — Móglaí Bap"
-      },
+      { "type": "section", "section": "Móglaí Bap Verse 1" },
       {
         "english": "Guess who’s back on the news",
-        "language": "english"
+        "irish": "Tomhais cé atá ar ais ar an nuacht"
       },
       {
         "english": "It’s your favourite Republican hoods",
-        "language": "english"
+        "irish": "Is iad do buchaillí Poblachtacha is ansa leat"
       },
       {
         "english": "It’s your fella with the Nike Air shoes",
-        "language": "english"
+        "irish": "Is é do fhear leis na bróga Nike Air"
       },
       {
         "english": "Two chains, two birds and we know what’s good",
-        "language": "english"
+        "irish": "Dhá slabhra, dhá éan agus tá a fhios againn cén scéal"
       },
       {
         "english": "Guess who's back to abuse",
-        "language": "english"
+        "irish": "Tomhais cé atá ar ais chun masla a thabhairt"
       },
       {
         "english": "Every solvent that I choose",
-        "language": "english"
+        "irish": "Gach tuaslagán a roghnaím"
       },
       {
         "english": "Two blues and a pint of stout",
-        "language": "english"
+        "irish": "Dhá phiolla ghoirm agus pionta leanna dorcha"
       },
       {
         "english": "And never you mind if it smells like trout, foc",
-        "language": "english"
+        "irish": "Agus ná bac le boladh an bradáin, fócl"
       },
       {
         "english": "Tomhas cé atá ag teacht i mo dhiaidh",
-        "language": "irish",
-        "english": "Guess who’s coming after me"
+        "irish": "Guess who's coming after me"
       },
       {
         "english": "Ach Stalford agus an DUP",
-        "language": "irish",
-        "english": "But Stalford and the DUP"
+        "irish": "But Stalford and the DUP"
       },
       {
         "english": "Gach lá, taobh amuigh de mo theach",
-        "language": "irish",
-        "english": "Every day, outside my house"
+        "irish": "Every day, outside my house"
       },
       {
         "english": "\"Go back to Dublin if you want to rap\"",
-        "language": "english"
+        "irish": "\"Fill ar ais go Baile Átha Cliath más mian leat rapáil\""
       },
       {
         "english": "Anois éist, I’m gonna say this once",
-        "language": "bilingual"
+        "irish": "Now listen, táim chun é seo a rá uair amháin"
       },
       {
         "english": "Yous can all stay just don’t be cunts",
-        "language": "english"
+        "irish": "Is féidir libh fanacht, ach ná bígí i bhur gcaimiléirí"
       },
       {
         "english": "And don’t be runnin' round like silly old Tans",
-        "language": "english"
+        "irish": "Agus ná bí ag rith thart cosúil le Sean-Tans seafóideacha"
       },
       {
         "english": "Just take these yokes and we’ll go for a dance",
-        "language": "english"
+        "irish": "Tógaigí na piollaí seo agus rachaimid ag rince"
       },
       {
         "english": "Go for a dance, go for a dance",
-        "language": "english"
+        "irish": "Téigh ag rince, téigh ag rince"
       },
       {
         "english": "Go for a dance, go for a dance",
-        "language": "english"
+        "irish": "Téigh ag rince, téigh ag rince"
       },
-  
-      {
-        "type": "section",
-        "section": "Verse 2 — Mo Chara"
-      },
+      { "type": "section", "section": "Mo Chara Verse" },
       {
         "english": "Bhí an DUP harassin' me",
-        "language": "bilingual",
-        "english": "The DUP were harassing me"
+        "irish": "The DUP were harassing me"
       },
       {
         "english": "But now we’re all on the yokes and it’s startin' to be",
-        "language": "english"
+        "irish": "Ach anois táimid uilig ar na piollaí agus tá sé ag éirí"
       },
       {
         "english": "A good night out, they forgot all about",
-        "language": "english"
+        "irish": "Oíche mhaith amuigh, rinne siad dearmad go hiomlán ar"
       },
       {
         "english": "The time that I said something like ‘Brits Out’",
-        "language": "english"
+        "irish": "An uair a dúirt mé rud éigin cosúil le 'Amach leis na Briotanaigh'"
       },
       {
-        "english": "Arlene’s throwing shapes, half a yoke nearly killed her",
-        "language": "english"
+        "english": "Arlene’s throwing shapes half a yoke nearly killed her",
+        "irish": "Tá Arlene ag cur cora, ba bheag nár mharaigh leathphillín í"
       },
       {
         "english": "Jeffrey Donaldson’s lost all his filters",
-        "language": "english"
+        "irish": "Tá gach scagaire caillte ag Jeffrey Donaldson"
       },
       {
         "english": "\"Seo duit mate, take two sticks\"",
-        "language": "bilingual",
-        "english": "\"Here you go mate, take two pills\""
+        "irish": "\"Here you go, a chara, glac dhá phiolla\""
       },
       {
         "english": "He got me in a headlock and gave me a kiss",
-        "language": "english"
+        "irish": "Chuir sé mé i ngreim muiníl agus thug póg dom"
       },
       {
         "english": "And now Christy Stalford’s having the craic",
-        "language": "english"
+        "irish": "Agus anois tá Christy Stalford ag baint sult as"
       },
       {
         "english": "Showing everyone his old tattoo on his back",
-        "language": "english"
+        "irish": "Ag taispeáint a sheantatú ar a dhroim do gach duine"
       },
       {
         "english": "Arlene says \"Relax or you’ll get sacked\"",
-        "language": "english"
+        "irish": "Deir Arlene \"Lig do scíth nó brisfear thú as do phost\""
       },
       {
-        "english": "Dúirt mé \"tóg go bog é\", things get weird when you're whacked",
-        "language": "bilingual",
-        "english": "I said \"take it easy\", things get weird when you're out of it"
+        "english": "Dúirt mé \"tóg go bog é’, things get weird when you're whacked",
+        "irish": "I said \"take it easy\", éiríonn rudaí aisteach nuair atá tú ar na drugaí"
       },
       {
         "english": "Brits out for the night and we landed in Thompson’s",
-        "language": "english"
+        "irish": "Amach leis na Briotanaigh don oíche agus shroicheamar Thompson’s"
       },
       {
         "english": "Told Donaldson to double drop to see what happens",
-        "language": "english"
+        "irish": "Dúirt mé le Donaldson dhá cheann a thógáil le feiceáil cad a tharlaíonn"
       },
       {
         "english": "Sammy Wilson got knocked back at the door",
-        "language": "english"
+        "irish": "Níor lig siad Sammy Wilson isteach sa doras"
       },
       {
         "english": "And now he’s out the front in bad form",
-        "language": "english"
+        "irish": "Agus anois tá sé amuigh os comhair i drochghiúmar"
       },
       {
         "english": "Scoth na hoíche, neart yokes le hithe",
-        "language": "irish",
-        "english": "Best night ever, loads of yokes to eat"
+        "irish": "Night of nights, plenty of pills to eat"
       },
       {
-        "english": "'Nois tá mála de fiche, críochnaithe",
-        "language": "irish",
-        "english": "Now the bag of twenty’s gone"
+        "english": "'nois tá mála de fiche, críochnaithe",
+        "irish": "Now there's a bag of twenty, finished"
       },
       {
         "english": "These E’s are sweet, they’re sweet E's",
-        "language": "english"
+        "irish": "Tá na E seo milis, is milis iad"
       },
       {
-        "english": "I’m eatin' 'em like sweeties, Mála mór cola bottles agus mála meanies",
-        "language": "bilingual",
-        "english": "Big bag of cola bottles and a bag of Meanies"
+        "english": "I’m eatin 'em like sweeties, Mála mór cola bottles agus mála meanies",
+        "irish": "Táim á n-ithe cosúil le milseáin, mála mór buidéal cola agus mála meanies"
       },
-  
+      { "type": "section", "section": "Chorus" },
       {
-        "type": "section",
-        "section": "Chorus"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
+        "english": "Get your Brits out, get your Brits out, get your Brits out\nWe’re on a mad one",
+        "irish": "Faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh\nTáimid ar mire"
       },
       {
-        "english": "We’re on a mad one",
-        "language": "english"
+        "english": "Get your Brits out, get your Brits out, get your Brits out\nWe’re on a mad one!",
+        "irish": "Faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh\nTáimid ar mire!"
       },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one",
-        "language": "english"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one!",
-        "language": "english"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one",
-        "language": "english"
-      },
-  
-      {
-        "type": "section",
-        "section": "Verse 3 — Móglaí Bap"
-      },
+      { "type": "section", "section": "Móglaí Bap Verse 2" },
       {
         "english": "Ar ais ag an teach and things are getting crusty",
-        "language": "bilingual",
-        "english": "Back at the house and things are getting crusty"
+        "irish": "Back at the house and things are getting messy"
       },
       {
         "english": "Arlene ar mo chlé and she’s getting touchy",
-        "language": "bilingual",
-        "english": "Arlene on my left and she’s getting touchy"
+        "irish": "Arlene’s on my left and she’s getting flirty"
       },
       {
         "english": "Must be, just mar gheall ar na yokes",
-        "language": "bilingual",
-        "english": "Must be just because of the yokes"
+        "irish": "Must be, just because of the pills"
       },
       {
         "english": "'Cause she whispered in my ear ‘I like to be choked’",
-        "language": "english"
+        "irish": "Mar a dúirt sí go ciúin liom ‘Is maith liom a bheith stróicthe’"
       },
       {
         "english": "And I boked right into her face",
-        "language": "english"
+        "irish": "Agus rinne mé urlacan díreach ina héadan"
       },
       {
         "english": "'Cause the room was spinning all over the place",
-        "language": "english"
+        "irish": "Mar bhí an seomra ag rothlú timpeall orm"
       },
       {
         "english": "I couldn’t stand, couldn’t sit but I kept her lit",
-        "language": "english"
+        "irish": "Níorbh fhéidir liom seasamh ná suí ach choinnigh mé ar aghaidh léi"
       },
       {
         "english": "And now my best mate is a distinguished Brit",
-        "language": "english"
+        "irish": "Agus anois is Briotanach clúiteach é mo chara is fearr"
       },
-  
-      {
-        "type": "section",
-        "section": "Verse 4 — Mo Chara"
-      },
+      { "type": "section", "section": "Mo Chara Verse 2" },
       {
         "english": "We’re at the afters and it’s a disaster",
-        "language": "english"
+        "irish": "Táimid ag an gcóisir i ndiaidh agus is tubaiste é"
       },
       {
         "english": "Cunts are talkin' politics, there's a lack of a laughter",
-        "language": "english"
+        "irish": "Tá daoine ag caint faoi pholaitíocht, gan gáire ar bith le cloisteáil"
       },
       {
         "english": "Skaggin' out on the sofa, Arlene’s tinn",
-        "language": "bilingual",
-        "english": "Skaggin' out on the sofa, Arlene’s sick"
+        "irish": "Ag imeacht as a meabhair ar an tolg, tá Arlene tinn"
       },
       {
         "english": "Paro off her head, she believes she’s sinned",
-        "language": "english"
+        "irish": "Ar mire ina hintinn, síleann sí go ndearna sí peaca"
       },
       {
         "english": "Donaldson has started with his homophobic chat",
-        "language": "english"
+        "irish": "Thosaigh Donaldson lena chuid cainte homafóibeach"
       },
       {
-        "english": "So everyone has started on him — that’s enough of that",
-        "language": "english"
+        "english": "So everyone has started on him that’s enough of that",
+        "irish": "Mar sin thosaigh gach duine ag tabhairt air, sin go leor de sin"
       },
       {
         "english": "Stalford’s lickin' coke off a plate",
-        "language": "english"
+        "irish": "Tá Stalford ag lapaire cóicín ó phláta"
       },
       {
-        "english": "You’ve got issues mate",
-        "language": "english"
+        "english": "You’ve got issues mate\nYou’ve got issues mate\nIssues mate\nIssues mate\nIssues mate",
+        "irish": "Tá fadhbanna agat a chara\nTá fadhbanna agat a chara\nFadhbanna a chara\nFadhbanna a chara\nFadhbanna a chara"
       },
+      { "type": "section", "section": "Chorus (Reprise)" },
       {
-        "english": "You’ve got issues mate",
-        "language": "english"
-      },
-      {
-        "english": "Issues mate",
-        "language": "english"
-      },
-      {
-        "english": "Issues mate",
-        "language": "english"
-      },
-      {
-        "english": "Issues mate",
-        "language": "english"
-      },
-  
-      {
-        "type": "section",
-        "section": "Final Chorus"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one",
-        "language": "english"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one!",
-        "language": "english"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one",
-        "language": "english"
-      },
-      {
-        "english": "Get your Brits out, get your Brits out, get your Brits out",
-        "language": "english"
-      },
-      {
-        "english": "We’re on a mad one",
-        "language": "english"
+        "english": "Get your Brits out, get your Brits out, get your Brits out\nWe’re on a mad one",
+        "irish": "Faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh, faigh amach do Bhriotanaigh\nTáimid ar mire"
       }
     ]
   }

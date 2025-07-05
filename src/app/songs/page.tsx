@@ -2,380 +2,43 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Music, Search, Filter, ArrowLeft, SortAsc, SortDesc } from 'lucide-react';
-
-// Complete KNEECAP discography organized by release
-const songs = [
-  // ===== FINE ART (2024) =====
-  {
-    id: '3cag-feat-radie-peat',
-    title: '3CAG',
-    titleEnglish: '3CAG (feat. Radie Peat)',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:08',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Opening track from Fine Art featuring Radie Peat, setting the tone for the album.',
-  },
-  {
-    id: 'fine-art',
-    title: 'Fine Art',
-    titleEnglish: 'Fine Art',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:19',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Title track exploring artistic expression as resistance and identity in both languages.',
-  },
-  {
-    id: 'i-bhfiacha-linne',
-    title: 'I bhFiacha Linne',
-    titleEnglish: 'In Our Debt',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:07',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Aggressive track about debts and money owed, showcasing KNEECAP\'s harder edge.',
-  },
-  {
-    id: 'im-flush',
-    title: 'I\'m Flush',
-    titleEnglish: 'I\'m Flush',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:56',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Money-focused track showing KNEECAP\'s success and financial confidence.',
-  },
-  {
-    id: 'better-way-to-live',
-    title: 'Better Way to Live',
-    titleEnglish: 'Better Way to Live (feat. Grian Chatten)',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:56',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Collaboration with Fontaines D.C.\'s Grian Chatten exploring themes of addiction and hope.',
-  },
-  {
-    id: 'sick-in-the-head',
-    title: 'Sick in the Head',
-    titleEnglish: 'Sick in the Head',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:32',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Raw exploration of mental health struggles and societal pressure.',
-  },
-  {
-    id: 'love-making',
-    title: 'Love Making',
-    titleEnglish: 'Love Making (feat. Nino)',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:27',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Sensual track featuring Nino, showing KNEECAP\'s more intimate side.',
-  },
-  {
-    id: 'drug-dealin-pagans',
-    title: 'Drug Dealin Pagans',
-    titleEnglish: 'Drug Dealin Pagans',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '2:33',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Provocative track blending spiritual and street themes in Irish.',
-  },
-  {
-    id: 'harrow-road',
-    title: 'Harrow Road',
-    titleEnglish: 'Harrow Road (feat. Jelani Blackman)',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:45',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'London-set collaboration with Jelani Blackman about urban navigation and displacement.',
-  },
-  {
-    id: 'parful',
-    title: 'Parful',
-    titleEnglish: 'Parful',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:19',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'House-influenced banger about cross-community raving and unity through music.',
-  },
-  {
-    id: 'rhino-ket',
-    title: 'Rhino Ket',
-    titleEnglish: 'Rhino Ket',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:07',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Techno/dancehall hybrid showcasing KNEECAP\'s experimental electronic side.',
-  },
-  {
-    id: 'way-too-much',
-    title: 'Way Too Much',
-    titleEnglish: 'Way Too Much',
-    album: 'Fine Art',
-    year: 2024,
-    duration: '3:17',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Introspective closing track about excess and finding balance.',
-  },
-
-  // ===== 3CAG (2018) =====
-  {
-    id: 'your-all-legitimate-targets',
-    title: 'Your All Legitimate Targets',
-    titleEnglish: 'Your All Legitimate Targets',
-    album: '3CAG',
-    year: 2018,
-    duration: '1:23',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Provocative opening statement from KNEECAP\'s debut mixtape.',
-  },
-  {
-    id: 'amach-anocht',
-    title: 'Amach Anocht',
-    titleEnglish: 'Out Tonight',
-    album: '3CAG',
-    year: 2018,
-    duration: '4:06',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Irish party anthem about going out and living life to the fullest.',
-  },
-  {
-    id: 'ta-na-baggies-ar-an-talamh',
-    title: 'Tá na Baggies ar an Talamh',
-    titleEnglish: 'The Baggies Are on the Ground',
-    album: '3CAG',
-    year: 2018,
-    duration: '3:51',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Street narrative about drug culture, featuring MC Muipéad.',
-  },
-  {
-    id: 'cearta',
-    title: 'C.E.A.R.T.A',
-    titleEnglish: 'R.I.G.H.T.S',
-    album: '3CAG',
-    year: 2018,
-    duration: '3:43',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'KNEECAP\'s breakthrough song about a police encounter while carrying illegal substances.',
-  },
-  {
-    id: 'incognito',
-    title: 'Incognito',
-    titleEnglish: 'Incognito',
-    album: '3CAG',
-    year: 2018,
-    duration: '3:29',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Stealth-mode track about staying under the radar.',
-  },
-  {
-    id: 'ceacht-mo-chara',
-    title: 'Ceacht Mo Chara',
-    titleEnglish: 'My Friend\'s Lesson',
-    album: '3CAG',
-    year: 2018,
-    duration: '4:23',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Storytelling track about learning from friends\' experiences.',
-  },
-  {
-    id: 'your-sniffer-dogs-are-shite',
-    title: 'Your Sniffer Dogs Are Shite',
-    titleEnglish: 'Your Sniffer Dogs Are Shite',
-    album: '3CAG',
-    year: 2018,
-    duration: '5:28',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Anti-police anthem criticizing law enforcement methods.',
-  },
-  {
-    id: 'bouncers',
-    title: 'Bouncers',
-    titleEnglish: 'Bouncers',
-    album: '3CAG',
-    year: 2018,
-    duration: '4:16',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Club culture commentary about door security and nightlife politics.',
-  },
-
-  // ===== SINGLES & OTHER RELEASES =====
-  {
-    id: 'the-recap',
-    title: 'THE RECAP',
-    titleEnglish: 'THE RECAP (ft. Mozey)',
-    album: 'Single',
-    year: 2025,
-    duration: '3:30',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Latest single featuring Mozey, summarizing KNEECAP\'s journey so far.',
-  },
-  {
-    id: 'its-been-ages',
-    title: 'ITS BEEN AGES',
-    titleEnglish: 'ITS BEEN AGES',
-    album: 'Single',
-    year: 2023,
-    duration: '2:45',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Return single after a gap between releases, acknowledging the wait.',
-  },
-  {
-    id: 'hood',
-    title: 'H.O.O.D',
-    titleEnglish: 'H.O.O.D',
-    album: 'Single',
-    year: 2021,
-    duration: '3:30',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Neighborhood pride anthem representing West Belfast.',
-  },
-  {
-    id: 'guilty-conscience',
-    title: 'Guilty Conscience',
-    titleEnglish: 'Guilty Conscience',
-    album: 'Single',
-    year: 2021,
-    duration: '3:45',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Introspective track examining moral conflicts and personal accountability.',
-  },
-  {
-    id: 'thart-agus-thart',
-    title: 'Thart agus Thart',
-    titleEnglish: 'Around and Around',
-    album: 'Single',
-    year: 2021,
-    duration: '3:20',
-    language: 'Irish',
-    primaryLanguage: 'irish',
-    hasTranslation: true,
-    description: 'Circular narrative about life\'s repetitive cycles in Irish.',
-  },
-  {
-    id: 'get-your-brits-out',
-    title: 'Get Your Brits Out',
-    titleEnglish: 'Get Your Brits Out',
-    album: 'Single',
-    year: 2019,
-    duration: '3:20',
-    language: 'English',
-    primaryLanguage: 'english',
-    hasTranslation: true,
-    description: 'Political anthem calling for British withdrawal from Ireland.',
-  },
-  {
-    id: 'fenian-cunts',
-    title: 'Fenian Cunts',
-    titleEnglish: 'Fenian Cunts',
-    album: 'Single',
-    year: 2019,
-    duration: '3:15',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Provocative track reclaiming sectarian language and turning it into empowerment.',
-  },
-  {
-    id: 'gael-gigolos',
-    title: 'Gael-Gigolos',
-    titleEnglish: 'Gael-Gigolos',
-    album: 'Single',
-    year: 2019,
-    duration: '3:10',
-    language: 'Bilingual',
-    primaryLanguage: 'mixed',
-    hasTranslation: true,
-    description: 'Playful track about Irish speakers as modern-day gigolos.',
-  },
-];
+import { Music, Search, Filter, ArrowLeft, SortAsc } from 'lucide-react';
+import { getAllSongs, getSongsByAlbum, searchSongs } from '../../data/songs';
 
 export default function SongsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAlbum, setSelectedAlbum] = useState('all');
   const [sortBy, setSortBy] = useState('album'); // 'album', 'alphabetical', 'year-newest', 'year-oldest'
 
+  const allSongs = getAllSongs();
+
+  // Helper function to normalize year values
+  const getYearAsNumber = (year: string | number): number => {
+    return typeof year === 'string' ? parseInt(year) || 0 : year;
+  };
+
   // Sort the songs based on the selected option
   const getSortedSongs = () => {
-    let sorted = [...songs];
+    const sorted = [...allSongs];
     
     switch (sortBy) {
       case 'alphabetical':
         sorted.sort((a, b) => a.title.localeCompare(b.title));
         break;
       case 'year-newest':
-        sorted.sort((a, b) => b.year - a.year);
+        sorted.sort((a, b) => getYearAsNumber(b.year) - getYearAsNumber(a.year));
         break;
       case 'year-oldest':
-        sorted.sort((a, b) => a.year - b.year);
+        sorted.sort((a, b) => getYearAsNumber(a.year) - getYearAsNumber(b.year));
         break;
       case 'album':
       default:
         // Default grouping by album (Fine Art first, then 3CAG, then Singles)
         const albumOrder = { 'Fine Art': 1, '3CAG': 2, 'Single': 3 };
         sorted.sort((a, b) => {
-          const albumCompare = albumOrder[a.album as keyof typeof albumOrder] - albumOrder[b.album as keyof typeof albumOrder];
+          const albumCompare = (albumOrder[a.album as keyof typeof albumOrder] || 4) - (albumOrder[b.album as keyof typeof albumOrder] || 4);
           if (albumCompare !== 0) return albumCompare;
-          return a.year - b.year;
+          return getYearAsNumber(a.year) - getYearAsNumber(b.year);
         });
         break;
     }
@@ -384,20 +47,16 @@ export default function SongsPage() {
   };
 
   const filteredSongs = getSortedSongs().filter(song => {
-    const matchesSearch = song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         song.titleEnglish.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         song.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
+    const matchesSearch = searchTerm === '' || searchSongs(searchTerm).some(s => s.id === song.id);
     const matchesAlbum = selectedAlbum === 'all' || song.album === selectedAlbum;
-    
     return matchesSearch && matchesAlbum;
   });
 
   const albums = ['Fine Art', '3CAG', 'Single'];
-  const totalSongs = songs.length;
-  const fineArtSongs = songs.filter(s => s.album === 'Fine Art').length;
-  const cagSongs = songs.filter(s => s.album === '3CAG').length;
-  const singleSongs = songs.filter(s => s.album === 'Single').length;
+  const totalSongs = allSongs.length;
+  const fineArtSongs = getSongsByAlbum('Fine Art').length;
+  const cagSongs = getSongsByAlbum('3CAG').length;
+  const singleSongs = getSongsByAlbum('Single').length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
@@ -550,15 +209,17 @@ export default function SongsPage() {
                 )}
 
                 {/* Description */}
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
-                  {song.description}
-                </p>
+                {song.description && (
+                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                    {song.description}
+                  </p>
+                )}
 
                 {/* Features */}
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center space-x-2">
                     <span className="text-green-600 dark:text-green-400">
-                      {song.hasTranslation ? '✓ Translations' : '○ Lyrics only'}
+                      {song.lines && song.lines.length > 0 ? '✓ Lyrics Available' : '○ Coming Soon'}
                     </span>
                   </div>
                   <div className="text-green-600 group-hover:text-green-700 font-medium">
@@ -595,7 +256,7 @@ export default function SongsPage() {
               with Grian Chatten (Fontaines D.C.), Jelani Blackman, and others.
             </p>
             <div className="text-blue-600 dark:text-blue-400 text-sm">
-              {fineArtSongs} tracks • 37:46 runtime
+              {fineArtSongs} tracks
             </div>
           </div>
 
@@ -609,7 +270,7 @@ export default function SongsPage() {
               established their unique bilingual style.
             </p>
             <div className="text-purple-600 dark:text-purple-400 text-sm">
-              {cagSongs} tracks • 30:39 runtime
+              {cagSongs} tracks
             </div>
           </div>
 
@@ -623,11 +284,11 @@ export default function SongsPage() {
               that built KNEECAP's reputation.
             </p>
             <div className="text-orange-600 dark:text-orange-400 text-sm">
-              {singleSongs} releases • Various years
+              {singleSongs} releases
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

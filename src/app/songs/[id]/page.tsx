@@ -1,22 +1,25 @@
+// src/app/songs/[id]/page.tsx
 'use client';
 
 import { useState, use, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Music, Play, ChevronDown, ChevronUp, Pause, Settings } from 'lucide-react';
-import { getSong, Song } from '../../../data/songs';
+import { ArrowLeft, Music, Play, ChevronDown, ChevronUp, Pause, Settings, List } from 'lucide-react';
+import { getSong, getAllSongs, type Song } from '../../../data/songs';
+import KneecapAttribution from '../../../components/KneecapAttribution';
 
 interface LyricsLineProps {
   line: {
     irish?: string;
     english?: string;
-    language?: 'irish' | 'english';
+    language?: 'irish' | 'english' | 'mixed';
     type?: 'section' | 'lyric';
     section?: string;
     artist?: string;
   };
+  song: Song;
 }
 
-function LyricsLine({ line }: LyricsLineProps) {
+function LyricsLine({ line, song }: LyricsLineProps) {
   const [showTranslation, setShowTranslation] = useState(false);
   
   // Handle section headers
@@ -39,9 +42,13 @@ function LyricsLine({ line }: LyricsLineProps) {
   }
   
   // Handle regular lyric lines
-  const isIrish = line.language === 'irish';
+  // Use the song's primary language to determine what to show as primary text
+  const isIrish = song.primaryLanguage === 'irish' || (line.language === 'irish');
   const primaryText = isIrish ? line.irish : line.english;
   const translationText = isIrish ? line.english : line.irish;
+  
+  // If we don't have both texts, just show what we have
+  if (!primaryText && !translationText) return null;
   
   return (
     <div className="mb-1">
@@ -51,23 +58,25 @@ function LyricsLine({ line }: LyricsLineProps) {
         onClick={() => setShowTranslation(!showTranslation)}
       >
         <p className="text-lg leading-relaxed text-gray-900 dark:text-white flex-1">
-          {primaryText}
+          {primaryText || translationText}
         </p>
-        <div className={`ml-3 p-1 rounded transition-colors ${
-          isIrish 
-            ? 'text-green-600 hover:bg-green-100 dark:hover:bg-green-900/20' 
-            : 'text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20'
-        }`}>
-          {showTranslation ? (
-            <ChevronUp className="h-5 w-5" />
-          ) : (
-            <ChevronDown className="h-5 w-5" />
-          )}
-        </div>
+        {(primaryText && translationText) && (
+          <div className={`ml-3 p-1 rounded transition-colors ${
+            isIrish 
+              ? 'text-green-600 hover:bg-green-100 dark:hover:bg-green-900/20' 
+              : 'text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20'
+          }`}>
+            {showTranslation ? (
+              <ChevronUp className="h-5 w-5" />
+            ) : (
+              <ChevronDown className="h-5 w-5" />
+            )}
+          </div>
+        )}
       </div>
       
       {/* Translation dropdown */}
-      {showTranslation && (
+      {showTranslation && (primaryText && translationText) && (
         <div className={`mt-1 mx-2 p-3 rounded-lg border-2 transition-all duration-300 ${
           isIrish 
             ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800' 
@@ -93,7 +102,7 @@ function LyricsLine({ line }: LyricsLineProps) {
   );
 }
 
-// Auto-scroll control component
+// Auto-scroll control component (keeping your existing implementation)
 function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
   onToggle: () => void;
   isPlaying: boolean;
@@ -131,35 +140,6 @@ function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
                   background: `linear-gradient(to right, #10b981 0%, #10b981 ${((speed - 0.2) / (3 - 0.2)) * 100}%, #e5e7eb ${((speed - 0.2) / (3 - 0.2)) * 100}%, #e5e7eb 100%)`
                 }}
               />
-              <style jsx>{`
-                .slider::-webkit-slider-thumb {
-                  appearance: none;
-                  height: 18px;
-                  width: 18px;
-                  border-radius: 50%;
-                  background: #10b981;
-                  cursor: pointer;
-                  border: 2px solid #ffffff;
-                  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                }
-                .slider::-moz-range-thumb {
-                  height: 18px;
-                  width: 18px;
-                  border-radius: 50%;
-                  background: #10b981;
-                  cursor: pointer;
-                  border: 2px solid #ffffff;
-                  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                }
-              `}</style>
-            </div>
-            
-            {/* Speed Labels */}
-            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-              <span>0.2x</span>
-              <span>1x</span>
-              <span>2x</span>
-              <span>3x</span>
             </div>
             
             {/* Quick Presets */}
@@ -184,12 +164,6 @@ function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
               <span className="text-sm font-medium text-gray-900 dark:text-white">
                 Current: {speed.toFixed(1)}x speed
               </span>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                {speed <= 0.5 ? 'Very Slow' : 
-                 speed <= 0.8 ? 'Slow' : 
-                 speed <= 1.2 ? 'Normal' : 
-                 speed <= 2 ? 'Fast' : 'Very Fast'}
-              </div>
             </div>
           </div>
         </div>
@@ -239,7 +213,10 @@ interface SongPageProps {
 
 export default function SongPage({ params }: SongPageProps) {
   const { id } = use(params);
-  const song = getSong(id);
+  const [song, setSong] = useState<Song | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   // Auto-scroll state
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
@@ -247,15 +224,34 @@ export default function SongPage({ params }: SongPageProps) {
   const lyricsContainerRef = useRef<HTMLDivElement>(null);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-scroll logic with improved speed calculation
+  // Get all songs for sidebar, sorted alphabetically
+  const allSongs = getAllSongs().sort((a, b) => a.title.localeCompare(b.title));
+
+  // Load song data
+  useEffect(() => {
+    try {
+      setLoading(true);
+      const songData = getSong(id);
+      if (songData) {
+        setSong(songData);
+      } else {
+        setError('Song not found');
+      }
+    } catch (err) {
+      setError('Failed to load song');
+      console.error('Error loading song:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [id]);
+
+  // Auto-scroll logic (keeping your existing implementation)
   useEffect(() => {
     if (isAutoScrolling && lyricsContainerRef.current) {
-      // Much more responsive speed calculation
-      // scrollSpeed ranges from 0.2 to 3.0
-      const baseScrollStep = 2; // base pixels per step
-      const scrollStep = Math.max(0.5, baseScrollStep * scrollSpeed); // variable step size
-      const baseDelay = 20; // base delay in ms
-      const scrollDelay = Math.max(5, baseDelay / scrollSpeed); // variable delay
+      const baseScrollStep = 2;
+      const scrollStep = Math.max(0.5, baseScrollStep * scrollSpeed);
+      const baseDelay = 20;
+      const scrollDelay = Math.max(5, baseDelay / scrollSpeed);
       
       scrollIntervalRef.current = setInterval(() => {
         if (lyricsContainerRef.current) {
@@ -264,23 +260,19 @@ export default function SongPage({ params }: SongPageProps) {
           const maxScroll = container.scrollHeight - container.clientHeight;
           
           if (currentScroll >= maxScroll) {
-            // Reached the end, stop auto-scrolling
             setIsAutoScrolling(false);
           } else {
-            // Smooth scrolling with requestAnimationFrame for better performance
             container.scrollTop += scrollStep;
           }
         }
       }, scrollDelay);
     } else {
-      // Clear interval when auto-scrolling is stopped
       if (scrollIntervalRef.current) {
         clearInterval(scrollIntervalRef.current);
         scrollIntervalRef.current = null;
       }
     }
 
-    // Cleanup on unmount
     return () => {
       if (scrollIntervalRef.current) {
         clearInterval(scrollIntervalRef.current);
@@ -288,7 +280,6 @@ export default function SongPage({ params }: SongPageProps) {
     };
   }, [isAutoScrolling, scrollSpeed]);
 
-  // Auto-scroll controls
   const toggleAutoScroll = () => {
     setIsAutoScrolling(!isAutoScrolling);
   };
@@ -297,7 +288,20 @@ export default function SongPage({ params }: SongPageProps) {
     setScrollSpeed(speed);
   };
 
-  if (!song) {
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <Music className="h-16 w-16 text-green-600 mx-auto mb-4 animate-pulse" />
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Loading song...</h1>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !song) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
@@ -314,7 +318,7 @@ export default function SongPage({ params }: SongPageProps) {
     );
   }
 
-  const hasFullLyrics = ['amach-anocht', 'cearta', 'get-your-brits-out'].includes(song.id);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
@@ -322,10 +326,19 @@ export default function SongPage({ params }: SongPageProps) {
       <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/songs" className="flex items-center space-x-2 text-gray-600 hover:text-green-600 transition-colors">
-              <ArrowLeft className="h-5 w-5" />
-              <span>Back to Songs</span>
-            </Link>
+            <div className="flex items-center space-x-4">
+              <Link href="/songs" className="flex items-center space-x-2 text-gray-600 hover:text-green-600 transition-colors">
+                <ArrowLeft className="h-5 w-5" />
+                <span>Back to Songs</span>
+              </Link>
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="flex items-center space-x-2 text-gray-600 hover:text-green-600 transition-colors lg:hidden"
+              >
+                <List className="h-5 w-5" />
+                <span>Songs</span>
+              </button>
+            </div>
             <div className="flex items-center space-x-2">
               <Music className="h-8 w-8 text-green-600" />
               <span className="text-2xl font-bold text-gray-900 dark:text-white">KNEECAP</span>
@@ -334,7 +347,46 @@ export default function SongPage({ params }: SongPageProps) {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex">
+        {/* Left Sidebar - Song List */}
+        <div className={`${sidebarOpen ? 'block' : 'hidden'} lg:block fixed lg:relative inset-y-0 left-0 z-50 w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 lg:border-r-0 lg:shadow-lg`}>
+          <div className="flex flex-col h-screen pt-16 lg:pt-0">
+            <div className="flex-shrink-0 px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">All Songs</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Alphabetical order</p>
+            </div>
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-2 py-2">
+                {allSongs.map((songItem) => (
+                  <Link
+                    key={songItem.id}
+                    href={`/songs/${songItem.id}`}
+                    className={`block px-3 py-2 mb-1 rounded-lg text-sm transition-colors ${
+                      songItem.id === id
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300 font-medium'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    {songItem.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Overlay for mobile */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        {/* Main Content */}
+        <div className="flex-1 lg:ml-0">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Song Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
@@ -358,25 +410,7 @@ export default function SongPage({ params }: SongPageProps) {
           </div>
         </div>
 
-        {!hasFullLyrics && (
-          <div className="mb-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-            <div className="flex items-start space-x-3">
-              <div className="text-amber-600 dark:text-amber-400">
-                <svg className="h-5 w-5 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-amber-800 dark:text-amber-200">
-                  Lyrics Coming Soon
-                </h3>
-                <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">
-                  Complete line-by-line translations for this song are being prepared. Check back soon for the full lyrics experience!
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+
 
         {/* Controls */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
@@ -396,7 +430,7 @@ export default function SongPage({ params }: SongPageProps) {
             </div>
             
             <div className="text-sm text-gray-600 dark:text-gray-400">
-              {hasFullLyrics ? 'Click any line to see translation' : 'Preview content - full lyrics coming soon'}
+              Click any line to see translation
             </div>
           </div>
         </div>
@@ -405,13 +439,10 @@ export default function SongPage({ params }: SongPageProps) {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
           <div className="bg-green-600 text-white px-6 py-4">
             <h3 className="text-xl font-semibold">
-              {hasFullLyrics ? 'Lyrics & Translations' : 'Song Preview'}
+              Lyrics & Translations
             </h3>
             <p className="text-green-100 text-sm mt-1">
-              {hasFullLyrics 
-                ? 'Tap any line to reveal its translation • Green arrows = Irish to English • Red arrows = English to Irish'
-                : 'Full lyrics and translations coming soon'
-              }
+              Tap any line to reveal its translation • Green arrows = Irish to English • Red arrows = English to Irish
             </p>
           </div>
           
@@ -421,20 +452,18 @@ export default function SongPage({ params }: SongPageProps) {
             style={{ scrollBehavior: 'smooth' }}
           >
             {song.lines.map((line, index: number) => (
-              <LyricsLine key={index} line={line} />
+              <LyricsLine key={index} line={line} song={song} />
             ))}
           </div>
         </div>
 
-        {/* Auto-scroll controller - only show if lyrics are available */}
-        {hasFullLyrics && (
-          <AutoScrollController
-            onToggle={toggleAutoScroll}
-            isPlaying={isAutoScrolling}
-            speed={scrollSpeed}
-            onSpeedChange={handleSpeedChange}
-          />
-        )}
+        {/* Auto-scroll controller */}
+        <AutoScrollController
+          onToggle={toggleAutoScroll}
+          isPlaying={isAutoScrolling}
+          speed={scrollSpeed}
+          onSpeedChange={handleSpeedChange}
+        />
 
         {/* Song Information */}
         <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
@@ -452,19 +481,19 @@ export default function SongPage({ params }: SongPageProps) {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Album Context:</h4>
+              <h4 className="font-semibold mb-2">About this song:</h4>
               <p className="text-sm">
-                {song.album === 'Fine Art' 
-                  ? 'From KNEECAP&apos;s critically acclaimed 2024 album &quot;Fine Art&quot;, produced by Toddla T. The album seamlessly merges Irish with English lyrics.'
-                  : song.album === '3CAG'
-                  ? 'From KNEECAP&apos;s debut 2018 mixtape &quot;3CAG&quot; (3 Consonants and a Vowel), which introduced their unique bilingual rap style to the world.'
-                  : 'A standalone single release showcasing KNEECAP&apos;s evolving sound and lyrical prowess.'
-                }
+                {song.description}
               </p>
             </div>
+          </div>
+        </div>
+
+            {/* KNEECAP Attribution */}
+            <KneecapAttribution />
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}
