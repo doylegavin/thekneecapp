@@ -1,1 +1,95 @@
-
+{
+    "id": "im-flush",
+    "title": "I'm Flush",
+    "titleEnglish": "I'm Flush",
+    "album": "3CAG",
+    "year": 2024,
+    "duration": "3:00",
+    "primaryLanguage": "bilingual",
+    "lines": [
+      { "type": "section", "section": "Verse 1" },
+      {
+        "irish": "I'm flush\nSceitimíní ag teacht ormsa le gach cois-\nCéim, téamsa 'uig an pub\nNo fuss when I jump in a taxi, not on a bus",
+        "english": "I'm flush\nExcitement coming over me with every step\nStep, I’m heading to the pub\nNo fuss, I’m taking a taxi, not the bus"
+      },
+      {
+        "irish": "Pure zen 'cause you know I got paid, let's spend\nGach pingin atá agam\nHenry VIII in my pocket, I'm fuckin' dishin' out lovin'",
+        "english": "Pure zen ‘cause you know I got paid, let’s spend\nEvery penny I have\nHenry VIII in my pocket, I’m throwing love around"
+      },
+      {
+        "irish": "Ní hionnann sin a rá, I'm your mate ach go tobann\nI'm surrounded by coke fiends asking if I've got something",
+        "english": "Not saying I’m your mate but suddenly\nI’m surrounded by coke heads asking if I’ve anything"
+      },
+  
+      { "type": "section", "section": "Chorus" },
+      {
+        "irish": "It's not all about the money\nBut I'm fuckin' flush, now I find it kinda funny\nCouple of quid, my rainy day's turned sunny\nPacket in my pocket, my nose goes runny",
+        "english": "It’s not all about the money\nBut I’m flush, now it’s kinda funny\nFew quid and the clouds have cleared\nPacket in my pocket, nose starting to smear"
+      },
+      {
+        "irish": "So fuck, it's not all about the cheddar\nNow that I've got it, my night looks better\nSmile on my face since the first day that I met her\nColombian cold when I'm feelin' under the weather\nNo, fuck, it's 'cause I'm sniffin' loads of banger",
+        "english": "So yeah, it’s not just about the cheese\nBut since I’ve got it, the night feels a breeze\nSmiling since I met her that day\nColombian cure for feeling grey\nNo – wait – it’s ‘cause I’ve sniffed banger all day"
+      },
+  
+      { "type": "section", "section": "Verse 2" },
+      {
+        "irish": "I'm stuffed, mo bhéal a lán oisrí le Tabasco sauce\nI'm lyin' in bed till late, 'cause I have't got a boss\nI'm spending all my money, no matter 'bout the cost",
+        "english": "I’m stuffed, mouth full of oysters and Tabasco sauce\nI’m lying in late, don’t have a boss\nSpending all my cash, no matter the cost"
+      },
+      {
+        "irish": "Once second-hand Lacoste, now it's Gucci and Balenciaga\nNíl mé ag iarraidh bheith chomh bocht le mo hathair\nThat's not what I'm after",
+        "english": "Used to wear second-hand Lacoste, now it’s Gucci and Balenciaga\nI don’t want to be as broke as my da\nThat’s not what I’m after"
+      },
+      {
+        "irish": "Looking something more I've never had before\nWon't see me walking the street\nUnless there's TNs on my feet and they're sweet\nNeat and clean",
+        "english": "I’m looking for something I’ve never had before\nYou won’t catch me walking the streets\nUnless I’ve got fresh TNs on my feet\nNeat and clean"
+      },
+      {
+        "irish": "Was always stardawg, now it's only cali green\nLeis an caighdeán is fearr fíon, chandelier ar mo dhíon",
+        "english": "Used to smoke Stardawg, now it’s only Cali green\nOnly the finest wine, chandelier on my ceiling"
+      },
+      {
+        "irish": "I'm a working-class fella with a middle-class palate\nYes, sir, that's me",
+        "english": "I’m a working-class lad with a middle-class taste\nThat’s me, no debate"
+      },
+      {
+        "irish": "We went from rags to riches\nAnd we got a wee machine that be cleaning our dishes\nAnd we be going on missions, stayin' up late in the kitchens\nEverybody fuckin' talks, but nobody listens",
+        "english": "We came up from rags to riches\nNow we’ve got a dishwasher doing our dishes\nAlways scheming, late-night missions\nEveryone talks, but no one listens"
+      },
+  
+      { "type": "section", "section": "Chorus" },
+      {
+        "irish": "It's not all about the money\nBut I'm fuckin' flush, now I find it kinda funny\nCouple of quid, my rainy day's turned sunny\nPacket in my pocket, my nose goes runny",
+        "english": "It’s not all about the money\nBut I’m flush, now it’s kinda funny\nFew quid and the clouds have cleared\nPacket in my pocket, nose starting to smear"
+      },
+      {
+        "irish": "So fuck, it's not all about the cheddar\nNow that I've got it, my night looks better\nSmile on my face since the first day that I met her\nColombian cold when I'm feelin' under the weather\nNo, fuck, it's 'cause I'm sniffin' loads of banger",
+        "english": "So yeah, it’s not just about the cheese\nBut since I’ve got it, the night feels a breeze\nSmiling since I met her that day\nColombian cure for feeling grey\nNo – wait – it’s ‘cause I’ve sniffed banger all day"
+      },
+  
+      { "type": "section", "section": "Verse 3" },
+      {
+        "irish": "Siúil isteach, scum under one roof\nNightmare for the doorstaff\nLive, laugh, look at West Belfast crew in for the big Baku",
+        "english": "Walk in – scum under one roof\nNightmare for security at the door\nLive, laugh – look, it’s the West Belfast boys here for the big Baku"
+      },
+      {
+        "irish": "Mo pocaí lán le plean le hé a chaitheamh\n20 stout, ag scairtí thar a chéile until we're fucked out",
+        "english": "My pockets full with plans to blow\n20 pints in and shouting till we’re wrecked"
+      },
+      {
+        "irish": "Gan smeacht againn ar ár ngialla communicate through shout\nLooks like we're running out\nSomebody send a taxi if the dealer's about",
+        "english": "No control of our jaws, we shout instead of talk\nLooks like it’s runnin’ low\nSomeone get a taxi if the dealer’s on show"
+      },
+  
+      { "type": "section", "section": "Chorus" },
+      {
+        "irish": "It's not all about the money\nBut I'm fuckin' flush, now I find it kinda funny\nCouple of quid, my rainy day's turned sunny\nPacket in my pocket, my nose goes runny",
+        "english": "It’s not all about the money\nBut I’m flush, now it’s kinda funny\nFew quid and the clouds have cleared\nPacket in my pocket, nose starting to smear"
+      },
+      {
+        "irish": "So fuck, it's not all about the cheddar\nNow that I've got it, my night looks better\nSmile on my face since the first day that I met her\nColombian cold when I'm feelin' under the weather\nNo, fuck, it's 'cause I'm sniffin' loads of banger",
+        "english": "So yeah, it’s not just about the cheese\nBut since I’ve got it, the night feels a breeze\nSmiling since I met her that day\nColombian cure for feeling grey\nNo – wait – it’s ‘cause I’ve sniffed banger all day"
+      }
+    ]
+  }
+  

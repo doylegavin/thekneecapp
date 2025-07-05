@@ -1,1 +1,71 @@
-
+{
+    "id": "parful",
+    "title": "Parful",
+    "titleEnglish": "Powerful",
+    "album": "Fine Art",
+    "year": 2024,
+    "duration": "2:52",
+    "primaryLanguage": "bilingual",
+    "lines": [
+      { "type": "section", "section": "Intro (Narration)" },
+      {
+        "irish": "Well, this wall was built years ago\nTo stop the Protestants on this side fighting with the Catholics on the other\nIt's there 24 hours a day\nThe thing is that it divides the two communities\nBut every Saturday night hundreds of people go out down town, just go out clubbin'\nForget about the divides between each other",
+        "english": "Well, this wall was built years ago\nTo stop the Protestants on this side fighting with the Catholics on the other\nIt's there 24 hours a day\nThe thing is that it divides the two communities\nBut every Saturday night hundreds of people go out downtown, just go out clubbing\nForget about the divides between each other"
+      },
+  
+      { "type": "section", "section": "Verse 1" },
+      {
+        "irish": "Parful\nCrochadh thart in a bar full\nGot mo snaois all wrapped in a parcel\nCos ya know that I get a bit partial\nMearbhall orm but I still feel parful",
+        "english": "Powerful\nHanging about in a bar full\nGot my sniff all wrapped in a parcel\nCause you know I get a bit partial\nI’m dizzy but I still feel powerful"
+      },
+      {
+        "irish": "Gettin' whacked in the rain is parful\nChain smokin' with your mates is parful\nArrivin' late to rave with an eighth and your jawbone aches and ya still feel parful",
+        "english": "Getting wrecked in the rain is powerful\nChain smoking with your mates is powerful\nArriving late to the rave with an eighth and your jaw aches and you still feel powerful"
+      },
+  
+      { "type": "section", "section": "Break (Narration)" },
+      {
+        "irish": "They love every minute of the time they're out with... no matter who they're with",
+        "english": "They love every minute of the time they're out with... no matter who they're with"
+      },
+  
+      { "type": "section", "section": "Chorus" },
+      {
+        "irish": "Pa-\nPa-\nPa- pa- pa- pa-\nPa-pa-pa-pa-\nParful\nParful\nParful\nParful",
+        "english": "Pa-\nPa-\nPa- pa- pa- pa-\nPa-pa-pa-pa-\nPowerful\nPowerful\nPowerful\nPowerful"
+      },
+  
+      { "type": "section", "section": "Verse 2 (Same as Verse 1)" },
+      {
+        "irish": "Parful\nCrochadh thart in a bar full\nGot mo snaois all wrapped in a parcel\nCos ya know that I get a bit partial\nMearbhall orm but I still feel parful",
+        "english": "Powerful\nHanging about in a bar full\nGot my sniff all wrapped in a parcel\nCause you know I get a bit partial\nI’m dizzy but I still feel powerful"
+      },
+      {
+        "irish": "Gettin' whacked in the rain is parful\nChain smokin' with your mates is parful\nArrivin' late to rave with an eighth and your jawbone aches and ya still feel parful",
+        "english": "Getting wrecked in the rain is powerful\nChain smoking with your mates is powerful\nArriving late to the rave with an eighth and your jaw aches and you still feel powerful"
+      },
+  
+      { "type": "section", "section": "Break (Narration 2)" },
+      {
+        "irish": "These young people have lived their entire lives in a society poisoned by sectarian hatred\nNow they're telling us the rave brings Protestants and Catholics together",
+        "english": "These young people have lived their entire lives in a society poisoned by sectarian hatred\nNow they're telling us the rave brings Protestants and Catholics together"
+      },
+  
+      { "type": "section", "section": "Verse 3 (Same again)" },
+      {
+        "irish": "Parful\nCrochadh thart in a bar full\nGot mo snaois all wrapped in a parcel\nCos ya know that I get a bit partial\nMearbhall orm but I still feel parful",
+        "english": "Powerful\nHanging about in a bar full\nGot my sniff all wrapped in a parcel\nCause you know I get a bit partial\nI’m dizzy but I still feel powerful"
+      },
+      {
+        "irish": "Gettin' whacked in the rain is parful\nChain smokin' with your mates is parful\nArrivin' late to rave with an eighth and your jawbone aches and ya still feel parful",
+        "english": "Getting wrecked in the rain is powerful\nChain smoking with your mates is powerful\nArriving late to the rave with an eighth and your jaw aches and you still feel powerful"
+      },
+  
+      { "type": "section", "section": "Outro" },
+      {
+        "irish": "Parful\nParful",
+        "english": "Powerful\nPowerful"
+      }
+    ]
+  }
+  

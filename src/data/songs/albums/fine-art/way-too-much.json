@@ -1,1 +1,191 @@
-
+{
+    "id": "way-too-much",
+    "title": "Way Too Much",
+    "titleEnglish": "Iomarca Ar Fad",
+    "album": "Fine Art",
+    "year": 2024,
+    "duration": "3:40",
+    "primaryLanguage": "bilingual",
+    "lines": [
+      { "type": "section", "section": "Intro / Chorus" },
+      {
+        "english": "When things get way too much\nGet way too much",
+        "irish": "Nuair a éiríonn rudaí iomarca ar fad\nIomarca ar fad"
+      },
+      { "type": "section", "section": "Móglaí Bap Verse 1" },
+      {
+        "english": "Nuair a éirím ó mo leabaidh tá mé gléasta",
+        "irish": "When I get up from my bed I'm dressed"
+      },
+      {
+        "english": "Réidh fá choinne cibé rud 'tá I gceist le",
+        "irish": "Ready for whatever lies ahead"
+      },
+      {
+        "english": "I bhfad rómhinic mhúscail mise is mé céasta",
+        "irish": "Too often I used to wake up tormented"
+      },
+      {
+        "english": "Ach anois osclaím mo shúil is tá mé réidh fá choinne aon rud",
+        "irish": "But now I open my eyes and I'm ready for anything"
+      },
+      {
+        "english": "Live, laugh, love",
+        "irish": "Mair, gáir, grá"
+      },
+      {
+        "english": "Used to feel nothin' till I took some drugs",
+        "irish": "Níor mhothaigh mé tada go dtí gur ghlac mé drugaí"
+      },
+      {
+        "english": "Now I run about just feelin' pure smug",
+        "irish": "Anois siúlaim thart ag mothú go hiomlán sástáilte"
+      },
+      {
+        "english": "Cos I made it out the ruts",
+        "irish": "Mar d’éalaigh mé as an ngéarghátar"
+      },
+      {
+        "english": "Not to say I feel good, but I feel nasc more than I ever could",
+        "irish": "Nílim ag rá go bhfuil mé go hiontach, ach mothaím ceangal níos mó ná riamh"
+      },
+      { "type": "section", "section": "Mo Chara Verse 1" },
+      {
+        "english": "Achan uile rud ag bogadh róghasta",
+        "irish": "Everything is moving too fast"
+      },
+      {
+        "english": "So tógaim céim siar whenever I haveta",
+        "irish": "So I take a step back whenever I have to"
+      },
+      {
+        "english": "Started to substitute stress out for laughter",
+        "irish": "Thosaigh mé ag cur gáire in áit struis"
+      },
+      {
+        "english": "Get myself in check, relax and come back after",
+        "irish": "Ceartaím mé féin, ligim scíth agus tagaim ar ais ina dhiaidh"
+      },
+      {
+        "english": "Furasta bheith faoi smacht ag freagracht",
+        "irish": "Easy to be controlled by responsibility"
+      },
+      {
+        "english": "Snowed under when you've stuff ya can't clock",
+        "irish": "Faoi bhrú nuair nach féidir leat an méid atá agat a láimhseáil"
+      },
+      {
+        "english": "The show must go on, some things ya can't stop",
+        "irish": "Caithfidh an seó leanúint ar aghaidh, tá rudaí nach féidir leat stopadh"
+      },
+      {
+        "english": "Scaifte anseo le tú a fheiceáil, make them laugh, pal",
+        "irish": "Tá an slua anseo le tú a fheiceáil, déan iad a chur ag gáire, a chara"
+      },
+      { "type": "section", "section": "Chorus" },
+      {
+        "english": "When things get way too much\nYou gotta give me a touch, one, two",
+        "irish": "Nuair a éiríonn rudaí iomarca\nCaithfidh tú teagmháil a thabhairt dom, haon, dó"
+      },
+      {
+        "english": "Just know it'll never be enough",
+        "irish": "Bí ar an eolas nach mbeidh sé riamh go leor"
+      },
+      {
+        "english": "Gotta get out your head, boy\nBefore you know it you'll be dead, gone",
+        "irish": "Caithfidh tú dul amach as do cheann, a bhuachaill\nSula dtuigeann tú, beidh tú marbh, imithe"
+      },
+      {
+        "english": "But I can't keep you off my mind",
+        "irish": "Ach ní féidir liom tú a bhaint de m'intinn"
+      },
+      { "type": "section", "section": "Mo Chara Verse 2" },
+      {
+        "english": "Bíonn laethanta mar sin againn ar fad",
+        "irish": "We all have days like that"
+      },
+      {
+        "english": "Rud I ndiaidh ruda, chin up, brother, it's grand",
+        "irish": "Thing after thing, chin up, a bhráthair, tá sé ceart go leor"
+      },
+      {
+        "english": "When it seems that it's comin' gan stad",
+        "irish": "Nuair a bhreathnaíonn sé go bhfuil sé ag teacht gan stad"
+      },
+      {
+        "english": "Puff your chest out, lad, and remember who's the man",
+        "irish": "Sín amach do bhrollach, a fhear, agus cuimhnigh cé hé an ceannaire"
+      },
+      {
+        "english": "Roinnt amanntaí agaigh chróga",
+        "irish": "Sometimes you have to face things bravely"
+      },
+      {
+        "english": "Réiteach eile, tá sé go breá a bheith brónach",
+        "irish": "Another approach: it's okay to be sad"
+      },
+      {
+        "english": "Take the olive branch, I'm sure you know that",
+        "irish": "Glac leis an craobh olóige, táim cinnte go dtuigeann tú é sin"
+      },
+      {
+        "english": "Just get through this mornin', bain triail arís tráthnóna",
+        "irish": "Níl ort ach éalú tríd an mhaidin, bain triail eile as tráthnóna"
+      },
+      { "type": "section", "section": "Móglaí Bap Verse 2" },
+      {
+        "english": "Seachas féin-chrá, cad é faoi fhéin-ghrá",
+        "irish": "Instead of self-torment, what about self-love"
+      },
+      {
+        "english": "Seachas bheith ag tabhairt amach duit féin gach lá",
+        "irish": "Instead of giving out to yourself every day"
+      },
+      {
+        "english": "Glac sos lig scíth, goid píos ó do chíste",
+        "irish": "Take a break, rest, steal a piece of your own cake"
+      },
+      {
+        "english": "Luigh sa leabaidh níl muid anseo ach fá choinne píosa",
+        "irish": "Lie in the bed, we’re only here for a bit"
+      },
+      {
+        "english": "Is beag lá nach bhfuil tú ar m'intinn",
+        "irish": "There are few days when you're not on my mind"
+      },
+      {
+        "english": "Is beag comhrá nach bhfaigheann tusa mention",
+        "irish": "Few conversations go by without you being mentioned"
+      },
+      {
+        "english": "Faraor géar ní fhaighimid extension",
+        "irish": "Sadly we don’t get an extension"
+      },
+      {
+        "english": "So take your time with the shit you be ingestin'",
+        "irish": "Mar sin glac do chuid ama leis an truflais atá tú ag glacadh isteach"
+      },
+      {
+        "english": "So fill your cup\nAnd don't be lettin' no cunt take away your buzz with every single sup",
+        "irish": "Mar sin líon do chupán\nAgus ná lig d’aon amadán do shonas a ghoid le gach sip amháin"
+      },
+      {
+        "english": "Cos that's the way it is\nDoesn't mean it always was",
+        "irish": "Sin mar atá sé\nNí chiallaíonn sé go raibh sé mar sin i gcónaí"
+      },
+      {
+        "english": "But I'm grateful to fuck for these class A drugs",
+        "irish": "Ach táim buíoch as na drugaí Rang A seo, le do thoil"
+      },
+      { "type": "section", "section": "Chorus (Refrain)" },
+      {
+        "english": "When things get way too much\nYou gotta give me a touch, one, two\nJust know it'll never be enough",
+        "irish": "Nuair a bhíonn rudaí iomarca\nTabhair dom teagmháil, haon, dó\nBí ar an eolas nach mbeidh sé riamh sách maith"
+      },
+      {
+        "english": "Gotta get out your head, boy\nBefore you know it you'll be dead and gone\nBut I can't keep you off my mind",
+        "irish": "Caithfidh tú éalú as do cheann, a bhuachaill\nSula dtuigeann tú, beidh tú marbh agus imithe\nAch ní féidir liom tú a bhaint de m’intinn"
+      }
+    ]
+  }
+  

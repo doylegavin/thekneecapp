@@ -1,1 +1,75 @@
-
+{
+    "id": "rhino-ket",
+    "title": "Rhino Ket",
+    "titleEnglish": "Rhino Ket",
+    "album": "3CAG",
+    "year": 2024,
+    "duration": "3:19",
+    "primaryLanguage": "bilingual",
+    "lines": [
+      { "type": "section", "section": "Verse 1 – Móglaí Bap" },
+      {
+        "irish": "Need a come down after that set\nThis hamster shit is really not it\nWanna be stuck to the ground with a sniff\nInstead I'm sitting here sober like a dick",
+        "english": "Need a come down after that set\nThis hamster stuff is really not it\nWant to be glued to the floor with a sniff\nInstead I’m sitting here sober like an eejit"
+      },
+      {
+        "irish": "Cause recently I heard a secret\nThere's this thing called rhinoceros ket\nWhen you take a line it makes you forget (Sounds great)\nBally up and let's rob a vet (Sweet)",
+        "english": "Cause recently I heard a secret\nThere's a thing called rhinoceros ket\nOne line makes you forget (Sounds great)\nWrap up and let’s rob a vet (Sweet)"
+      },
+  
+      { "type": "section", "section": "Verse 2 – Mo Chara" },
+      {
+        "irish": "Sin a gig déanta\nMóglaí ag caint ar Rhino Ket, you know I want that\nSo we hatched a plan táimid santach\nChristmas comin' early in the bed of Santa",
+        "english": "That’s the gig done\nMóglaí talking about Rhino Ket, you know I want that\nSo we made a plan, we’re greedy\nChristmas coming early in Santa’s van"
+      },
+      {
+        "irish": "So it's céal díreach chuig an clinic, pure ket, fuck all else in it\nScale the counter, we only have a minute\nLéigh na lipéidí, find it and bring it",
+        "english": "So it’s straight to the clinic, pure ket, nothing else in it\nHop the counter, we’ve only got a minute\nRead the labels, find it and lift it"
+      },
+      {
+        "irish": "Back to the Falls Road\nBut before we leave, a bit for the walk home\nTóg eochair stuff i do mo shrón\n[?]",
+        "english": "Back to the Falls Road\nBut before we go, a bit for the road\nTake key stuff into my nose\n[?]"
+      },
+  
+      { "type": "section", "section": "Bridge" },
+      {
+        "irish": "Can somebody call Provaí to make another drug deal\nBeen sniffing this shit all night, I'm sober as a judge and it's just not right",
+        "english": "Can someone ring Provaí to sort another deal\nI’ve been sniffing this all night, still sober as a judge – it’s just not right"
+      },
+  
+      { "type": "section", "section": "Dialogue – Móglaí Bap & Mo Chara" },
+      {
+        "irish": "I'm getting nothing off this\nUh, Móglaí, honestly just wait, wait\nOh fuck, I can't see\nI'm getting nothing off this!\nMóglaí, Móglaí! I can't see!\nLucky, lucky bastard!\nWhat the fuck did you do, I can't see!\nNo!",
+        "english": "I’m getting nothing off this\nMóglaí, seriously just give it a minute\nOh f***, I can’t see\nI’m getting nothing!\nMóglaí, Móglaí! I can’t see!\nYou lucky, lucky bastard!\nWhat the f*** did you take? I can’t see!\nNo!"
+      },
+  
+      { "type": "section", "section": "Verse 3 – Móglaí Bap" },
+      {
+        "irish": "Can't sit, can't think, can barely even walk\nDon't know how the fuck we'll make it back to Falls\nTrying to stick these but my hands have turned to paws\nOh lord, think I took it too far\n[?]",
+        "english": "Can’t sit, can’t think, can barely walk\nNo idea how we’ll make it back to the Falls\nTrying to grip things but my hands are now paws\nOh lord, I think I went too far\n[?]"
+      },
+  
+      { "type": "section", "section": "Verse 4 – Mo Chara" },
+      {
+        "irish": "The best, maith and fear, Móglaí, all the best\nKeep your clothes on, can't be getting undressed\nNíos mó capallí, probably\nGiddy up, rack it up, get me fucked\nCheck my pulse whenever I'm interdimensional traveling",
+        "english": "The best, good man, Móglaí, all the best\nKeep your clothes on, can’t be stripping yet\nMore horse tranquillisers, probably\nGiddy up, rack it up, get me messed\nCheck my pulse while I’m travelling through dimensions"
+      },
+  
+      { "type": "section", "section": "Outro – Spoken" },
+      {
+        "irish": "Holy fucking shit, it's lethal\nFuck me, how am I gonna get my eyesight back now?\nJesus Christ, that was enough to kill a small fucking village",
+        "english": "Holy f***ing shit, it’s lethal\nF*** me, how am I meant to get my eyesight back?\nJesus Christ, that would kill a whole f***ing village"
+      },
+  
+      { "type": "section", "section": "Final Hook – Both" },
+      {
+        "irish": "I'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed",
+        "english": "I’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos"
+      },
+      {
+        "irish": "I'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed\nI'm k-holed out my head, this shit puts rhinos to bed",
+        "english": "I’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos\nI’m k-holed out of my head, this stuff knocks out rhinos"
+      }
+    ]
+  }
+  
