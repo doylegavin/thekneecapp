@@ -19,7 +19,15 @@
         "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
         "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
       },
-  
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
+      },
+
       {
         "type": "section",
         "section": "Verse 1 - Móglaí Bap"
@@ -45,8 +53,12 @@
         "irish": "Dúirt sí gurb ainm aisteach é, níor chuala sí riamh é"
       },
       {
-        "english": "It's actually Irish but enough about me ? cén ainm atá ort a tháisce agus dhfreagair sí",
-        "irish": "Is ainm Gaelach é ach go leor fúmsa — cad is ainm duit a stór, agus d'fhreagair sí"
+        "english": "It's actually Irish but enough about me",
+        "irish": "Is ainm Gaelach é ach go leor fúmsa"
+      },
+      {
+        "english": "Cén ainm atá ort a tháisce agus dhfreagair sí",
+        "irish": "Cad is ainm duit a stór, agus d'fhreagair sí"
       },
       {
         "english": "Hi my name is Eliza Woodcock",
@@ -57,11 +69,29 @@
         "irish": "Níl mé as an áit seo, ach is maith liom go mór é"
       },
       {
-        "english": "And I was like wait whaa, sin ainm aisteach\nOh yeah bhí mé ag caint le Protastúnach",
-        "irish": "Agus dúirt mé 'fan go fóill, sin ainm aisteach'\nÓ sea, bhí mé ag caint le Protastúnach"
-  
+        "english": "And I was like wait whaa, sin ainm aisteach",
+        "irish": "Agus dúirt mé 'fan go fóill, sin ainm aisteach'"
       },
-  
+      {
+        "english": "Oh yeah bhí mé ag caint le Protastúnach",
+        "irish": "Ó sea, bhí mé ag caint le Protastúnach"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
+      },
       {
         "type": "section",
         "section": "Verse 2 - Mo Chara"
@@ -87,29 +117,60 @@
         "irish": "A lovely, lively girl, full of craic, not full of crap when she spoke"
       },
       {
-        "english": "Said whatever your name is do you want to come back\nNuair a landáil muid her bedsheets were a Union Jack",
-        "irish": "Dúirt sí pé ainm atá ort, ar mhaith leat teacht liom abhaile\nNuair a shroicheamar a teach, bhí a leapachas clúdaithe le bratach Shasana"
+        "english": "Said whatever your name is do you want to come back",
+        "irish": "Dúirt sí pé ainm atá ort, ar mhaith leat teacht liom abhaile"
       },
       {
-        "english": "Fuck me duairt me internally\nGrianghraf do a Deaideo san RUC ar an dresser",
-        "irish": "'Fuck me', a dúirt mé i mo chroí\nGrianghraf dá seanathair sa RUC ar an tábla"
+        "english": "Nuair a landáil muid her bedsheets were a Union Jack",
+        "irish": "Nuair a shroicheamar a teach, bhí a leapachas clúdaithe le bratach Shasana"
       },
       {
-        "english": "I start to undress her\nCraic ar dhóigh because she's a messer, níos moille nuair a thit sí 'na luí, bhí mé síoraí ag smaoineamh faoin Éirí Amach",
-        "irish": "Thosaigh mé ag baint di\nCraic den scoth mar is pleidhce í, ach bhí mé fós ag smaoineamh ar an Éirí Amach nuair a thit sí ina luí"
+        "english": "Fuck me duairt me internally",
+        "irish": "'Fuck me', a dúirt mé i mo chroí"
+      },
+      {
+        "english": "Grianghraf do a Deaideo san RUC ar an dresser",
+        "irish": "Grianghraf dá seanathair sa RUC ar an tábla"
+      },
+      {
+        "english": "I start to undress her",
+        "irish": "Thosaigh mé ag baint di"
+      },
+      {
+        "english": "Craic ar dhóigh because she's a messer, níos moille nuair a thit sí 'na luí, bhí mé síoraí ag smaoineamh faoin Éirí Amach",
+        "irish": "Craic den scoth mar is pleidhce í, ach bhí mé fós ag smaoineamh ar an Éirí Amach nuair a thit sí ina luí"
       },
       {
         "english": "Sure tá mé sa leabaidh le Protastúnach",
         "irish": "Go deimhin, tá mé sa leaba le Protastúnach"
       },
-  
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
+      },
       {
         "type": "section",
         "section": "Verse 3"
       },
       {
-        "english": "[?] is cuma liom faoi do creideamh\nI just wanna know an bhfuil tú ag iarraidh [?] suas Bóthar na bhFál",
-        "irish": "[?] I don't care about your religion\nI just wanna know do you want to [?] up the Falls Road"
+        "english": "[?] is cuma liom faoi do creideamh",
+        "irish": "[?] I don't care about your religion"
+      },
+      {
+        "english": "I just wanna know an bhfuil tú ag iarraidh [?] suas Bóthar na bhFál",
+        "irish": "I just wanna know do you want to [?] up the Falls Road"
       },
       {
         "english": "Maybe we could grab a swall, cúpla canna síos ag an bhalla síochána",
@@ -123,28 +184,51 @@
         "english": "Ulster Plantations cause gan é we wouldn't be having relations",
         "irish": "Ulster Plantations — without them, we wouldn't even be having this relation"
       },
-  
+
       {
-        "english": "Are you a Fenian a dúirt sí liom\nYou should have told me that before I let ya smack my bum",
-        "irish": "An Fínínach thú? a dúirt sí liom\nBa cheart duit é sin a rá sula lig mé duit buille a thabhairt do mo thóin"
+        "english": "Are you a Fenian a dúirt sí liom",
+        "irish": "An Fínínach thú? a dúirt sí liom"
       },
       {
-        "english": "Ach an oíche ar fad you're tellin' me I'm the one\nWell I've got no time for Republican scum",
-        "irish": "Ach ar feadh na hoíche ar fad dúirt tú gur mise an ceann\nBhuel, níl fonn orm ar scum Poblachtach"
+        "english": "You should have told me that before I let ya smack my bum",
+        "irish": "Ba cheart duit é sin a rá sula lig mé duit buille a thabhairt do mo thóin"
       },
       {
-        "english": "What the fuck that's racist or something\nYou didn't mind when my face was in your muffin",
-        "irish": "Céard é sin? Sin ciníoch nó rud éigin\nNíor thug tú aon gearán nuair a bhí mo bhéal sa mhuifín"
+        "english": "Ach an oíche ar fad you're tellin' me I'm the one",
+        "irish": "Ach ar feadh na hoíche ar fad dúirt tú gur mise an ceann"
       },
       {
-        "english": "Stop huffin just mar gheall gurbh as Bóthar na bhFál domh\nYou can call me King Billy if you want to",
-        "irish": "Stad de bheith ag tafann mar is as Bóthar na bhFál mé\nIs féidir leat glaoch orm Rí Liam más maith leat"
-  
+        "english": "Well I've got no time for Republican scum",
+        "irish": "Bhuel, níl fonn orm ar scum Poblachtach"
       },
-  
+      {
+        "english": "What the fuck that's racist or something",
+        "irish": "Céard é sin? Sin ciníoch nó rud éigin"
+      },
+      {
+        "english": "You didn't mind when my face was in your muffin",
+        "irish": "Níor thug tú aon gearán nuair a bhí mo bhéal sa mhuifín"
+      },
+      {
+        "english": "Stop huffin just mar gheall gurbh as Bóthar na bhFál domh",
+        "irish": "Stad de bheith ag tafann mar is as Bóthar na bhFál mé"
+      },
+      {
+        "english": "You can call me King Billy if you want to",
+        "irish": "Is féidir leat glaoch orm Rí Liam más maith leat"
+      },
+
       {
         "type": "section",
         "section": "Chorus (repeat)"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Óóó"
+      },
+      {
+        "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Get away from me",
+        "irish": "A chairde Fíníneacha, a chairde Fíníneacha, a chairde Fíníneacha, Imigh libh uaim"
       },
       {
         "english": "You Fenian Cunts, you Fenian Cunts, you Fenian Cunts, Oooh",

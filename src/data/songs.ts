@@ -93,7 +93,7 @@ export interface LyricsLine {
     thartAgusAgart as Song,
     theRecap as Song,
   ];
-  
+      
   // Helper functions
   export function getAllSongs(): Song[] {
     return songsData;
@@ -101,7 +101,7 @@ export interface LyricsLine {
   
   export function getSong(id: string): Song | null {
     return songsData.find(song => song.id === id) || null;
-  }
+    }
   
   export function getSongsByAlbum(album: string): Song[] {
     return songsData.filter(song => song.album === album);

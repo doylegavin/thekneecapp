@@ -45,6 +45,10 @@
         "english": "Because you can’t save us"
       },
       {
+        "type": "section",
+        "section": "Verse 2"
+      },
+      {
         "irish": "Le linn blianta fada mhór an chogaidh",
         "english": "During the long years of the great war"
       },
@@ -99,7 +103,7 @@
         "english": "I think I need a toke, ‘cause nothing’s nicer than a man on the flute"
       },
   
-      { "type": "section", "section": "Verse 2" },
+      { "type": "section", "section": "Verse 3" },
       {
         "irish": "Ag suí anseo le Manchán le cúpla magnum",
         "english": "Sitting here with Manchán with a couple of Magnums"
@@ -131,6 +135,10 @@
       {
         "irish": "Tá rud éigin sa spéir cos we're never alone",
         "english": "There’s something in the sky ‘cause we’re never alone"
+      },
+      {
+        "type": "section",
+        "section": "Verse 4"
       },
       {
         "irish": "Nach deas a bheith beo",

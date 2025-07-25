@@ -100,6 +100,22 @@
         "english": "You won’t see me standing still too long"
       },
       {
+        "irish": "C.E.A.R.T.A",
+        "english": "R.I.G.H.T.S"
+      },
+      {
+        "irish": "Is cuma liom sa foc faoi aon gharda",
+        "english": "I don’t give a f*ck about any Garda"
+      },
+      {
+        "irish": "Dúidín lasta, tá mise ró-ghasta",
+        "english": "Roll-up lit, I’m way too fast"
+      },
+      {
+        "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
+        "english": "You won’t see me standing still too long"
+      },
+      {
         "type": "section",
         "section": "Verse 3 — Mo Chara"
       },
@@ -196,6 +212,22 @@
         "english": "You won’t see me standing still too long"
       },
       {
+        "irish": "C.E.A.R.T.A",
+        "english": "R.I.G.H.T.S"
+      },
+      {
+        "irish": "Is cuma liom sa foc faoi aon gharda",
+        "english": "I don’t give a f*ck about any Garda"
+      },
+      {
+        "irish": "Dúidín lasta, tá mise ró-ghasta",
+        "english": "Roll-up lit, I’m way too fast"
+      },
+      {
+        "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
+        "english": "You won’t see me standing still too long"
+      },
+      {
         "type": "section",
         "section": "Verse 5 — Móglaí Bap"
       },
@@ -236,7 +268,12 @@
         "section": "Interlude — Garda"
       },
       {
-        "english": "“Young man we caught you damaging public property\nAnd you are coming to the station so we can talk properly”"
+        "english": "Young man we caught you damaging public property",
+        "irish": "Mhaith liom a fháil agus a fháil"
+      },
+      {
+        "english": "And you are coming to the station so we can talk properly",
+        "irish": "Agus a fháil agus a fháil"
       },
       {
         "type": "section",
@@ -293,7 +330,56 @@
       {
         "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
         "english": "You won’t see me standing still too long"
+      },
+      {
+        "irish": "C.E.A.R.T.A",
+        "english": "R.I.G.H.T.S"
+      },
+      {
+        "irish": "Is cuma liom sa foc faoi aon gharda",
+        "english": "I don’t give a f*ck about any Garda"
+      },
+      {
+        "irish": "Dúidín lasta, tá mise ró-ghasta",
+        "english": "Roll-up lit, I’m way too fast"
+      },
+      {
+        "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
+        "english": "You won’t see me standing still too long"
+      },
+      {
+        "irish": "C.E.A.R.T.A",
+        "english": "R.I.G.H.T.S"
+      },
+      {
+        "irish": "Is cuma liom sa foc faoi aon gharda",
+        "english": "I don’t give a f*ck about any Garda"
+      },
+      {
+        "irish": "Dúidín lasta, tá mise ró-ghasta",
+        "english": "Roll-up lit, I’m way too fast"
+      },
+      {
+        "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
+        "english": "You won’t see me standing still too long"
+      },
+      {
+        "irish": "C.E.A.R.T.A",
+        "english": "R.I.G.H.T.S"
+      },
+      {
+        "irish": "Is cuma liom sa foc faoi aon gharda",
+        "english": "I don’t give a f*ck about any Garda"
+      },
+      {
+        "irish": "Dúidín lasta, tá mise ró-ghasta",
+        "english": "Roll-up lit, I’m way too fast"
+      },
+      {
+        "irish": "Ní fheicfidh tú mise i mo sheasamh ró-fhada",
+        "english": "You won’t see me standing still too long"
       }
+
     ]
   }
   

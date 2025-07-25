@@ -42,8 +42,12 @@ function LyricsLine({ line, song }: LyricsLineProps) {
   }
   
   // Handle regular lyric lines
-  // Use the song's primary language to determine what to show as primary text
-  const isIrish = song.primaryLanguage === 'irish' || (line.language === 'irish');
+  // Determine primary language based on property order in the line object
+  // The first property (english or irish) is the primary/visible language
+  const lineKeys = Object.keys(line);
+  const firstLanguageKey = lineKeys.find(key => key === 'english' || key === 'irish');
+  const isIrish = firstLanguageKey === 'irish';
+  
   const primaryText = isIrish ? line.irish : line.english;
   const translationText = isIrish ? line.english : line.irish;
   
@@ -63,8 +67,8 @@ function LyricsLine({ line, song }: LyricsLineProps) {
         {(primaryText && translationText) && (
           <div className={`ml-3 p-1 rounded transition-colors ${
             isIrish 
-              ? 'text-green-600 hover:bg-green-100 dark:hover:bg-green-900/20' 
-              : 'text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20'
+              ? 'text-orange-600 hover:bg-orange-100 dark:hover:bg-orange-900/20' 
+              : 'text-green-600 hover:bg-green-100 dark:hover:bg-green-900/20'
           }`}>
             {showTranslation ? (
               <ChevronUp className="h-5 w-5" />
@@ -79,20 +83,20 @@ function LyricsLine({ line, song }: LyricsLineProps) {
       {showTranslation && (primaryText && translationText) && (
         <div className={`mt-1 mx-2 p-3 rounded-lg border-2 transition-all duration-300 ${
           isIrish 
-            ? 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800' 
-            : 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800'
+            ? 'bg-orange-50 border-orange-200 dark:bg-orange-900/20 dark:border-orange-800' 
+            : 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800'
         }`}>
           <div className="flex items-start space-x-2">
             <span className={`text-sm font-semibold ${
-              isIrish ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'
+              isIrish ? 'text-orange-700 dark:text-orange-300' : 'text-green-700 dark:text-green-300'
             }`}>
               {isIrish ? '🇬🇧' : '🇮🇪'} {isIrish ? 'English:' : 'Gaeilge:'}
             </span>
           </div>
           <p className={`mt-2 text-lg font-medium leading-relaxed ${
             isIrish 
-              ? 'text-green-800 dark:text-green-200' 
-              : 'text-red-800 dark:text-red-200'
+              ? 'text-orange-800 dark:text-orange-200' 
+              : 'text-green-800 dark:text-green-200'
           }`}>
             {translationText}
           </p>

@@ -1,7 +1,7 @@
 {
     "id": "ceacht-mo-chara",
     "title": "Ceacht Mo Chara",
-    "titleEnglish": "Mo Chara’s Lesson",
+    "titleEnglish": "Mo Chara's Lesson",
     "album": "3CAG",
     "year": 2024,
     "duration": "4:07",
@@ -9,100 +9,385 @@
     "lines": [
       { "type": "section", "section": "Verse 1" },
       {
-        "irish": "Fáiltigí go Ceacht mo Chara (Hello)\nFoghlaim seo agus ní bheidh tú ag teacht sa dara háit\nBanging out 3CAG agus mé ar stáitse\nAr seachrán ó na Gardaí ón tseachtain seo caite\nTá éad orthu mar gheall go bhfuil mo pubes ildaite\nFaic fágtha le rá",
-        "english": "Welcome to Mo Chara’s Lesson (Hello)\nLearn this and you won’t be coming second\nBanging out 3CAG while I’m on stage\nEvading the guards from last week\nThey’re jealous because my pubes are colourful\nNothing left to say"
+        "irish": "Fáiltigí go Ceacht mo Chara (Hello)",
+        "english": "Welcome to Mo Chara's Lesson (Hello)"
       },
       {
-        "irish": "Don't change the drug laws because I’m raking it in gach lá\nAch sílim gur gá do na Péas iad féin a choinneáil stuama\nAr Bhóthar na bhFál ní bheidh tú i bhfad ar shiúl ó phetrol-buama\nBuama peitril ag éist' le techno beidh mise ar shiúl ní bheidh mise le feiceáil",
-        "english": "Don't change the drug laws because I’m raking it in every day\nBut I think the guards need to keep themselves steady\nOn the Falls Road you’re never far from a petrol bomb\nPetrol bomb with techno blaring – I’ll be gone, unseen"
+        "irish": "Foghlaim seo agus ní bheidh tú ag teacht sa dara háit",
+        "english": "Learn this and you won't be coming second"
       },
       {
-        "irish": "Gardaí ag seiceáil tá mise ag pacáil amach sna sléibthe cosúil le jackal\n'Cause that’s where I hide, níl an RUC on my side\nJust ar feadh cúpla, an méid sin, táim ar ais i focain paradise",
-        "english": "Cops checking, I’m packing out in the mountains like a jackal\nThat’s where I hide, the RUC aren’t on my side\nJust for a few, that’s it, I’m back in f***ing paradise"
+        "irish": "Banging out 3CAG agus mé ar stáitse",
+        "english": "Banging out 3CAG while I'm on stage"
       },
       {
-        "irish": "An Gaeilgeoir 'Mr. Nice' a chuirtear orm\nAr fáil fríd an ghrian, ghaoth, bháistí agus stoirm\nMar tá sneachta ann 'ar go' ó Mo Chara ar lá tirim\nAgus tá Dan Healy paranoid faoi achan abairt a dheirim",
-        "english": "They call me the Irish-speaking ‘Mr. Nice’\nAvailable through sun, wind, rain and storm\nBecause there’s snow ‘on the go’ from Mo Chara on a dry day\nAnd Dan Healy is paranoid about every line I say"
+        "irish": "Ar seachrán ó na Gardaí ón tseachtain seo caite",
+        "english": "Evading the guards from last week"
       },
       {
-        "irish": "Fuck the Pope, I'm selling dope le Bishop Brennan\nFuck the Queen, I'm selling green le achan cunt sa Kremlin\nLSD nó piollaí, focain díolaim an t-iomlán\n(\"How many should I take, Mo Chara said three or something?\")",
-        "english": "F*** the Pope, I'm selling dope with Bishop Brennan\nF*** the Queen, I'm selling green with every c*** in the Kremlin\nLSD or pills, I sell the whole f***ing lot\n(\"How many should I take? Mo Chara said three or something?\")"
+        "irish": "Tá éad orthu mar gheall go bhfuil mo pubes ildaite",
+        "english": "They're jealous because my pubes are colourful"
       },
-  
+      {
+        "irish": "Faic fágtha le rá",
+        "english": "Nothing left to say"
+      },
+      {
+        "irish": "Don't change the drug laws because I'm raking it in gach lá",
+        "english": "Don't change the drug laws because I'm raking it in every day"
+      },
+      {
+        "irish": "Ach sílim gur gá do na Péas iad féin a choinneáil stuama",
+        "english": "But I think the guards need to keep themselves steady"
+      },
+      {
+        "irish": "Ar Bhóthar na bhFál ní bheidh tú i bhfad ar shiúl ó phetrol-buama",
+        "english": "On the Falls Road you're never far from a petrol bomb"
+      },
+      {
+        "irish": "Buama peitril ag éist' le techno beidh mise ar shiúl ní bheidh mise le feiceáil",
+        "english": "Petrol bomb with techno blaring – I'll be gone, unseen"
+      },
+      {
+        "irish": "Gardaí ag seiceáil tá mise ag pacáil amach sna sléibthe cosúil le jackal",
+        "english": "Cops checking, I'm packing out in the mountains like a jackal"
+      },
+      {
+        "irish": "'Cause that's where I hide, níl an RUC on my side",
+        "english": "That's where I hide, the RUC aren't on my side"
+      },
+      {
+        "irish": "Just ar feadh cúpla, an méid sin, táim ar ais i focain paradise",
+        "english": "Just for a few, that's it, I'm back in f***ing paradise"
+      },
+      {
+        "irish": "An Gaeilgeoir 'Mr. Nice' a chuirtear orm",
+        "english": "They call me the Irish-speaking 'Mr. Nice'"
+      },
+      {
+        "irish": "Ar fáil fríd an ghrian, ghaoth, bháistí agus stoirm",
+        "english": "Available through sun, wind, rain and storm"
+      },
+      {
+        "irish": "Mar tá sneachta ann 'ar go' ó Mo Chara ar lá tirim",
+        "english": "Because there's snow 'on the go' from Mo Chara on a dry day"
+      },
+      {
+        "irish": "Agus tá Dan Healy paranoid faoi achan abairt a dheirim",
+        "english": "And Dan Healy is paranoid about every line I say"
+      },
+      {
+        "irish": "Fuck the Pope, I'm selling dope le Bishop Brennan",
+        "english": "F*** the Pope, I'm selling dope with Bishop Brennan"
+      },
+      {
+        "irish": "Fuck the Queen, I'm selling green le achan cunt sa Kremlin",
+        "english": "F*** the Queen, I'm selling green with every c*** in the Kremlin"
+      },
+      {
+        "irish": "LSD nó piollaí, focain díolaim an t-iomlán",
+        "english": "LSD or pills, I sell the whole f***ing lot"
+      },
+      {
+        "irish": "(\"How many should I take, Mo Chara said three or something?\")",
+        "english": "(\"How many should I take? Mo Chara said three or something?\")"
+      },
+
       { "type": "section", "section": "Verse 2" },
       {
-        "irish": "Pearsantachtaí difriúla when I'm selling an 3CAG\nMúinte le posh pricks and acting hard leis na scumbags\nSometimes you have to bite your tongue leis na meánaicmigh\nExactly, due the focain airgead sexy",
-        "english": "Different personalities when I'm selling 3CAG\nPolite with posh pricks, act tough with the scumbags\nSometimes you have to bite your tongue with the middle class\nExactly, because the f***ing money is sexy"
+        "irish": "Pearsantachtaí difriúla when I'm selling an 3CAG",
+        "english": "Different personalities when I'm selling 3CAG"
       },
       {
-        "irish": "Eventually, imíonn siad, couple o’ quid down\nThe clowns, running around, saying that legend Mo Chara’s sound\nAch i bhfírinne bhí orm é a dhíol níos daoire daofa\nMar bím i gcónaí ag iarraidh go mbeidh sé níos saoire do na",
-        "english": "Eventually, they’re gone, a few quid down\nThe clowns, running around saying Mo Chara’s a legend\nBut truthfully, I had to sell it dearer to them\nBecause I’m always trying to make it cheaper for the"
+        "irish": "Múinte le posh pricks and acting hard leis na scumbags",
+        "english": "Polite with posh pricks, act tough with the scumbags"
       },
       {
-        "irish": "Leaids as an cheantar nach bhfaigheann laethanta saoire ar bith\nSniff that mate and you'll be back in Ibiza arís",
-        "english": "Lads from the area who never get holidays at all\nSniff that mate and you’ll be back in Ibiza again"
+        "irish": "Sometimes you have to bite your tongue leis na meánaicmigh",
+        "english": "Sometimes you have to bite your tongue with the middle class"
       },
-  
+      {
+        "irish": "Exactly, due the focain airgead sexy",
+        "english": "Exactly, because the f***ing money is sexy"
+      },
+      {
+        "irish": "Eventually, imíonn siad, couple o' quid down",
+        "english": "Eventually, they're gone, a few quid down"
+      },
+      {
+        "irish": "The clowns, running around, saying that legend Mo Chara's sound",
+        "english": "The clowns, running around saying Mo Chara's a legend"
+      },
+      {
+        "irish": "Ach i bhfírinne bhí orm é a dhíol níos daoire daofa",
+        "english": "But truthfully, I had to sell it dearer to them"
+      },
+      {
+        "irish": "Mar bím i gcónaí ag iarraidh go mbeidh sé níos saoire do na",
+        "english": "Because I'm always trying to make it cheaper for the"
+      },
+      {
+        "irish": "Leaids as an cheantar nach bhfaigheann laethanta saoire ar bith",
+        "english": "Lads from the area who never get holidays at all"
+      },
+      {
+        "irish": "Sniff that mate and you'll be back in Ibiza arís",
+        "english": "Sniff that mate and you'll be back in Ibiza again"
+      },
+
       { "type": "section", "section": "Chorus" },
       {
-        "irish": "Mo Chara i do cheantar\nMo Chara i do theach\nMo Chara’s everywhere\nAr an drabhlás anocht",
-        "english": "Mo Chara in your area\nMo Chara in your house\nMo Chara’s everywhere\nOn the session tonight"
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
       },
-  
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
+      },
+      {
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
+      },
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
+      },
+
       { "type": "section", "section": "Verse 3" },
       {
-        "irish": "Achan duine buartha faoi Mo Chara\nMar gheall go bhfuil barraíocht ama aige\nMar go bhfuil barraíocht bán aige\nMar gur as Bóthar na Carraige",
-        "english": "Everyone’s worried about Mo Chara\nBecause he’s got too much time\nBecause he’s got too much white\nBecause he’s from Rock Road"
+        "irish": "Achan duine buartha faoi Mo Chara",
+        "english": "Everyone's worried about Mo Chara"
       },
       {
-        "irish": "Báine dó\nIs léir go bhfuil Mo Chara the opposite the [?]\nNí imrím cluichí seachas Cribby 'is Dizzy Dinosaurs\nInseoidh mé duit once more",
-        "english": "Too pale for him\nIt’s clear that Mo Chara’s the opposite of [?]\nI don’t play games except Cribby and Dizzy Dinosaurs\nI’ll tell you once more"
+        "irish": "Mar gheall go bhfuil barraíocht ama aige",
+        "english": "Because he's got too much time"
       },
       {
-        "irish": "Ní shílim i bhfírinne gur chóir\nÉisteacht le RTÉ nó beidh cuairteoir at your Ma's front door\nSmashing up your radio then giving myself fellatio\nI dteach do mháthar a gimp suit leathair\nHanging in her patio",
-        "english": "I truly don’t think you should\nListen to RTÉ or there’ll be a visitor at your ma’s front door\nSmashing your radio and giving myself fellatio\nIn your mother’s house in a leather gimp suit\nHanging in her patio"
+        "irish": "Mar go bhfuil barraíocht bán aige",
+        "english": "Because he's got too much white"
       },
       {
-        "irish": "I still prefer your Granny though\nBurting her like a fanny coat\nHorn agus féasóg uirthi, she look’s like a manly goat",
-        "english": "I still prefer your Granny though\nRiding her like a furry coat\nHorn and beard on her – she looks like a manly goat"
+        "irish": "Mar gur as Bóthar na Carraige",
+        "english": "Because he's from Rock Road"
       },
       {
-        "irish": "Kneecap, givin' your Da a vesectomy\nI'll beat your brother at FIFA when your Ma is erectin' me\nTá do dheirfiúr next to me, I'm selling her ecstasy\nRapping i ndátheangach coursing through my anatomy",
-        "english": "Kneecap, giving your Da a vasectomy\nI'll beat your brother at FIFA while your Ma’s getting turned on by me\nYour sister’s next to me, I'm selling her ecstasy\nRapping bilingually flowing through my anatomy"
+        "irish": "Báine dó",
+        "english": "Too pale for him"
       },
-  
+      {
+        "irish": "Is léir go bhfuil Mo Chara the opposite the [?]",
+        "english": "It's clear that Mo Chara's the opposite of [?]"
+      },
+      {
+        "irish": "Ní imrím cluichí seachas Cribby 'is Dizzy Dinosaurs",
+        "english": "I don't play games except Cribby and Dizzy Dinosaurs"
+      },
+      {
+        "irish": "Inseoidh mé duit once more",
+        "english": "I'll tell you once more"
+      },
+      {
+        "irish": "Ní shílim i bhfírinne gur chóir",
+        "english": "I truly don't think you should"
+      },
+      {
+        "irish": "Éisteacht le RTÉ nó beidh cuairteoir at your Ma's front door",
+        "english": "Listen to RTÉ or there'll be a visitor at your ma's front door"
+      },
+      {
+        "irish": "Smashing up your radio then giving myself fellatio",
+        "english": "Smashing your radio and giving myself fellatio"
+      },
+      {
+        "irish": "I dteach do mháthar a gimp suit leathair",
+        "english": "In your mother's house in a leather gimp suit"
+      },
+      {
+        "irish": "Hanging in her patio",
+        "english": "Hanging in her patio"
+      },
+      {
+        "irish": "I still prefer your Granny though",
+        "english": "I still prefer your Granny though"
+      },
+      {
+        "irish": "Burting her like a fanny coat",
+        "english": "Riding her like a furry coat"
+      },
+      {
+        "irish": "Horn agus féasóg uirthi, she look's like a manly goat",
+        "english": "Horn and beard on her – she looks like a manly goat"
+      },
+      {
+        "irish": "Kneecap, givin' your Da a vesectomy",
+        "english": "Kneecap, giving your Da a vasectomy"
+      },
+      {
+        "irish": "I'll beat your brother at FIFA when your Ma is erectin' me",
+        "english": "I'll beat your brother at FIFA while your Ma's getting turned on by me"
+      },
+      {
+        "irish": "Tá do dheirfiúr next to me, I'm selling her ecstasy",
+        "english": "Your sister's next to me, I'm selling her ecstasy"
+      },
+      {
+        "irish": "Rapping i ndátheangach coursing through my anatomy",
+        "english": "Rapping bilingually flowing through my anatomy"
+      },
+
       { "type": "section", "section": "Chorus (repeat)" },
       {
-        "irish": "Mo Chara i do cheantar\nMo Chara i do theach\nMo Chara's everywhere\nAr an drabhlás anocht",
-        "english": "Mo Chara in your area\nMo Chara in your house\nMo Chara’s everywhere\nOn the session tonight"
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
       },
-  
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
+      },
+      {
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
+      },
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
+      },
+
       { "type": "section", "section": "Verse 4 / Outro" },
       {
-        "irish": "Cúpla siolla eile sure just don focain craic\nAgus cúpla líne eile pure before I hit the sack\nNuair a dhéanann na Péas seic\nFaigheann siad faic",
-        "english": "A few more syllables just for the f***ing craic\nAnd a few more pure lines before I hit the sack\nWhen the guards do a search\nThey find nothing"
+        "irish": "Cúpla siolla eile sure just don focain craic",
+        "english": "A few more syllables just for the f***ing craic"
       },
       {
-        "irish": "Mar tá mo dope about an inch and a half up my crack\nDe réir boring bastards, tá mé drochbhéasach\nAch ag déanamh a bheag de dhaoine is what I'm best at",
-        "english": "Because my dope’s about an inch and a half up my crack\nAccording to boring bastards, I’ve bad manners\nBut belittling people is what I'm best at"
+        "irish": "Agus cúpla líne eile pure before I hit the sack",
+        "english": "And a few more pure lines before I hit the sack"
       },
       {
-        "irish": "Like when I wipe my arse with your wee sister's vest top\nAgus chuir mé i bhfolach é in a charity shop (Eugh)",
-        "english": "Like when I wipe my arse with your wee sister’s vest top\nAnd I hid it in a charity shop (Eugh)"
+        "irish": "Nuair a dhéanann na Péas seic",
+        "english": "When the guards do a search"
       },
       {
-        "irish": "\"Ó mo Dhia, tá tú focain cáidheach\"\nThrow your baby into the fire\nAchan duine thíos for the Messiah\nNí féidir liom bás a fháil and I'll never retire",
-        "english": "\"Oh my God, you’re f***ing filthy\"\nThrow your baby into the fire\nEveryone’s down for the Messiah\nI can’t die and I’ll never retire"
+        "irish": "Faigheann siad faic",
+        "english": "They find nothing"
       },
       {
-        "irish": "Tá mé imithe ar focain strae\nCuirim scairt ar focain Babestation i rith an lae\nMelting heads, is breá liom é\nCuirfidh mé isteach ar dhaoine, go dtí go dtéim ag ré'",
-        "english": "I’ve gone completely off the rails\nI call Babestation during the day\nMelting heads, I love it\nI’ll bother people until I float away"
+        "irish": "Mar tá mo dope about an inch and a half up my crack",
+        "english": "Because my dope's about an inch and a half up my crack"
       },
-  
+      {
+        "irish": "De réir boring bastards, tá mé drochbhéasach",
+        "english": "According to boring bastards, I've bad manners"
+      },
+      {
+        "irish": "Ach ag déanamh a bheag de dhaoine is what I'm best at",
+        "english": "But belittling people is what I'm best at"
+      },
+      {
+        "irish": "Like when I wipe my arse with your wee sister's vest top",
+        "english": "Like when I wipe my arse with your wee sister's vest top"
+      },
+      {
+        "irish": "Agus chuir mé i bhfolach é in a charity shop (Eugh)",
+        "english": "And I hid it in a charity shop (Eugh)"
+      },
+      {
+        "irish": "\"Ó mo Dhia, tá tú focain cáidheach\"",
+        "english": "\"Oh my God, you're f***ing filthy\""
+      },
+      {
+        "irish": "Throw your baby into the fire",
+        "english": "Throw your baby into the fire"
+      },
+      {
+        "irish": "Achan duine thíos for the Messiah",
+        "english": "Everyone's down for the Messiah"
+      },
+      {
+        "irish": "Ní féidir liom bás a fháil and I'll never retire",
+        "english": "I can't die and I'll never retire"
+      },
+      {
+        "irish": "Tá mé imithe ar focain strae",
+        "english": "I've gone completely off the rails"
+      },
+      {
+        "irish": "Cuirim scairt ar focain Babestation i rith an lae",
+        "english": "I call Babestation during the day"
+      },
+      {
+        "irish": "Melting heads, is breá liom é",
+        "english": "Melting heads, I love it"
+      },
+      {
+        "irish": "Cuirfidh mé isteach ar dhaoine, go dtí go dtéim ag ré'",
+        "english": "I'll bother people until I float away"
+      },
+
       { "type": "section", "section": "Final Chorus" },
+      
       {
-        "irish": "Mo Chara i do cheantar\nMo Chara i do theach\nMo Chara's everywhere\nAr an drabhlás anocht",
-        "english": "Mo Chara in your area\nMo Chara in your house\nMo Chara’s everywhere\nOn the session tonight"
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
+      },
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
+      },
+      {
+        "irish": "Mo Chara i do cheantar",
+        "english": "Mo Chara in your area"
+      },
+      {
+        "irish": "Mo Chara i do theach",
+        "english": "Mo Chara in your house"
+      },
+      {
+        "irish": "Mo Chara's everywhere",
+        "english": "Mo Chara's everywhere"
+      },
+      {
+        "irish": "Ar an drabhlás anocht",
+        "english": "On the session tonight"
       }
     ]
   }
