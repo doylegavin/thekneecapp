@@ -27,7 +27,7 @@ interface SpotifyError {
 }
 
 interface SpotifyPlayer {
-  addListener: (event: string, callback: (data: any) => void) => void;
+  addListener: <T = unknown>(event: string, callback: (data: T) => void) => void;
   connect: () => Promise<boolean>;
   disconnect: () => void;
   togglePlay: () => Promise<void>;
@@ -40,7 +40,6 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [player, setPlayer] = useState<SpotifyPlayer | null>(null);
-  const [deviceId, setDeviceId] = useState<string>('');
   const [accessToken, setAccessToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<SpotifyTrack | null>(null);
@@ -108,7 +107,6 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
       // Ready
       spotifyPlayer.addListener('ready', ({ device_id }: { device_id: string }) => {
         console.log('Ready with Device ID', device_id);
-        setDeviceId(device_id);
         setIsReady(true);
       });
 
