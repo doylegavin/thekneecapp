@@ -1,11 +1,12 @@
 // src/app/songs/[id]/page.tsx
 'use client';
 
-import { useState, use, useEffect, useRef } from 'react';
+import { useState, use, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Music, Play, ChevronDown, ChevronUp, Pause, Settings, List } from 'lucide-react';
+import { ArrowLeft, Music, Play, ChevronDown, ChevronUp, Pause, Settings, List, Eye, EyeOff } from 'lucide-react';
 import { getSong, getAllSongs, type Song } from '../../../data/songs';
 import KneecapAttribution from '../../../components/KneecapAttribution';
+import SpotifyPlayer from '../../../components/SpotifyPlayer';
 
 interface LyricsLineProps {
   line: {
@@ -17,11 +18,11 @@ interface LyricsLineProps {
     artist?: string;
   };
   song: Song;
+  showTranslation?: boolean;
+  onToggleTranslation?: () => void;
 }
 
-function LyricsLine({ line, song }: LyricsLineProps) {
-  const [showTranslation, setShowTranslation] = useState(false);
-  
+function LyricsLine({ line, song, showTranslation = false, onToggleTranslation }: LyricsLineProps) {
   // Handle section headers
   if (line.type === 'section') {
     return (
@@ -59,7 +60,7 @@ function LyricsLine({ line, song }: LyricsLineProps) {
       {/* Main line with dropdown toggle */}
       <div 
         className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
-        onClick={() => setShowTranslation(!showTranslation)}
+        onClick={onToggleTranslation}
       >
         <p className="text-lg leading-relaxed text-gray-900 dark:text-white flex-1">
           {primaryText || translationText}
@@ -79,34 +80,35 @@ function LyricsLine({ line, song }: LyricsLineProps) {
         )}
       </div>
       
-      {/* Translation dropdown */}
+      {/* Translation dropdown - Improved compact layout */}
       {showTranslation && (primaryText && translationText) && (
         <div className={`mt-1 mx-2 p-3 rounded-lg border-2 transition-all duration-300 ${
           isIrish 
             ? 'bg-orange-50 border-orange-200 dark:bg-orange-900/20 dark:border-orange-800' 
             : 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800'
         }`}>
+          {/* Compact layout: Flag, language label, and translation on same line */}
           <div className="flex items-start space-x-2">
-            <span className={`text-sm font-semibold ${
+            <span className={`text-sm font-semibold whitespace-nowrap ${
               isIrish ? 'text-orange-700 dark:text-orange-300' : 'text-green-700 dark:text-green-300'
             }`}>
               {isIrish ? '🇬🇧' : '🇮🇪'} {isIrish ? 'English:' : 'Gaeilge:'}
             </span>
+            <p className={`text-lg font-medium leading-relaxed flex-1 ${
+              isIrish 
+                ? 'text-orange-800 dark:text-orange-200' 
+                : 'text-green-800 dark:text-green-200'
+            }`}>
+              {translationText}
+            </p>
           </div>
-          <p className={`mt-2 text-lg font-medium leading-relaxed ${
-            isIrish 
-              ? 'text-orange-800 dark:text-orange-200' 
-              : 'text-green-800 dark:text-green-200'
-          }`}>
-            {translationText}
-          </p>
         </div>
       )}
     </div>
   );
 }
 
-// Auto-scroll control component (keeping your existing implementation)
+// Auto-scroll control component with improved mobile support
 function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
   onToggle: () => void;
   isPlaying: boolean;
@@ -147,62 +149,51 @@ function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
             </div>
             
             {/* Quick Presets */}
-            <div className="flex justify-center space-x-2 mb-2">
-              {[0.5, 1, 1.5, 2].map((preset) => (
-                <button
-                  key={preset}
-                  onClick={() => onSpeedChange(preset)}
-                  className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-                    Math.abs(speed - preset) < 0.05
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500'
-                  }`}
-                >
-                  {preset}x
-                </button>
-              ))}
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
+              <button onClick={() => onSpeedChange(0.5)} className="hover:text-green-600">
+                Slow
+              </button>
+              <button onClick={() => onSpeedChange(1)} className="hover:text-green-600">
+                Normal
+              </button>
+              <button onClick={() => onSpeedChange(2)} className="hover:text-green-600">
+                Fast
+              </button>
             </div>
             
-            {/* Current Speed Display */}
-            <div className="text-center">
-              <span className="text-sm font-medium text-gray-900 dark:text-white">
-                Current: {speed.toFixed(1)}x speed
-              </span>
+            <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+              Speed: {speed.toFixed(1)}x
             </div>
           </div>
         </div>
       )}
-
-      {/* Main Control Panel */}
-      <div className="bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 p-2 flex items-center space-x-2">
-        {/* Auto-scroll Toggle */}
-        <button
-          onClick={onToggle}
-          className={`p-2 rounded-full transition-colors ${
-            isPlaying
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-          title={isPlaying ? 'Stop Auto-scroll' : 'Start Auto-scroll'}
-        >
-          {isPlaying ? (
-            <Pause className="h-5 w-5" />
-          ) : (
-            <Play className="h-5 w-5" />
-          )}
-        </button>
-
-        {/* Settings Toggle */}
+      
+      {/* Main Controls */}
+      <div className="flex flex-col space-y-2">
+        {/* Settings Button */}
         <button
           onClick={() => setShowControls(!showControls)}
-          className={`p-2 rounded-full transition-colors ${
-            showControls
-              ? 'bg-blue-600 text-white hover:bg-blue-700'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-          }`}
-          title="Auto-scroll Settings"
+          className="w-12 h-12 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+          title="Speed Settings"
         >
-          <Settings className="h-5 w-5" />
+          <Settings className="h-6 w-6" />
+        </button>
+        
+        {/* Play/Pause Button */}
+        <button
+          onClick={onToggle}
+          className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-colors ${
+            isPlaying 
+              ? 'bg-red-600 hover:bg-red-700 text-white' 
+              : 'bg-green-600 hover:bg-green-700 text-white'
+          }`}
+          title={isPlaying ? 'Pause Auto-Scroll' : 'Start Auto-Scroll'}
+        >
+          {isPlaying ? (
+            <Pause className="h-6 w-6" />
+          ) : (
+            <Play className="h-6 w-6" />
+          )}
         </button>
       </div>
     </div>
@@ -210,9 +201,7 @@ function AutoScrollController({ onToggle, isPlaying, speed, onSpeedChange }: {
 }
 
 interface SongPageProps {
-  params: Promise<{
-    id: string;
-  }>;
+  params: Promise<{ id: string }>;
 }
 
 export default function SongPage({ params }: SongPageProps) {
@@ -222,11 +211,17 @@ export default function SongPage({ params }: SongPageProps) {
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
-  // Auto-scroll state
+  // Auto-scroll state with improved mobile support
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [scrollSpeed, setScrollSpeed] = useState(1);
+  const [userScrolling, setUserScrolling] = useState(false);
   const lyricsContainerRef = useRef<HTMLDivElement>(null);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const userScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Translation state
+  const [allTranslationsExpanded, setAllTranslationsExpanded] = useState(false);
+  const [expandedLines, setExpandedLines] = useState<Set<number>>(new Set());
 
   // Get all songs for sidebar, sorted alphabetically
   const allSongs = getAllSongs().sort((a, b) => a.title.localeCompare(b.title));
@@ -249,16 +244,31 @@ export default function SongPage({ params }: SongPageProps) {
     }
   }, [id]);
 
-  // Auto-scroll logic (keeping your existing implementation)
+  // User scroll detection
+  const handleUserScroll = useCallback(() => {
+    setUserScrolling(true);
+    
+    // Clear existing timeout
+    if (userScrollTimeoutRef.current) {
+      clearTimeout(userScrollTimeoutRef.current);
+    }
+    
+    // Set new timeout to detect when user stops scrolling
+    userScrollTimeoutRef.current = setTimeout(() => {
+      setUserScrolling(false);
+    }, 1000); // 1 second after user stops scrolling
+  }, []);
+
+  // Auto-scroll logic with user scroll detection
   useEffect(() => {
-    if (isAutoScrolling && lyricsContainerRef.current) {
+    if (isAutoScrolling && !userScrolling && lyricsContainerRef.current) {
       const baseScrollStep = 2;
       const scrollStep = Math.max(0.5, baseScrollStep * scrollSpeed);
       const baseDelay = 20;
       const scrollDelay = Math.max(5, baseDelay / scrollSpeed);
       
       scrollIntervalRef.current = setInterval(() => {
-        if (lyricsContainerRef.current) {
+        if (lyricsContainerRef.current && !userScrolling) {
           const container = lyricsContainerRef.current;
           const currentScroll = container.scrollTop;
           const maxScroll = container.scrollHeight - container.clientHeight;
@@ -282,7 +292,21 @@ export default function SongPage({ params }: SongPageProps) {
         clearInterval(scrollIntervalRef.current);
       }
     };
-  }, [isAutoScrolling, scrollSpeed]);
+  }, [isAutoScrolling, scrollSpeed, userScrolling]);
+
+  // Add scroll event listener
+  useEffect(() => {
+    const container = lyricsContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleUserScroll, { passive: true });
+      container.addEventListener('touchmove', handleUserScroll, { passive: true });
+      
+      return () => {
+        container.removeEventListener('scroll', handleUserScroll);
+        container.removeEventListener('touchmove', handleUserScroll);
+      };
+    }
+  }, [handleUserScroll]);
 
   const toggleAutoScroll = () => {
     setIsAutoScrolling(!isAutoScrolling);
@@ -290,6 +314,39 @@ export default function SongPage({ params }: SongPageProps) {
 
   const handleSpeedChange = (speed: number) => {
     setScrollSpeed(speed);
+  };
+
+  // Toggle all translations
+  const toggleAllTranslations = () => {
+    if (!song) return;
+    
+    if (allTranslationsExpanded) {
+      // Collapse all
+      setExpandedLines(new Set());
+      setAllTranslationsExpanded(false);
+    } else {
+      // Expand all
+      const allLineIndices = new Set<number>();
+      song.lines.forEach((_, index) => {
+        allLineIndices.add(index);
+      });
+      setExpandedLines(allLineIndices);
+      setAllTranslationsExpanded(true);
+    }
+  };
+
+  // Toggle individual line translation
+  const toggleLineTranslation = (index: number) => {
+    const newExpandedLines = new Set(expandedLines);
+    if (newExpandedLines.has(index)) {
+      newExpandedLines.delete(index);
+    } else {
+      newExpandedLines.add(index);
+    }
+    setExpandedLines(newExpandedLines);
+    
+    // Update the all translations state
+    setAllTranslationsExpanded(newExpandedLines.size === song?.lines.length);
   };
 
   // Loading state
@@ -322,8 +379,6 @@ export default function SongPage({ params }: SongPageProps) {
     );
   }
 
-
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
       {/* Navigation */}
@@ -351,6 +406,25 @@ export default function SongPage({ params }: SongPageProps) {
                 <span className="text-orange-500">App</span>
               </span>
             </div>
+            {/* Toggle All Translations Button */}
+            <button
+              onClick={toggleAllTranslations}
+              className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                allTranslationsExpanded
+                  ? 'bg-orange-100 text-orange-700 hover:bg-orange-200 dark:bg-orange-900/20 dark:text-orange-300'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300'
+              }`}
+              title={allTranslationsExpanded ? 'Hide all translations' : 'Show all translations'}
+            >
+              {allTranslationsExpanded ? (
+                <EyeOff className="h-5 w-5" />
+              ) : (
+                <Eye className="h-5 w-5" />
+              )}
+              <span className="hidden sm:inline">
+                {allTranslationsExpanded ? 'Hide All' : 'Show All'}
+              </span>
+            </button>
           </div>
         </div>
       </nav>
@@ -418,28 +492,16 @@ export default function SongPage({ params }: SongPageProps) {
           </div>
         </div>
 
+        {/* Spotify Player */}
+        <SpotifyPlayer 
+          trackName={song.title}
+          artistName="KNEECAP"
+        />
 
-
-        {/* Controls */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-4">
-              <button 
-                className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors cursor-not-allowed opacity-75"
-                disabled
-                title="Spotify Premium account required"
-              >
-                <Play className="h-5 w-5" />
-                <span>Play on Spotify</span>
-              </button>
-              <div className="text-xs text-gray-500 dark:text-gray-400">
-                Requires Spotify Premium & Sign-in
-              </div>
-            </div>
-            
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              Click any line to see translation
-            </div>
+        {/* Instructions */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 mb-8">
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
+            Click any line to see translation • Use the eye button to show/hide all translations
           </div>
         </div>
 
@@ -450,17 +512,27 @@ export default function SongPage({ params }: SongPageProps) {
               Lyrics & Translations
             </h3>
             <p className="text-green-100 text-sm mt-1">
-              Tap any line to reveal its translation • Green arrows = Irish to English • Red arrows = English to Irish
+              Tap any line to reveal its translation • Green arrows = English to Irish • Orange arrows = Irish to English
             </p>
           </div>
           
           <div 
             ref={lyricsContainerRef}
             className="p-6 max-h-screen overflow-y-auto"
-            style={{ scrollBehavior: 'smooth' }}
+            style={{ 
+              scrollBehavior: isAutoScrolling ? 'auto' : 'smooth',
+              // Improve mobile scroll performance
+              WebkitOverflowScrolling: 'touch'
+            }}
           >
             {song.lines.map((line, index: number) => (
-              <LyricsLine key={index} line={line} song={song} />
+              <LyricsLine 
+                key={index} 
+                line={line} 
+                song={song} 
+                showTranslation={expandedLines.has(index)}
+                onToggleTranslation={() => toggleLineTranslation(index)}
+              />
             ))}
           </div>
         </div>

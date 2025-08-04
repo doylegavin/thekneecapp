@@ -1,144 +1,128 @@
-# TheKneecApp - Educational Platform
+# TheKneecApp - KNEECAP Lyrics & Translation App
 
-A React/Next.js educational platform dedicated to the Irish rap group **KNEECAP**, designed to help users learn Irish (Gaeilge) through their bilingual lyrics.
+An educational app to teach people the Irish language through bilingual music by KNEECAP.
 
-## 🎵 About
+## Features
 
-This platform celebrates KNEECAP's contribution to Irish culture while providing educational tools for language learning. KNEECAP is a groundbreaking Irish rap group that performs in both Irish (Gaeilge) and English, revolutionizing the Irish music scene and making the Irish language accessible to new generations.
+### 🎵 **Spotify Integration**
+- Connect your Spotify Premium account to play music while reading lyrics
+- Full Web Playback SDK integration with play/pause, skip controls
+- Volume control and real-time track information
+- Seamless authentication flow
 
-## ✨ Features
+### 📱 **Mobile-Optimized Auto-Scroll**
+- Smart auto-scroll that pauses when user manually scrolls
+- Adjustable scroll speed with preset options
+- Touch-optimized for mobile devices
+- Floating controls for easy access
 
-- **Interactive Lyrics**: Side-by-side display of Irish and English lyrics
-- **Translation Toggle**: Switch between languages and view translations
-- **Song Library**: Browse KNEECAP's discography with search and filtering
-- **Educational Resources**: Irish language learning tips and cultural context
-- **Responsive Design**: Beautiful, modern UI that works on all devices
-- **Dark Mode Support**: Automatic dark/light theme switching
+### 🔄 **Enhanced Translation Features**
+- **Toggle All Translations**: Eye button in top-right to show/hide all translations at once
+- **Individual Line Toggle**: Click any line to reveal its translation
+- **Compact Layout**: Translations now display inline to save space
+- **Smart Language Detection**: Automatically determines primary language based on JSON property order
 
-## 🚀 Tech Stack
+### 🎨 **Visual Design**
+- **Color-coded Arrows**: 
+  - 🟢 Green arrows = English primary → Irish translation
+  - 🟠 Orange arrows = Irish primary → English translation
+- **Responsive Design**: Works perfectly on mobile and desktop
+- **Dark Mode Support**: Full dark theme compatibility
 
-- **Next.js 15** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Modern styling and responsive design
-- **Lucide React** - Beautiful icons
+### 📖 **Bilingual Lyrics System**
+- Property order in JSON determines which language is shown first
+- Line-by-line translations with cultural context
+- Section headers for song structure (Verse, Chorus, etc.)
+- Support for truly bilingual songs like "Better Way to Live"
 
-## 📁 Project Structure
+## Setup Instructions
 
-```
-kneecap-platform/
-├── src/
-│   └── app/
-│       ├── page.tsx          # Homepage
-│       ├── songs/
-│       │   ├── page.tsx      # Songs listing
-│       │   └── [id]/
-│       │       └── page.tsx  # Individual song pages
-│       ├── learn/
-│       │   └── page.tsx      # Learning resources
-│       ├── about/
-│       │   └── page.tsx      # About KNEECAP and platform
-│       ├── layout.tsx        # Root layout
-│       └── globals.css       # Global styles
-├── public/                   # Static assets
-└── README.md
-```
+### 1. Spotify Developer Setup
+1. Go to [Spotify for Developers](https://developer.spotify.com/)
+2. Create a new app with these settings:
+   - **App name**: `thekneecapp`
+   - **Description**: `An educational app to teach people the Irish language through bilingual music`
+   - **Website**: `thekneecapp.ie`
+   - **Redirect URIs**: 
+     - `http://localhost:3000/callback` (for development)
+     - `https://thekneecapp.ie/callback` (for production)
+   - **APIs**: Check "Web API" and "Web Playback SDK"
 
-## 🛠️ Installation & Setup
-
-1. **Clone the repository** (if applicable):
-   ```bash
-   git clone <repository-url>
-   cd kneecap-platform
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**:
+### 2. Environment Variables
+Create a `.env.local` file in the root directory:
 ```bash
+NEXT_PUBLIC_SPOTIFY_CLIENT_ID=your_client_id_here
+```
+
+### 3. Run the App
+```bash
+npm install
 npm run dev
-   ```
+```
 
-4. **Open your browser** and visit [http://localhost:3000](http://localhost:3000)
+## How to Use
 
-## 📖 Usage
+### Connecting Spotify
+1. Click "Connect Spotify" on any song page
+2. Log in with your Spotify Premium account
+3. Grant permissions for playback control
+4. You'll be redirected back to the app with a connected player
 
-### Exploring Songs
-- Navigate to the "Songs" section to browse KNEECAP's discography
-- Use search and language filters to find specific tracks
-- Click on any song to view lyrics with interactive translations
+### Reading Lyrics
+1. Browse songs from the sidebar or main songs page
+2. Click any lyric line to see its translation
+3. Use the eye button (👁️) in the top-right to show/hide all translations
+4. Colors indicate language flow:
+   - Green arrows: English → Irish
+   - Orange arrows: Irish → English
 
-### Learning Irish
-- Visit the "Learn Irish" section for language learning resources
-- Use the translation features in song lyrics to understand meanings
-- Follow the provided tips for learning through music
+### Auto-Scroll
+1. Use the floating play button to start auto-scroll
+2. Adjust speed with the settings gear icon
+3. Auto-scroll automatically pauses when you manually scroll
+4. Resumes after you stop scrolling for 1 second
 
-### Translation Features
-- Toggle between Irish and English views
-- View side-by-side translations for better understanding
-- Switch languages dynamically while reading lyrics
+## Song Data Structure
 
-## 🎯 Educational Goals
+Songs are stored as JSON files with this structure:
+```json
+{
+  "id": "song-id",
+  "title": "Song Title",
+  "titleEnglish": "English Title",
+  "album": "Album Name",
+  "year": 2024,
+  "primaryLanguage": "mixed",
+  "lines": [
+    {
+      "type": "section",
+      "section": "Verse 1"
+    },
+    {
+      "irish": "Irish lyrics here",
+      "english": "English translation here"
+    }
+  ]
+}
+```
 
-This platform aims to:
-- Make Irish language learning accessible and engaging
-- Preserve and promote Irish culture through contemporary music
-- Connect learners with authentic Irish language usage
-- Provide context for KNEECAP's cultural and linguistic impact
+**Important**: The order of `"irish"` and `"english"` properties determines which language is shown first!
 
-## 🎵 Sample Songs Included
+## Technical Stack
 
-- **Cearta** (Rights) - Irish language anthem about rights and identity
-- **H-Ifreann** (Hell) - Bilingual track mixing Irish and English
-- **Your Man** - English rap with Irish cultural references
-- **Fenian Cunts** - Political commentary in both languages
-- **Get Your Brits Out** - Political anthem
+- **Next.js 15** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Spotify Web API & SDK** - Music integration
+- **Lucide React** - Icons
 
-## 🚧 Future Enhancements
+## Contributing
 
-Planned features for future development:
-- Audio playback integration
-- Pronunciation guides
-- Interactive vocabulary exercises
-- User accounts and progress tracking
-- Community features and discussions
-- Mobile app version
-- Additional KNEECAP songs and albums
+1. Add new songs by creating JSON files in `src/data/songs/`
+2. Import new songs in `src/data/songs.ts`
+3. Follow the existing JSON structure for consistency
+4. Ensure proper Irish/English language ordering
 
-## 📱 Responsive Design
+## License
 
-The platform is fully responsive and works seamlessly on:
-- Desktop computers
-- Tablets
-- Mobile phones
-- All modern browsers
-
-## 🌙 Accessibility Features
-
-- Dark/light mode support
-- Keyboard navigation
-- Screen reader friendly
-- High contrast design options
-- Responsive text sizing
-
-## 🤝 Contributing
-
-This is an educational platform celebrating KNEECAP's music and Irish culture. All rights to the music and lyrics belong to KNEECAP.
-
-## 📝 License
-
-This is an educational project. All music and lyrical content rights belong to KNEECAP. The code is provided for educational purposes.
-
-## 🔗 Related Links
-
-- [KNEECAP Official](https://kneecap.ie/) (if available)
-- [Irish Language Resources](https://www.gaeilge.ie/)
-- [Conradh na Gaeilge](https://cnag.ie/)
-
----
-
-**Slán go fóill!** (Goodbye for now!)
-
-*Learn Irish through the power of KNEECAP's music* 🇮🇪
+This project is for educational purposes to promote the Irish language through KNEECAP's music.
