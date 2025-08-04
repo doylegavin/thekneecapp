@@ -17,12 +17,11 @@ interface LyricsLineProps {
     section?: string;
     artist?: string;
   };
-  song: Song;
   showTranslation?: boolean;
   onToggleTranslation?: () => void;
 }
 
-function LyricsLine({ line, song, showTranslation = false, onToggleTranslation }: LyricsLineProps) {
+function LyricsLine({ line, showTranslation = false, onToggleTranslation }: LyricsLineProps) {
   // Handle section headers
   if (line.type === 'section') {
     return (
@@ -529,7 +528,6 @@ export default function SongPage({ params }: SongPageProps) {
               <LyricsLine 
                 key={index} 
                 line={line} 
-                song={song} 
                 showTranslation={expandedLines.has(index)}
                 onToggleTranslation={() => toggleLineTranslation(index)}
               />

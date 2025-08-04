@@ -1,23 +1,49 @@
 // src/components/SpotifyPlayer.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, LogOut } from 'lucide-react';
 
 interface SpotifyPlayerProps {
-  trackUri?: string;
   trackName?: string;
   artistName?: string;
 }
 
-export default function SpotifyPlayer({ trackUri, trackName, artistName }: SpotifyPlayerProps) {
+interface SpotifyTrack {
+  name: string;
+  artists: Array<{ name: string }>;
+  uri: string;
+}
+
+interface SpotifyPlayerState {
+  paused: boolean;
+  track_window: {
+    current_track: SpotifyTrack;
+  };
+}
+
+interface SpotifyError {
+  message: string;
+}
+
+interface SpotifyPlayer {
+  addListener: (event: string, callback: (data: any) => void) => void;
+  connect: () => Promise<boolean>;
+  disconnect: () => void;
+  togglePlay: () => Promise<void>;
+  previousTrack: () => Promise<void>;
+  nextTrack: () => Promise<void>;
+  setVolume: (volume: number) => Promise<void>;
+}
+
+export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerProps) {
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [player, setPlayer] = useState<any>(null);
+  const [player, setPlayer] = useState<SpotifyPlayer | null>(null);
   const [deviceId, setDeviceId] = useState<string>('');
   const [accessToken, setAccessToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
+  const [currentTrack, setCurrentTrack] = useState<SpotifyTrack | null>(null);
   const [volume, setVolume] = useState(50);
 
   // Check for existing token on component mount
@@ -30,6 +56,18 @@ export default function SpotifyPlayer({ trackUri, trackName, artistName }: Spoti
       setIsAuthenticated(true);
     }
   }, []);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('spotify_access_token');
+    localStorage.removeItem('spotify_token_type');
+    localStorage.removeItem('spotify_expires_at');
+    setIsAuthenticated(false);
+    setAccessToken('');
+    setIsReady(false);
+    if (player) {
+      player.disconnect();
+    }
+  }, [player]);
 
   // Load Spotify Web Playback SDK
   useEffect(() => {
@@ -50,38 +88,38 @@ export default function SpotifyPlayer({ trackUri, trackName, artistName }: Spoti
       });
 
       // Error handling
-      spotifyPlayer.addListener('initialization_error', ({ message }: any) => {
+      spotifyPlayer.addListener('initialization_error', ({ message }: SpotifyError) => {
         console.error('Failed to initialize:', message);
       });
 
-      spotifyPlayer.addListener('authentication_error', ({ message }: any) => {
+      spotifyPlayer.addListener('authentication_error', ({ message }: SpotifyError) => {
         console.error('Failed to authenticate:', message);
         handleLogout();
       });
 
-      spotifyPlayer.addListener('account_error', ({ message }: any) => {
+      spotifyPlayer.addListener('account_error', ({ message }: SpotifyError) => {
         console.error('Failed to validate Spotify account:', message);
       });
 
-      spotifyPlayer.addListener('playback_error', ({ message }: any) => {
+      spotifyPlayer.addListener('playback_error', ({ message }: SpotifyError) => {
         console.error('Failed to perform playback:', message);
       });
 
       // Ready
-      spotifyPlayer.addListener('ready', ({ device_id }: any) => {
+      spotifyPlayer.addListener('ready', ({ device_id }: { device_id: string }) => {
         console.log('Ready with Device ID', device_id);
         setDeviceId(device_id);
         setIsReady(true);
       });
 
       // Not ready
-      spotifyPlayer.addListener('not_ready', ({ device_id }: any) => {
+      spotifyPlayer.addListener('not_ready', ({ device_id }: { device_id: string }) => {
         console.log('Device ID has gone offline', device_id);
         setIsReady(false);
       });
 
       // Player state changed
-      spotifyPlayer.addListener('player_state_changed', (state: any) => {
+      spotifyPlayer.addListener('player_state_changed', (state: SpotifyPlayerState | null) => {
         if (!state) return;
 
         setCurrentTrack(state.track_window.current_track);
@@ -98,7 +136,7 @@ export default function SpotifyPlayer({ trackUri, trackName, artistName }: Spoti
         script.parentNode.removeChild(script);
       }
     };
-  }, [isAuthenticated, accessToken, volume]);
+  }, [isAuthenticated, accessToken, volume, handleLogout]);
 
   const handleLogin = () => {
     const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
@@ -120,18 +158,6 @@ export default function SpotifyPlayer({ trackUri, trackName, artistName }: Spoti
     const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
     
     window.location.href = authUrl;
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('spotify_access_token');
-    localStorage.removeItem('spotify_token_type');
-    localStorage.removeItem('spotify_expires_at');
-    setIsAuthenticated(false);
-    setAccessToken('');
-    setIsReady(false);
-    if (player) {
-      player.disconnect();
-    }
   };
 
   const togglePlayback = async () => {
@@ -172,38 +198,6 @@ export default function SpotifyPlayer({ trackUri, trackName, artistName }: Spoti
       } catch (error) {
         console.error('Error setting volume:', error);
       }
-    }
-  };
-
-  // Search and play a specific track (for future use)
-  const searchAndPlay = async (query: string) => {
-    if (!accessToken || !deviceId) return;
-
-    try {
-      const searchResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=1`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
-
-      const searchData = await searchResponse.json();
-      
-      if (searchData.tracks.items.length > 0) {
-        const track = searchData.tracks.items[0];
-        
-        await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            uris: [track.uri]
-          })
-        });
-      }
-    } catch (error) {
-      console.error('Error searching and playing track:', error);
     }
   };
 
@@ -334,7 +328,11 @@ declare global {
   interface Window {
     onSpotifyWebPlaybackSDKReady: () => void;
     Spotify: {
-      Player: any;
+      Player: new (options: {
+        name: string;
+        getOAuthToken: (cb: (token: string) => void) => void;
+        volume: number;
+      }) => SpotifyPlayer;
     };
   }
 } 
