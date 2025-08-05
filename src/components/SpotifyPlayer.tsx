@@ -144,7 +144,13 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
       return;
     }
     
-    const redirectUri = `${window.location.origin}/callback`;
+    // Use loopback IP for localhost development (Spotify requirement as of April 2025)
+    let redirectUri;
+    if (window.location.hostname === 'localhost') {
+      redirectUri = `http://127.0.0.1:${window.location.port}/callback`;
+    } else {
+      redirectUri = `${window.location.origin}/callback`;
+    }
     const scopes = [
       'streaming',
       'user-read-email',
