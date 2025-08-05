@@ -58,12 +58,10 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   const [volume, setVolume] = useState(0.5);
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [error, setError] = useState<string>('');
-  const [debugInfo, setDebugInfo] = useState<string[]>([]);
 
-  // Add debug logging function
+  // Add debug logging function - console only
   const addDebugInfo = useCallback((message: string) => {
     console.log('[Spotify Debug]:', message);
-    setDebugInfo(prev => [...prev.slice(-9), `${new Date().toLocaleTimeString()}: ${message}`]);
   }, []);
 
   // Clear error when starting new actions
@@ -526,21 +524,6 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           </div>
         )}
         
-        {debugInfo.length > 0 && (
-          <details className="mt-4">
-            <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400">
-              Debug Information ({debugInfo.length})
-            </summary>
-            <div className="mt-2 bg-gray-50 dark:bg-gray-900 p-2 rounded text-xs font-mono max-h-40 overflow-y-auto">
-              {debugInfo.map((info, index) => (
-                <div key={index} className="text-gray-700 dark:text-gray-300">
-                  {info}
-                </div>
-              ))}
-            </div>
-          </details>
-        )}
-        
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Connect your Spotify account to play music directly in the app.
         </p>
@@ -578,21 +561,6 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
             <span>Connecting to Spotify...</span>
           </div>
-        )}
-        
-        {debugInfo.length > 0 && (
-          <details className="mt-4">
-            <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400">
-              Debug Information ({debugInfo.length})
-            </summary>
-            <div className="mt-2 bg-gray-50 dark:bg-gray-900 p-2 rounded text-xs font-mono max-h-40 overflow-y-auto">
-              {debugInfo.map((info, index) => (
-                <div key={index} className="text-gray-700 dark:text-gray-300">
-                  {info}
-                </div>
-              ))}
-            </div>
-          </details>
         )}
       </div>
     );
@@ -675,9 +643,18 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           <div className="text-sm text-green-800 dark:text-green-200">
             <div className="font-medium">Now playing: {currentTrack.name}</div>
             <div className="text-green-600 dark:text-green-300">by {currentTrack.artists.map(a => a.name).join(', ')}</div>
+            <div className="text-xs text-green-500 dark:text-green-400 mt-1">
+              Powered by Spotify
+            </div>
           </div>
         </div>
       )}
+
+      <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-700">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+          Spotify Premium account required. Music streaming for educational purposes only.
+        </p>
+      </div>
     </div>
   );
 }

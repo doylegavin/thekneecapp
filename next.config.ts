@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
               "font-src 'self' data:",
               "connect-src 'self' https://api.spotify.com https://accounts.spotify.com https://*.spotify.com https://*.scdn.co wss://*.spotify.com",
               "media-src 'self' blob: https://*.scdn.co https://*.spotifycdn.com",
-              "frame-src 'self' https://open.spotify.com https://accounts.spotify.com",
+              "frame-src 'self' https://open.spotify.com https://accounts.spotify.com https://sdk.scdn.co",
               "worker-src 'self' blob:",
               "object-src 'none'",
               "base-uri 'self'",
@@ -26,14 +26,14 @@ const nextConfig: NextConfig = {
               "upgrade-insecure-requests"
             ].join('; ')
           },
-          // Permissions Policy for Spotify Web Playback SDK
+          // Permissions Policy for Spotify Web Playback SDK - allow for all documents
           {
             key: 'Permissions-Policy',
             value: [
-              "autoplay=(self)",
+              "autoplay=*",
               "camera=()",
               "display-capture=()",
-              "encrypted-media=(self)",
+              "encrypted-media=*",
               "fullscreen=(self)",
               "geolocation=()",
               "microphone=()",
