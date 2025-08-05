@@ -14,13 +14,19 @@ interface SpotifyTrack {
   artists: Array<{ name: string }>;
   uri: string;
   id: string;
-  preview_url?: string;
 }
 
 interface SpotifyPlayerState {
   paused: boolean;
+  position: number;
+  duration: number;
   track_window: {
-    current_track: SpotifyTrack;
+    current_track: {
+      name: string;
+      artists: Array<{ name: string }>;
+      uri: string;
+      id: string;
+    };
   };
 }
 
@@ -36,156 +42,82 @@ interface SpotifyPlayer {
   previousTrack: () => Promise<void>;
   nextTrack: () => Promise<void>;
   setVolume: (volume: number) => Promise<void>;
+  pause: () => Promise<void>;
+  resume: () => Promise<void>;
 }
 
 export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerProps) {
-  const [isReady, setIsReady] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [player, setPlayer] = useState<SpotifyPlayer | null>(null);
-  const [accessToken, setAccessToken] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [accessToken, setAccessToken] = useState<string>('');
+  const [player, setPlayer] = useState<SpotifyPlayer | null>(null);
+  const [isReady, setIsReady] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
   const [currentTrack, setCurrentTrack] = useState<SpotifyTrack | null>(null);
-  const [volume, setVolume] = useState(50);
-  const [searchedTrack, setSearchedTrack] = useState<SpotifyTrack | null>(null);
-  const [isSearching, setIsSearching] = useState(false);
-  const [deviceId, setDeviceId] = useState<string>('');
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+  const [sdkLoaded, setSdkLoaded] = useState(false);
+  const [error, setError] = useState<string>('');
+  const [debugInfo, setDebugInfo] = useState<string[]>([]);
+
+  // Add debug logging function
+  const addDebugInfo = useCallback((message: string) => {
+    console.log('[Spotify Debug]:', message);
+    setDebugInfo(prev => [...prev.slice(-9), `${new Date().toLocaleTimeString()}: ${message}`]);
+  }, []);
+
+  // Clear error when starting new actions
+  const clearError = useCallback(() => {
+    setError('');
+  }, []);
 
   // Check for existing token on component mount
   useEffect(() => {
+    addDebugInfo('Checking for existing authentication...');
     const token = localStorage.getItem('spotify_access_token');
     const expiresAt = localStorage.getItem('spotify_expires_at');
     
     if (token && expiresAt && Date.now() < parseInt(expiresAt)) {
+      addDebugInfo('Found valid access token');
       setAccessToken(token);
       setIsAuthenticated(true);
+    } else {
+      addDebugInfo('No valid access token found');
+      localStorage.removeItem('spotify_access_token');
+      localStorage.removeItem('spotify_refresh_token');
+      localStorage.removeItem('spotify_expires_at');
     }
-  }, []);
+  }, [addDebugInfo]);
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('spotify_access_token');
-    localStorage.removeItem('spotify_token_type');
-    localStorage.removeItem('spotify_expires_at');
-    setIsAuthenticated(false);
-    setAccessToken('');
-    setIsReady(false);
-    if (player) {
-      player.disconnect();
-    }
-  }, [player]);
-
-  // Search for track when trackName changes
   useEffect(() => {
-    if (isAuthenticated && accessToken && trackName && artistName) {
-      searchForTrack(trackName, artistName);
-    }
-  }, [isAuthenticated, accessToken, trackName, artistName]);
-
-  // Search for track using Spotify Web API
-  const searchForTrack = async (track: string, artist: string) => {
-    if (!accessToken) return;
+    addDebugInfo('Loading Spotify Web Playback SDK...');
     
-    setIsSearching(true);
-    try {
-      const query = `track:"${track}" artist:"${artist}"`;
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=1`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Search failed: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      if (data.tracks.items.length > 0) {
-        setSearchedTrack(data.tracks.items[0]);
-      } else {
-        // Fallback: search with just track name
-        const fallbackQuery = `"${track}"`;
-        const fallbackResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(fallbackQuery)}&type=track&limit=5`, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
-        });
-        
-        if (fallbackResponse.ok) {
-          const fallbackData = await fallbackResponse.json();
-          // Look for KNEECAP or similar artist
-          const kneecapTrack = fallbackData.tracks.items.find((item: SpotifyTrack) => 
-            item.artists.some(a => a.name.toLowerCase().includes('kneecap'))
-          );
-          setSearchedTrack(kneecapTrack || fallbackData.tracks.items[0] || null);
-        }
-      }
-    } catch (error) {
-      console.error('Error searching for track:', error);
-    } finally {
-      setIsSearching(false);
+    if (window.Spotify) {
+      addDebugInfo('Spotify SDK already loaded');
+      setSdkLoaded(true);
+      return;
     }
-  };
-
-  // Load Spotify Web Playback SDK
-  useEffect(() => {
-    if (!isAuthenticated || !accessToken) return;
 
     const script = document.createElement('script');
     script.src = 'https://sdk.scdn.co/spotify-player.js';
     script.async = true;
+    
+    script.onload = () => {
+      addDebugInfo('Spotify SDK script loaded successfully');
+      setSdkLoaded(true);
+    };
+    
+    script.onerror = (error) => {
+      const errorMsg = 'Failed to load Spotify SDK script';
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
+    };
+
     document.body.appendChild(script);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const spotifyPlayer = new window.Spotify.Player({
-        name: 'TheKneecApp Web Player',
-        getOAuthToken: (cb: (token: string) => void) => {
-          cb(accessToken);
-        },
-        volume: volume / 100
-      });
-
-      // Error handling
-      spotifyPlayer.addListener('initialization_error', ({ message }: SpotifyError) => {
-        console.error('Failed to initialize:', message);
-      });
-
-      spotifyPlayer.addListener('authentication_error', ({ message }: SpotifyError) => {
-        console.error('Failed to authenticate:', message);
-        handleLogout();
-      });
-
-      spotifyPlayer.addListener('account_error', ({ message }: SpotifyError) => {
-        console.error('Failed to validate Spotify account:', message);
-      });
-
-      spotifyPlayer.addListener('playback_error', ({ message }: SpotifyError) => {
-        console.error('Failed to perform playback:', message);
-      });
-
-      // Ready
-      spotifyPlayer.addListener('ready', ({ device_id }: { device_id: string }) => {
-        console.log('Ready with Device ID', device_id);
-        setDeviceId(device_id);
-        setIsReady(true);
-      });
-
-      // Not ready
-      spotifyPlayer.addListener('not_ready', ({ device_id }: { device_id: string }) => {
-        console.log('Device ID has gone offline', device_id);
-        setIsReady(false);
-      });
-
-      // Player state changed
-      spotifyPlayer.addListener('player_state_changed', (state: SpotifyPlayerState | null) => {
-        if (!state) return;
-
-        setCurrentTrack(state.track_window.current_track);
-        setIsPlaying(!state.paused);
-      });
-
-      // Connect to the player
-      spotifyPlayer.connect();
-      setPlayer(spotifyPlayer);
+      addDebugInfo('Spotify Web Playback SDK ready callback triggered');
     };
 
     return () => {
@@ -193,95 +125,347 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
         script.parentNode.removeChild(script);
       }
     };
-  }, [isAuthenticated, accessToken, volume, handleLogout]);
+  }, [addDebugInfo]);
 
-  const handleLogin = async () => {
-    const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-    
-    if (!clientId) {
-      alert('Spotify Client ID not found. Please check your .env.local file.');
+  useEffect(() => {
+    if (!sdkLoaded || !window.Spotify || !isAuthenticated || !accessToken) {
       return;
     }
-    
-    // Use loopback IP for localhost development (Spotify requirement as of April 2025)
-    let redirectUri;
-    if (window.location.hostname === 'localhost') {
-      redirectUri = `http://127.0.0.1:${window.location.port}/callback`;
-    } else {
-      redirectUri = `${window.location.origin}/callback`;
+
+    addDebugInfo('Initializing Spotify player...');
+    clearError();
+
+    try {
+      const spotifyPlayer = new window.Spotify.Player({
+        name: 'Kneecap Web Player',
+        getOAuthToken: (cb: (token: string) => void) => {
+          addDebugInfo('Player requesting OAuth token');
+          cb(accessToken);
+        },
+        volume: volume
+      });
+
+      // Enhanced error handling
+      spotifyPlayer.addListener<SpotifyError>('initialization_error', ({ message }) => {
+        const errorMsg = `Initialization error: ${message}`;
+        console.error(errorMsg);
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+      });
+
+      spotifyPlayer.addListener<SpotifyError>('authentication_error', ({ message }) => {
+        const errorMsg = `Authentication error: ${message}`;
+        console.error(errorMsg);
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+        setIsAuthenticated(false);
+        localStorage.removeItem('spotify_access_token');
+        localStorage.removeItem('spotify_refresh_token');
+        localStorage.removeItem('spotify_expires_at');
+      });
+
+      spotifyPlayer.addListener<SpotifyError>('account_error', ({ message }) => {
+        const errorMsg = `Account error: ${message}`;
+        console.error(errorMsg);
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+      });
+
+      spotifyPlayer.addListener<SpotifyError>('playback_error', ({ message }) => {
+        const errorMsg = `Playback error: ${message}`;
+        console.error(errorMsg);
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+      });
+
+      spotifyPlayer.addListener<{ device_id: string }>('ready', ({ device_id }) => {
+        addDebugInfo(`Player ready with device ID: ${device_id}`);
+        setIsReady(true);
+      });
+
+      spotifyPlayer.addListener<{ device_id: string }>('not_ready', ({ device_id }) => {
+        addDebugInfo(`Player not ready with device ID: ${device_id}`);
+        setIsReady(false);
+      });
+
+      spotifyPlayer.addListener<SpotifyPlayerState>('player_state_changed', (state) => {
+        if (!state) {
+          addDebugInfo('Player state changed: null state');
+          return;
+        }
+
+        addDebugInfo(`Player state changed: ${state.paused ? 'paused' : 'playing'}`);
+        setIsPaused(state.paused);
+        setPosition(state.position);
+        setDuration(state.duration);
+        
+        if (state.track_window?.current_track) {
+          setCurrentTrack({
+            name: state.track_window.current_track.name,
+            artists: state.track_window.current_track.artists,
+            uri: state.track_window.current_track.uri,
+            id: state.track_window.current_track.id
+          });
+        }
+      });
+
+      // Connect with enhanced error handling
+      addDebugInfo('Connecting to Spotify...');
+      spotifyPlayer.connect().then((success: boolean) => {
+        if (success) {
+          addDebugInfo('Successfully connected to Spotify');
+          setPlayer(spotifyPlayer);
+        } else {
+          const errorMsg = 'Failed to connect to Spotify';
+          addDebugInfo(errorMsg);
+          setError(errorMsg);
+        }
+      }).catch((error: Error) => {
+        const errorMsg = `Connection error: ${error.message}`;
+        console.error(errorMsg, error);
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+      });
+
+    } catch (error) {
+      const errorMsg = `Player initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
     }
 
-    // Generate PKCE challenge
-    const generateCodeChallenge = async (codeVerifier: string) => {
-      const data = new TextEncoder().encode(codeVerifier);
-      const digest = await window.crypto.subtle.digest('SHA-256', data);
-      return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
+    return () => {
+      if (player) {
+        addDebugInfo('Disconnecting player...');
+        player.disconnect();
+      }
     };
+  }, [sdkLoaded, isAuthenticated, accessToken, volume, addDebugInfo, clearError]);
 
-    const generateCodeVerifier = () => {
-      const array = new Uint8Array(32);
-      window.crypto.getRandomValues(array);
-      return btoa(String.fromCharCode.apply(null, [...array]))
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_')
-        .replace(/=+$/, '');
-    };
-
-    // Generate and store PKCE values
-    const codeVerifier = generateCodeVerifier();
-    const codeChallenge = await generateCodeChallenge(codeVerifier);
-    
-    // Store code verifier for token exchange
-    localStorage.setItem('spotify_code_verifier', codeVerifier);
-
-    const scopes = [
-      'streaming',
-      'user-read-email',
-      'user-read-private',
-      'user-read-playback-state',
-      'user-modify-playback-state'
-    ].join(' ');
-
-    const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
-    
-    window.location.href = authUrl;
-  };
-
-  const playTrack = async () => {
-    if (!player || !isReady || !searchedTrack) return;
+  const handleLogin = async () => {
+    addDebugInfo('Starting Spotify login process...');
+    clearError();
     
     try {
-      // First, we need to transfer playback to our device and play the track
-      await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+      const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+      if (!clientId) {
+        const errorMsg = 'Spotify Client ID not configured';
+        addDebugInfo(errorMsg);
+        setError(errorMsg);
+        return;
+      }
+
+      const generateCodeVerifier = () => {
+        const array = new Uint8Array(32);
+        crypto.getRandomValues(array);
+        return btoa(String.fromCharCode(...array))
+          .replace(/=/g, '')
+          .replace(/\+/g, '-')
+          .replace(/\//g, '_');
+      };
+
+      const generateCodeChallenge = async (codeVerifier: string) => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(codeVerifier);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        return btoa(String.fromCharCode(...new Uint8Array(digest)))
+          .replace(/=/g, '')
+          .replace(/\+/g, '-')
+          .replace(/\//g, '_');
+      };
+
+      const codeVerifier = generateCodeVerifier();
+      localStorage.setItem('spotify_code_verifier', codeVerifier);
+      const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+      const scopes = 'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state';
+      
+      let redirectUri;
+      if (window.location.hostname === 'localhost') {
+        redirectUri = `http://127.0.0.1:${window.location.port}/callback`;
+        addDebugInfo(`Using localhost redirect URI: ${redirectUri}`);
+      } else {
+        redirectUri = `${window.location.origin}/callback`;
+        addDebugInfo(`Using production redirect URI: ${redirectUri}`);
+      }
+
+      const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
+      
+      addDebugInfo('Redirecting to Spotify authorization...');
+      window.location.href = authUrl;
+    } catch (error) {
+      const errorMsg = `Login failed: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
+    }
+  };
+
+  const handleLogout = useCallback(() => {
+    addDebugInfo('Logging out...');
+    clearError();
+    
+    try {
+      if (player) {
+        player.disconnect();
+        setPlayer(null);
+      }
+      
+      localStorage.removeItem('spotify_access_token');
+      localStorage.removeItem('spotify_refresh_token');
+      localStorage.removeItem('spotify_expires_at');
+      localStorage.removeItem('spotify_code_verifier');
+      
+      setIsAuthenticated(false);
+      setAccessToken('');
+      setIsReady(false);
+      setCurrentTrack(null);
+      addDebugInfo('Logout successful');
+    } catch (error) {
+      const errorMsg = `Logout error: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
+    }
+  }, [player, addDebugInfo, clearError]);
+
+  const searchTrack = useCallback(async (trackName: string, artistName: string, accessToken: string) => {
+    addDebugInfo(`Searching for track: "${trackName}" by "${artistName}"`);
+    clearError();
+    
+    try {
+      const query = encodeURIComponent(`track:"${trackName}" artist:"${artistName}"`);
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.tracks?.items?.length > 0) {
+        const track = data.tracks.items[0];
+        addDebugInfo(`Found track: ${track.name} by ${track.artists[0].name}`);
+        return {
+          name: track.name,
+          artists: track.artists,
+          uri: track.uri,
+          id: track.id
+        };
+      } else {
+        addDebugInfo('No tracks found for search query');
+        return null;
+      }
+    } catch (error) {
+      const errorMsg = `Track search failed: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
+      return null;
+    }
+  }, [addDebugInfo, clearError]);
+
+  const playTrack = useCallback(async (trackUri: string) => {
+    if (!player || !isReady) {
+      const errorMsg = 'Player not ready for playback';
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
+      return;
+    }
+
+    addDebugInfo(`Attempting to play track: ${trackUri}`);
+    clearError();
+
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/me/player/play`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          uris: [searchedTrack.uri]
+          uris: [trackUri]
         })
       });
+
+      if (response.ok) {
+        addDebugInfo('Track playback started successfully');
+      } else if (response.status === 404) {
+        addDebugInfo('No active device found, trying to transfer playback...');
+        // Try to get current player state to find device ID
+        const stateResponse = await fetch('https://api.spotify.com/v1/me/player', {
+          headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+        
+        if (stateResponse.ok) {
+          const state = await stateResponse.json();
+          if (state.device?.id) {
+            addDebugInfo(`Transferring playback to device: ${state.device.id}`);
+            // Transfer playback and then play
+            await fetch('https://api.spotify.com/v1/me/player', {
+              method: 'PUT',
+              headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                device_ids: [state.device.id],
+                play: false
+              })
+            });
+            
+            // Now try to play again
+            setTimeout(() => playTrack(trackUri), 1000);
+          } else {
+            throw new Error('No active Spotify device found');
+          }
+        } else {
+          throw new Error('No active Spotify device found');
+        }
+      } else {
+        throw new Error(`Playback failed: ${response.status} ${response.statusText}`);
+      }
     } catch (error) {
-      console.error('Error playing track:', error);
-      // Fallback to toggle play if track transfer fails
-      await player.togglePlay();
+      const errorMsg = `Playback error: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      addDebugInfo(errorMsg);
+      setError(errorMsg);
     }
-  };
+  }, [player, isReady, accessToken, addDebugInfo, clearError]);
+
+  // Search for track when trackName and artistName are available
+  useEffect(() => {
+    if (trackName && artistName && isAuthenticated && accessToken && isReady) {
+      searchTrack(trackName, artistName, accessToken).then(foundTrack => {
+        if (foundTrack) {
+          setCurrentTrack(foundTrack);
+          playTrack(foundTrack.uri);
+        }
+      });
+    }
+  }, [trackName, artistName, isAuthenticated, accessToken, isReady, searchTrack, playTrack]);
 
   const togglePlayback = async () => {
-    if (!player) return;
+    if (!player || !isReady) return;
     
     try {
-      if (searchedTrack && !currentTrack) {
-        // If we have a searched track but no current track, play the searched track
-        await playTrack();
-      } else {
-        // Toggle current playback
-        await player.togglePlay();
+      if (currentTrack && !isPaused) {
+        // Currently playing, pause it
+        await player.pause();
+      } else if (currentTrack && isPaused) {
+        // Currently paused, resume it
+        await player.resume();
+      } else if (trackName && artistName) {
+        // No current track, search and play
+        const foundTrack = await searchTrack(trackName, artistName, accessToken);
+        if (foundTrack) {
+          setCurrentTrack(foundTrack);
+          await playTrack(foundTrack.uri);
+        }
       }
     } catch (error) {
       console.error('Error toggling playback:', error);
@@ -309,10 +493,11 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   };
 
   const handleVolumeChange = async (newVolume: number) => {
-    setVolume(newVolume);
-    if (player) {
+    const volumeDecimal = newVolume / 100;
+    setVolume(volumeDecimal);
+    if (player && isReady) {
       try {
-        await player.setVolume(newVolume / 100);
+        await player.setVolume(volumeDecimal);
       } catch (error) {
         console.error('Error setting volume:', error);
       }
@@ -322,25 +507,43 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   // If not authenticated, show login button
   if (!isAuthenticated) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-4">
-            <button 
-              onClick={handleLogin}
-              className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Play className="h-5 w-5" />
-              <span>Connect Spotify</span>
-            </button>
-            <div className="text-xs text-gray-500 dark:text-gray-400">
-              Premium account required
-            </div>
-          </div>
-          
-          <div className="text-sm text-gray-600 dark:text-gray-400">
-            Listen along while reading lyrics
-          </div>
+      <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Spotify Player</h3>
+          <button
+            onClick={handleLogin}
+            disabled={!!error}
+            className="bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          >
+            Connect Spotify
+          </button>
         </div>
+        
+        {error && (
+          <div className="bg-red-100 dark:bg-red-900 border border-red-400 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4">
+            <p className="font-medium">Error:</p>
+            <p className="text-sm">{error}</p>
+          </div>
+        )}
+        
+        {debugInfo.length > 0 && (
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400">
+              Debug Information ({debugInfo.length})
+            </summary>
+            <div className="mt-2 bg-gray-50 dark:bg-gray-900 p-2 rounded text-xs font-mono max-h-40 overflow-y-auto">
+              {debugInfo.map((info, index) => (
+                <div key={index} className="text-gray-700 dark:text-gray-300">
+                  {info}
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
+        
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Connect your Spotify account to play music directly in the app.
+        </p>
       </div>
     );
   }
@@ -348,24 +551,49 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   // If authenticated but player not ready
   if (!isReady) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-green-600"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                {isSearching ? 'Searching for track...' : 'Connecting to Spotify...'}
-              </span>
-            </div>
-            <button 
-              onClick={handleLogout}
-              className="flex items-center space-x-2 text-red-600 hover:text-red-700 px-2 py-1 rounded transition-colors"
-              title="Disconnect Spotify"
+      <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Spotify Player</h3>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            Disconnect
+          </button>
+        </div>
+        
+        {error ? (
+          <div className="bg-red-100 dark:bg-red-900 border border-red-400 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4">
+            <p className="font-medium">Connection Error:</p>
+            <p className="text-sm">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
             >
-              <LogOut className="h-4 w-4" />
+              Retry
             </button>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center gap-3">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-green-500"></div>
+            <span>Connecting to Spotify...</span>
+          </div>
+        )}
+        
+        {debugInfo.length > 0 && (
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm text-gray-600 dark:text-gray-400">
+              Debug Information ({debugInfo.length})
+            </summary>
+            <div className="mt-2 bg-gray-50 dark:bg-gray-900 p-2 rounded text-xs font-mono max-h-40 overflow-y-auto">
+              {debugInfo.map((info, index) => (
+                <div key={index} className="text-gray-700 dark:text-gray-300">
+                  {info}
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
       </div>
     );
   }
@@ -386,17 +614,17 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
             <button 
               onClick={togglePlayback}
               className={`p-3 rounded-full transition-colors ${
-                isPlaying 
-                  ? 'bg-green-600 hover:bg-green-700 text-white' 
-                  : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500'
+                isPaused 
+                  ? 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500' 
+                  : 'bg-green-600 hover:bg-green-700 text-white'
               }`}
               disabled={!isReady}
-              title={searchedTrack ? `Play "${searchedTrack.name}"` : 'Play/Pause'}
+              title={currentTrack ? `Play "${currentTrack.name}"` : `Search and play "${trackName}"`}
             >
-              {isPlaying ? (
-                <Pause className="h-6 w-6" />
-              ) : (
+              {isPaused ? (
                 <Play className="h-6 w-6" />
+              ) : (
+                <Pause className="h-6 w-6" />
               )}
             </button>
             <button 
@@ -410,17 +638,12 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           
           <div className="text-sm">
             <div className="font-medium text-gray-900 dark:text-white">
-              {currentTrack ? currentTrack.name : searchedTrack ? searchedTrack.name : (trackName || 'No track found')}
+              {currentTrack ? currentTrack.name : (trackName || 'No Track')}
             </div>
             <div className="text-gray-600 dark:text-gray-400">
-              {currentTrack ? currentTrack.artists[0].name : searchedTrack ? searchedTrack.artists[0].name : (artistName || 'KNEECAP')}
+              {currentTrack ? currentTrack.artists[0].name : (artistName || 'KNEECAP')}
             </div>
-            {isSearching && (
-              <div className="flex items-center space-x-1 text-xs text-gray-500">
-                <Search className="h-3 w-3" />
-                <span>Searching...</span>
-              </div>
-            )}
+            {/* Removed isSearching as it's not directly related to the new SDK state */}
           </div>
 
           <button 
@@ -439,19 +662,19 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
             type="range"
             min="0"
             max="100"
-            value={volume}
+            value={volume * 100}
             onChange={(e) => handleVolumeChange(parseInt(e.target.value))}
             className="w-20 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
           />
-          <span className="text-xs text-gray-500 dark:text-gray-400 w-8">{volume}%</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400 w-8">{volume * 100}%</span>
         </div>
       </div>
       
-      {searchedTrack && !currentTrack && (
+      {currentTrack && (
         <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
           <div className="text-sm text-green-800 dark:text-green-200">
-            <div className="font-medium">Ready to play: {searchedTrack.name}</div>
-            <div className="text-green-600 dark:text-green-300">by {searchedTrack.artists.map(a => a.name).join(', ')}</div>
+            <div className="font-medium">Now playing: {currentTrack.name}</div>
+            <div className="text-green-600 dark:text-green-300">by {currentTrack.artists.map(a => a.name).join(', ')}</div>
           </div>
         </div>
       )}
