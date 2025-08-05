@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, LogOut } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, LogOut, Search } from 'lucide-react';
 
 interface SpotifyPlayerProps {
   trackName?: string;
@@ -13,6 +13,8 @@ interface SpotifyTrack {
   name: string;
   artists: Array<{ name: string }>;
   uri: string;
+  id: string;
+  preview_url?: string;
 }
 
 interface SpotifyPlayerState {
@@ -44,6 +46,9 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<SpotifyTrack | null>(null);
   const [volume, setVolume] = useState(50);
+  const [searchedTrack, setSearchedTrack] = useState<SpotifyTrack | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [deviceId, setDeviceId] = useState<string>('');
 
   // Check for existing token on component mount
   useEffect(() => {
@@ -67,6 +72,59 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
       player.disconnect();
     }
   }, [player]);
+
+  // Search for track when trackName changes
+  useEffect(() => {
+    if (isAuthenticated && accessToken && trackName && artistName) {
+      searchForTrack(trackName, artistName);
+    }
+  }, [isAuthenticated, accessToken, trackName, artistName]);
+
+  // Search for track using Spotify Web API
+  const searchForTrack = async (track: string, artist: string) => {
+    if (!accessToken) return;
+    
+    setIsSearching(true);
+    try {
+      const query = `track:"${track}" artist:"${artist}"`;
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=1`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.tracks.items.length > 0) {
+        setSearchedTrack(data.tracks.items[0]);
+      } else {
+        // Fallback: search with just track name
+        const fallbackQuery = `"${track}"`;
+        const fallbackResponse = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(fallbackQuery)}&type=track&limit=5`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          // Look for KNEECAP or similar artist
+          const kneecapTrack = fallbackData.tracks.items.find((item: SpotifyTrack) => 
+            item.artists.some(a => a.name.toLowerCase().includes('kneecap'))
+          );
+          setSearchedTrack(kneecapTrack || fallbackData.tracks.items[0] || null);
+        }
+      }
+    } catch (error) {
+      console.error('Error searching for track:', error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   // Load Spotify Web Playback SDK
   useEffect(() => {
@@ -107,6 +165,7 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
       // Ready
       spotifyPlayer.addListener('ready', ({ device_id }: { device_id: string }) => {
         console.log('Ready with Device ID', device_id);
+        setDeviceId(device_id);
         setIsReady(true);
       });
 
@@ -151,13 +210,6 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
     } else {
       redirectUri = `${window.location.origin}/callback`;
     }
-    const scopes = [
-      'streaming',
-      'user-read-email',
-      'user-read-private',
-      'user-read-playback-state',
-      'user-modify-playback-state'
-    ].join(' ');
 
     // Generate PKCE challenge
     const generateCodeChallenge = async (codeVerifier: string) => {
@@ -185,16 +237,52 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
     // Store code verifier for token exchange
     localStorage.setItem('spotify_code_verifier', codeVerifier);
 
+    const scopes = [
+      'streaming',
+      'user-read-email',
+      'user-read-private',
+      'user-read-playback-state',
+      'user-modify-playback-state'
+    ].join(' ');
+
     const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
     
     window.location.href = authUrl;
+  };
+
+  const playTrack = async () => {
+    if (!player || !isReady || !searchedTrack) return;
+    
+    try {
+      // First, we need to transfer playback to our device and play the track
+      await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uris: [searchedTrack.uri]
+        })
+      });
+    } catch (error) {
+      console.error('Error playing track:', error);
+      // Fallback to toggle play if track transfer fails
+      await player.togglePlay();
+    }
   };
 
   const togglePlayback = async () => {
     if (!player) return;
     
     try {
-      await player.togglePlay();
+      if (searchedTrack && !currentTrack) {
+        // If we have a searched track but no current track, play the searched track
+        await playTrack();
+      } else {
+        // Toggle current playback
+        await player.togglePlay();
+      }
     } catch (error) {
       console.error('Error toggling playback:', error);
     }
@@ -265,7 +353,9 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-green-600"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">Connecting to Spotify...</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {isSearching ? 'Searching for track...' : 'Connecting to Spotify...'}
+              </span>
             </div>
             <button 
               onClick={handleLogout}
@@ -301,6 +391,7 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
                   : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500'
               }`}
               disabled={!isReady}
+              title={searchedTrack ? `Play "${searchedTrack.name}"` : 'Play/Pause'}
             >
               {isPlaying ? (
                 <Pause className="h-6 w-6" />
@@ -319,11 +410,17 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           
           <div className="text-sm">
             <div className="font-medium text-gray-900 dark:text-white">
-              {currentTrack ? currentTrack.name : (trackName || 'No track playing')}
+              {currentTrack ? currentTrack.name : searchedTrack ? searchedTrack.name : (trackName || 'No track found')}
             </div>
             <div className="text-gray-600 dark:text-gray-400">
-              {currentTrack ? currentTrack.artists[0].name : (artistName || 'KNEECAP')}
+              {currentTrack ? currentTrack.artists[0].name : searchedTrack ? searchedTrack.artists[0].name : (artistName || 'KNEECAP')}
             </div>
+            {isSearching && (
+              <div className="flex items-center space-x-1 text-xs text-gray-500">
+                <Search className="h-3 w-3" />
+                <span>Searching...</span>
+              </div>
+            )}
           </div>
 
           <button 
@@ -349,6 +446,15 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
           <span className="text-xs text-gray-500 dark:text-gray-400 w-8">{volume}%</span>
         </div>
       </div>
+      
+      {searchedTrack && !currentTrack && (
+        <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+          <div className="text-sm text-green-800 dark:text-green-200">
+            <div className="font-medium">Ready to play: {searchedTrack.name}</div>
+            <div className="text-green-600 dark:text-green-300">by {searchedTrack.artists.map(a => a.name).join(', ')}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
