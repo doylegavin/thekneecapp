@@ -136,7 +136,7 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
     };
   }, [isAuthenticated, accessToken, volume, handleLogout]);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
     
     if (!clientId) {
@@ -159,7 +159,33 @@ export default function SpotifyPlayer({ trackName, artistName }: SpotifyPlayerPr
       'user-modify-playback-state'
     ].join(' ');
 
-    const authUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    // Generate PKCE challenge
+    const generateCodeChallenge = async (codeVerifier: string) => {
+      const data = new TextEncoder().encode(codeVerifier);
+      const digest = await window.crypto.subtle.digest('SHA-256', data);
+      return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+    };
+
+    const generateCodeVerifier = () => {
+      const array = new Uint8Array(32);
+      window.crypto.getRandomValues(array);
+      return btoa(String.fromCharCode.apply(null, [...array]))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+    };
+
+    // Generate and store PKCE values
+    const codeVerifier = generateCodeVerifier();
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
+    
+    // Store code verifier for token exchange
+    localStorage.setItem('spotify_code_verifier', codeVerifier);
+
+    const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirectUri)}&code_challenge_method=S256&code_challenge=${codeChallenge}`;
     
     window.location.href = authUrl;
   };

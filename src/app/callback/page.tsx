@@ -11,40 +11,85 @@ export default function SpotifyCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleSpotifyCallback = () => {
+    const handleSpotifyCallback = async () => {
       try {
-        // Get the hash from the URL (Spotify returns tokens in the hash)
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
+        // Check for error first
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
         
-        const accessToken = params.get('access_token');
-        const tokenType = params.get('token_type');
-        const expiresIn = params.get('expires_in');
-        const error = params.get('error');
-
         if (error) {
           setStatus('error');
           setMessage(`Authentication failed: ${error}`);
           return;
         }
 
-        if (accessToken) {
-          // Store the token in localStorage
-          localStorage.setItem('spotify_access_token', accessToken);
-          localStorage.setItem('spotify_token_type', tokenType || 'Bearer');
-          localStorage.setItem('spotify_expires_at', (Date.now() + parseInt(expiresIn || '3600') * 1000).toString());
-          
-          setStatus('success');
-          setMessage('Successfully connected to Spotify!');
-          
-          // Redirect back to the app after 2 seconds
-          setTimeout(() => {
-            router.push('/songs');
-          }, 2000);
-        } else {
+        // Get authorization code from URL
+        const code = urlParams.get('code');
+        
+        if (!code) {
           setStatus('error');
-          setMessage('No access token received from Spotify');
+          setMessage('No authorization code received from Spotify');
+          return;
         }
+
+        // Get stored code verifier
+        const codeVerifier = localStorage.getItem('spotify_code_verifier');
+        
+        if (!codeVerifier) {
+          setStatus('error');
+          setMessage('Code verifier not found. Please try logging in again.');
+          return;
+        }
+
+        // Exchange authorization code for access token
+        const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+        const redirectUri = window.location.hostname === 'localhost' 
+          ? `http://127.0.0.1:${window.location.port}/callback`
+          : `${window.location.origin}/callback`;
+
+        const tokenResponse = await fetch('https://accounts.spotify.com/api/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: redirectUri,
+            client_id: clientId || '',
+            code_verifier: codeVerifier,
+          }),
+        });
+
+        if (!tokenResponse.ok) {
+          const errorData = await tokenResponse.json();
+          setStatus('error');
+          setMessage(`Token exchange failed: ${errorData.error_description || errorData.error}`);
+          return;
+        }
+
+        const tokenData = await tokenResponse.json();
+        
+        // Store the tokens in localStorage
+        localStorage.setItem('spotify_access_token', tokenData.access_token);
+        localStorage.setItem('spotify_token_type', tokenData.token_type || 'Bearer');
+        localStorage.setItem('spotify_expires_at', (Date.now() + tokenData.expires_in * 1000).toString());
+        
+        if (tokenData.refresh_token) {
+          localStorage.setItem('spotify_refresh_token', tokenData.refresh_token);
+        }
+        
+        // Clean up code verifier
+        localStorage.removeItem('spotify_code_verifier');
+        
+        setStatus('success');
+        setMessage('Successfully connected to Spotify!');
+        
+        // Redirect back to the app after 2 seconds
+        setTimeout(() => {
+          router.push('/songs');
+        }, 2000);
+        
       } catch (err) {
         console.error('Error processing Spotify callback:', err);
         setStatus('error');
