@@ -27,6 +27,9 @@ export default function Home() {
               <Link href="/learn" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors">
                 Learn Irish
               </Link>
+              <Link href="/faq" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors">
+                FAQ
+              </Link>
               <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition-colors">
                 About
               </Link>
