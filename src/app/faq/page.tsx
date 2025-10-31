@@ -227,7 +227,7 @@ export default function FAQ() {
             <>
               <ul className="list-disc list-inside space-y-1">
                 <li><strong>Comprehensive courses:</strong> Ranganna.com, Buntús Cainte, Learning Irish.</li>
-                <li><strong>Exam prep:</strong> Gaeilgeoir Guides, <a href="https://examinaite.ie" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">ExaminAite.ie</a>.</li>
+                <li><strong>Exam prep:</strong> Gaeilgeoir Guides, <a href="https://examinaite.ie" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Examinaite.ie</a>.</li>
                 <li><strong>Apps:</strong> Duolingo, Teanglann, <a href="https://gaelgoir.ai" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">Gaelgoir.ai</a>.</li>
                 <li><strong>Websites:</strong> Focloir.ie, Focal.ie, Gramadach na Gaeilge, Forvo & Abair.ie.</li>
                 <li><strong>Podcasts:</strong> Nuacht Mhall, Beo ar Éigean, Bitesize Irish Podcast, How To Gael.</li>
@@ -235,7 +235,7 @@ export default function FAQ() {
                 <li><strong>Music & Culture:</strong> <a href="https://thekneecapp.ie" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">TheKneecapp.ie</a>, pop-up Gaeltachts, Oireachtas na Gaeilge festival, All-Ireland Fleadh.</li>
                 <li><strong>Pronunciation & dialect:</strong> Teanglann.ie (recordings); pick a dialect early and stick to it.</li>
                 <li><strong>Community:</strong> Pop-Up Gaeltacht, Gaeilge Amháin Facebook group, Twitter Irish word-of-the-day accounts.</li>
-                <li><strong>AI tools:</strong> <a href="https://examinaite.ie" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">ExaminAite.ie</a> uses AI to tailor study plans and lighten teachers' workload. <a href="https://gaelgoir.ai" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">Gaelgoir.ai</a> offers a conversational voicebot. <a href="https://thekneecapp.ie" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">TheKneecapp.ie</a> uses interactive AI translation to make learning through songs accessible and engaging.</li>
+                <li><strong>AI tools:</strong> <a href="https://examinaite.ie" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Examinaite.ie</a> uses AI to tailor study plans and lighten teachers' workload. <a href="https://gaelgoir.ai" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">Gaelgoir.ai</a> offers a conversational voicebot. <a href="https://thekneecapp.ie" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 underline">TheKneecapp.ie</a> uses interactive AI translation to make learning through songs accessible and engaging.</li>
               </ul>
             </>
           )
